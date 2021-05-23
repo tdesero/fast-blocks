@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('wp-block-editor', 'wp-components', 'wp-element', 'wp-polyfill', 'wp-server-side-render'), 'version' => 'b0d2374bc17f585a45cd30459daa2e86');
+<?php return array('dependencies' => array('wp-block-editor', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill', 'wp-server-side-render'), 'version' => '4064c1d955a7635b5e964dba3fd540ec');

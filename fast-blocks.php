@@ -39,10 +39,14 @@ class SingleFastBlock {
 
 	public function render_callback( $attributes, $content ) {
 		if ($this->settings['template']) {
+			fast_blocks_instance()->change_current_block_fields( $attributes );
 			ob_start();
-			//file_exists($path)
-			//get_stylesheet_directory() funzt auch bei child-themes
-			get_template_part($this->settings['template'], null, $attributes);
+
+			$path = get_stylesheet_directory() . $this->settings['template'];
+			if ( file_exists( $path ) ) {
+				include $path;
+			}
+
 			$output = ob_get_clean();
 			return $output;
 		}
@@ -52,6 +56,8 @@ class SingleFastBlock {
 class FastBlocksPlugin {
 
 	private $all_blocks = [];
+
+	public $current_block_fields = [];
 
 	public function init() {
 		$this->add_scripts();
@@ -91,9 +97,15 @@ class FastBlocksPlugin {
 		$block = new SingleFastBlock($settings);
 		$this->all_blocks[$settings['name']] = $settings;
 	}
+	
+	public function change_current_block_fields($attributes) {
+		$this->current_block_fields = $attributes;
+	}
 }
 
-//init
+/**
+ * Plugin Initialization
+ */
 function fast_blocks_instance() {
 	static $instance;
 	if ($instance === null) {
@@ -107,7 +119,22 @@ function fast_blocks_init() {
 }
 add_action( 'init', 'fast_blocks_init' );
 
-//helpers
+/**
+ * Helpers
+ */
+
 function add_fast_block($settings) {
 	fast_blocks_instance()->register_block($settings);
+}
+
+function fast_field( $field_string ) {
+	$attributes = fast_blocks_instance()->current_block_fields;
+	$value = wp_kses_post( $attributes[$field_string] );
+	echo $value;
+}
+
+function get_fast_field( $field_string ) {
+	$attributes = fast_blocks_instance()->current_block_fields;
+	$value = $attributes[$field_string];
+	return $value;
 }

@@ -1,10 +1,11 @@
-import { RichText, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { Button, TextControl, ToggleControl, SelectControl } from '@wordpress/components';
+import { InspectorControls, RichText } from '@wordpress/block-editor';
+import { Button, TextControl, ToggleControl, SelectControl, PanelBody } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
-const Column = (props) => {
-  return <div style={{width: props.width, padding: '5px'}}>{props.children}</div>
-}
+import { __ } from '@wordpress/i18n';
+
+import ImageUpload from './components/ImageUpload';
+
 
 function registerHelper( name, fields, options ) {
   const origAttributes = {};
@@ -17,19 +18,17 @@ function registerHelper( name, fields, options ) {
     
     origAttributes[fieldName] = newValue;
   }
-	console.log('origAttributes', origAttributes)
 
-  const edit = ({ attributes, setAttributes, isSelected }) => {
-		console.log('attributes',attributes)
-		if (isSelected) {
-    		return (
-					<div style={{backgroundColor: '#f5f5f5', padding: '15px', borderRadius: '5px', display: 'flex', flexWrap: 'wrap'}}>
-						<h2 style={{fontSize: '12px', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '0', width: '100%'}}>{ options.title }</h2>
+  const edit = (props) => {
+		const { attributes, setAttributes } = props;
+		return (
+			<>
+				<InspectorControls>
+					<PanelBody>
 						{Object.entries(fields).map(function([fieldName, field]) {
 							switch(field.input) {
 								case 'checkbox':
 									return (
-										<Column width="100%">
 											<ToggleControl
 												label={field.label}
 												onChange={(e) => { 
@@ -39,11 +38,9 @@ function registerHelper( name, fields, options ) {
 												}}
 												checked={ attributes[fieldName] } 
 											/>
-										</Column>
 									);
 								case 'text':
 									return (
-										<Column width="50%">
 											<TextControl
 												label={field.label}
 												value={attributes[fieldName]}
@@ -53,11 +50,9 @@ function registerHelper( name, fields, options ) {
 													})
 												}}
 											/>
-										</Column>
 									);
 								case 'select':
 									return (
-										<Column width="50%">
 											<SelectControl
 												label={field.label}
 												value={attributes[fieldName]}
@@ -68,76 +63,47 @@ function registerHelper( name, fields, options ) {
 												}}
 												options = {field.options}
 											/>
-										</Column>
 									);
 								case 'image':
 									return (
-										<Column width="50%">
-											<MediaUploadCheck>
-												<MediaUpload
-													onSelect={ ( media ) => {
-														setAttributes( { 
-															[fieldName]: {
-																id: media.id,
-																sizes: media.sizes,
-																url: media.url
-															}
-														} )
-													} }
-													allowedTypes={ [ 'image' ] }
-													value={ attributes[fieldName] }
-													render={ ( { open } ) => (
-														<>
-															{ !attributes[fieldName] ? (
-																<Button onClick={ open } isPrimary>
-																	{field.label}
-																</Button>
-															) : (
-																<>
-																	<img 
-																		onClick={ open } 
-																		src={attributes[fieldName].url}
-																		style={{width: '150px', height: '150px', objectFit: 'cover', marginRight: '10px', background: 'white'}}
-																	/>
-																	<Button onClick={ () => { setAttributes( {[fieldName]: undefined } ) }} isSecondary>
-																		Bild entfernen
-																	</Button>
-																</>
-															)}
-														</>
-													) }
-												/>
-											</MediaUploadCheck>
-										</Column>
+											<ImageUpload 
+												attributes={attributes}
+												setAttributes={setAttributes}
+												field={field}
+												fieldName={fieldName}
+											/>
 									);
 								case 'richText':
+									console.log(props);
 									return (
-										<Column width="50%">
-											<RichText 
-												className='components-text-control__input'
-												value={attributes[fieldName]}
-												onChange={ (text) => {
-													setAttributes({
-														[fieldName]: text
-													})
-												}}
-												placeholder='Text einfügen...'
-											/>
-										</Column>
+											<>
+												<p>{field.label}</p>
+												<RichText 
+													className='components-text-control__input'
+													style={{marginBottom: '10px'}}
+													value={attributes[fieldName]}
+													onChange={ (text) => {
+														setAttributes({
+															[fieldName]: text
+														})
+													}}
+													placeholder={__('Add text…')}
+													inlineToolbar 
+												/>
+											</>
 									)
 								default:
 									return;
 							}
 						})}
-					</div>
-				) } else {
-					return (
-						<ServerSideRender
-							block={ name }
-							attributes={ attributes }
-						/>
-					)
-				}
+					</PanelBody>
+				</InspectorControls>
+				<ServerSideRender
+					block={ name }
+					attributes={ attributes }
+				/>
+			</>
+			)
   }
   
   return {
