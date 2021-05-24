@@ -19,8 +19,7 @@ const ImageUpload = ({attributes, setAttributes, fieldName, field}) => (
       value={ attributes[fieldName] }
       render={ ( { open } ) => (
         <>
-          <BaseControl label={field.label} >
-          </BaseControl>
+          <BaseControl label={field.label} />
           { !attributes[fieldName] ? (
             <Button onClick={ open } isPrimary>
               {__('Open Media Library')}
