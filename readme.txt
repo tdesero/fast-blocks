@@ -35,15 +35,17 @@ No! The JavaScript part is handled completely by the plugin.
 
 == Example Usage ==
 
+register your block:
+
 `$easyblocks_test_settings = [
   'name'      => 'some-slug/block-name',
-  'template'  => 'blocks/test', // template from theme-directory
+  'template'  => '/blocks/test.php', // template from theme-directory
   'settings'  => [
     'title'   => 'Plugin Block', // add the same settings as the original "registerBlockType" function without attributes
   ],
   'fields'    => [
     // with the fields array you can define attributes and the inputs/labels that are needed
-    'someString'  => [
+    'headline'  => [
       'default'   => 'default string',
       'type'      => 'string',
       'input'	    => 'text',
@@ -58,3 +60,12 @@ No! The JavaScript part is handled completely by the plugin.
 ];
 
 add_fast_block( $easyblocks_test_settings );`
+
+available inputs: `text`, `richText`, `checkbox`, `select`, `image`.
+
+example usage inside template:
+
+`<div>
+  <h2><?php fast_field('headline'); ?></h2>
+  <img src="<?php echo get_fast_field('image')['url']; ?>">
+</div>`

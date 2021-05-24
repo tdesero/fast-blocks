@@ -39,7 +39,7 @@ class SingleFastBlock {
 
 	public function render_callback( $attributes, $content ) {
 		if ($this->settings['template']) {
-			fast_blocks_instance()->change_current_block_fields( $attributes );
+			fast_blocks_instance()->set_current_fields( $attributes );
 			ob_start();
 
 			$path = get_stylesheet_directory() . $this->settings['template'];
@@ -57,7 +57,7 @@ class FastBlocksPlugin {
 
 	private $all_blocks = [];
 
-	public $current_block_fields = [];
+	private $current_block_fields = [];
 
 	public function init() {
 		$this->add_scripts();
@@ -73,7 +73,7 @@ class FastBlocksPlugin {
 		$script_asset_path = "$dir/build/index.asset.php";
 		if ( ! file_exists( $script_asset_path ) ) {
 			throw new Error(
-				'You need to run `npm start` or `npm run build` for the "create-block/workshop-stefan-block" block first.'
+				'You need to run `npm start` or `npm run build`.'
 			);
 		}
 		$index_js     = 'build/index.js';
@@ -98,8 +98,12 @@ class FastBlocksPlugin {
 		$this->all_blocks[$settings['name']] = $settings;
 	}
 	
-	public function change_current_block_fields($attributes) {
+	public function set_current_fields($attributes) {
 		$this->current_block_fields = $attributes;
+	}
+
+	public function get_current_fields() {
+		return $this->current_block_fields;
 	}
 }
 
@@ -123,18 +127,18 @@ add_action( 'init', 'fast_blocks_init' );
  * Helpers
  */
 
-function add_fast_block($settings) {
+function add_fast_block( $settings ) {
 	fast_blocks_instance()->register_block($settings);
 }
 
 function fast_field( $field_string ) {
-	$attributes = fast_blocks_instance()->current_block_fields;
+	$attributes = fast_blocks_instance()->get_current_fields();
 	$value = wp_kses_post( $attributes[$field_string] );
 	echo $value;
 }
 
 function get_fast_field( $field_string ) {
-	$attributes = fast_blocks_instance()->current_block_fields;
+	$attributes = fast_blocks_instance()->get_current_fields();
 	$value = $attributes[$field_string];
 	return $value;
 }
