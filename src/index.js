@@ -30,9 +30,10 @@ function registerHelper( name, fields, options, children ) {
   const edit = (props) => {
 		const { attributes, setAttributes, isSelected } = props;
 		const [ height, setHeight ] = useState(0);
+
 		return (
 			<Card
-				style={{ background: !isSelected && 'transparent', minHeight: height }}
+				style={{ background: (!isSelected && !children) && 'transparent', minHeight: height }}
 				onMouseDown={(e) => { 
 					/* this should prevent scroll position jumping but there is probably a better way to do this */
 					if (isSelected) return;
@@ -43,10 +44,11 @@ function registerHelper( name, fields, options, children ) {
 				}}
 			>
 				<CardBody>
-					{isSelected ? (
+					{/* show serversiderender only if it has no children, ssr does not work with children here */}
+					{( isSelected || children ) ? (
 						<>
 							<label style={{fontSize: '10px'}}>Block: {options.title}</label> 
-							{Object.entries(fields).map(function([fieldName, field]) {
+							{Object.entries(fields).map( ([fieldName, field]) => {
 								return switchComponents(field, setAttributes, fieldName, attributes, props);
 							})}
 						</>
