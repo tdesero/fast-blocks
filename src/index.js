@@ -1,6 +1,7 @@
-import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
-import { Button, PanelBody, Notice, Snackbar } from '@wordpress/components';
+import { InnerBlocks } from '@wordpress/block-editor';
+import { Card, CardBody } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
+
 
 import { switchComponents } from './switchComponents';
 
@@ -20,33 +21,34 @@ function registerHelper( name, fields, options, children ) {
   const edit = (props) => {
 		const { attributes, setAttributes, isSelected } = props;
 		return (
-			<>
-				<InspectorControls>
-					<PanelBody>
-						{Object.entries(fields).map(function([fieldName, field]) {
-							return switchComponents(field, setAttributes, fieldName, attributes, props);
-						})}
-					</PanelBody>
+			<Card style={{ background: !isSelected && 'transparent'}}>
+				<CardBody>
+					<label style={{fontSize: '10px'}}>{options.title}</label>
 
-				</InspectorControls>
-				{ isSelected && <Snackbar status="info" isDismissible={false}>Edit fields inside the right panel</Snackbar> }
-				<label style={{fontSize: '10px'}}>{options.title}</label>
-				<div style={{cursor: isSelected ? 'not-allowed' : 'default'}}>
-					<ServerSideRender
-						block={ name }
-						attributes={ attributes }
-					/>
-				</div>
-				{ children && (
-					<div style={{border: '1px dashed grey', padding: '10px'}} >
-						<InnerBlocks
-							allowedBlocks={ children }
-							orientation='horizontal'
-							renderAppender={ InnerBlocks.ButtonBlockAppender }
+					{isSelected ? (
+						<>
+							{Object.entries(fields).map(function([fieldName, field]) {
+								return switchComponents(field, setAttributes, fieldName, attributes, props);
+							})}
+						</>
+					):(
+						<ServerSideRender
+							block={ name }
+							attributes={ { ...attributes } }
 						/>
-					</div>
-				)}
-			</>
+					)
+					}
+					{ children && (
+						<div style={{border: '1px dashed grey', padding: '10px'}} >
+							<InnerBlocks
+								allowedBlocks={ children }
+								orientation='horizontal'
+								renderAppender={ InnerBlocks.ButtonBlockAppender }
+							/>
+						</div>
+					)}
+				</CardBody>
+			</Card>
 			)
   }
   

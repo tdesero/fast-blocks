@@ -1,5 +1,5 @@
 import { RichText } from '@wordpress/block-editor';
-import { TextControl, ToggleControl, SelectControl } from '@wordpress/components';
+import { TextControl, ToggleControl, SelectControl, BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from './components/ImageUpload';
 
@@ -45,25 +45,26 @@ export function switchComponents(field, setAttributes, fieldName, attributes, pr
 					attributes={attributes}
 					setAttributes={setAttributes}
 					field={field}
-					fieldName={fieldName} />
+					fieldName={fieldName} 
+				/>
 			);
 		case 'richText':
 			console.log(props);
 			return (
-				<>
-					<p>{field.label}</p>
-					<RichText
-						className='components-text-control__input'
-						style={{ marginBottom: '24px' }}
-						value={attributes[fieldName]}
-						onChange={(text) => {
-							setAttributes({
-								[fieldName]: text
-							});
-						}}
-						placeholder={__('Add text…')}
-						inlineToolbar />
-				</>
+					<>
+						<BaseControl label={field.label} />
+						<RichText
+							className='components-text-control__input'
+							style={{ marginBottom: '24px' }}
+							value={attributes[fieldName]}
+							onChange={(text) => {
+								setAttributes({
+									[fieldName]: text
+								});
+							}}
+							placeholder={__('Add text…')}
+							inlineToolbar />
+					</>
 			);
 		default:
 			return;

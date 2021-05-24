@@ -1,5 +1,5 @@
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
+import { Button, BaseControl } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
 
@@ -19,7 +19,8 @@ const ImageUpload = ({attributes, setAttributes, fieldName, field}) => (
       value={ attributes[fieldName] }
       render={ ( { open } ) => (
         <>
-          <p>{field.label}</p>
+          <BaseControl label={field.label} >
+          </BaseControl>
           { !attributes[fieldName] ? (
             <Button onClick={ open } isPrimary>
               {__('Open Media Library')}
