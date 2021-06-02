@@ -32,8 +32,8 @@ function registerHelper( name, fields, options, children ) {
 		const [ height, setHeight ] = useState(0);
 
 		return (
-			<Card
-				style={{ background: (!isSelected && !children) && 'transparent', minHeight: height }}
+			<div
+				style={{minHeight: height }}
 				onMouseDown={(e) => { 
 					/* this should prevent scroll position jumping but there is probably a better way to do this */
 					if (isSelected) return;
@@ -43,15 +43,26 @@ function registerHelper( name, fields, options, children ) {
 					setHeight( currentHeight );
 				}}
 			>
-				<CardBody>
 					{/* show serversiderender only if it has no children, ssr does not work with children here */}
 					{( isSelected || children ) ? (
-						<>
-							<label style={{fontSize: '10px'}}>Block: {options.title}</label> 
-							{Object.entries(fields).map( ([fieldName, field]) => {
-								return switchComponents(field, setAttributes, fieldName, attributes, props);
-							})}
-						</>
+						<Card style={{ background: (!isSelected && !children) && 'transparent'}}>
+							<CardBody>
+								<label style={{fontSize: '10px'}}>Block: {options.title}</label> 
+								{Object.entries(fields).map( ([fieldName, field]) => {
+									return switchComponents(field, setAttributes, fieldName, attributes, props);
+								})}
+
+								{ children && (
+									<div style={{border: '1px dashed grey', padding: '10px'}} >
+										<InnerBlocks
+											allowedBlocks={ children }
+											orientation='horizontal'
+											renderAppender={ InnerBlocks.ButtonBlockAppender }
+										/>
+									</div>
+								)}
+							</CardBody>
+						</Card>
 					):(
 						<ServerSideRender
 							block={ name }
@@ -59,17 +70,7 @@ function registerHelper( name, fields, options, children ) {
 						/>
 					)
 					}
-					{ children && (
-						<div style={{border: '1px dashed grey', padding: '10px'}} >
-							<InnerBlocks
-								allowedBlocks={ children }
-								orientation='horizontal'
-								renderAppender={ InnerBlocks.ButtonBlockAppender }
-							/>
-						</div>
-					)}
-				</CardBody>
-			</Card>
+			</div>
 			)
   }
   
@@ -85,13 +86,25 @@ function registerHelper( name, fields, options, children ) {
 					<div>
 						{Object.entries(fields).map( ([fieldName, field]) => {
 								switch (field.input) {
-									// for some fields it is likely, that there should be output 
-									case 'text': return <p>{attributes[fieldName]}</p>;
-									case 'image': return (<img src={(attributes[fieldName] === typeof Object) && attributes[fieldName].url} />);
+									// for some fields it is likely, that there should be output
+									case 'text': 
+										if (typeof field.selector === "string") {
+											// TODO: check if it is a valid tag
+											const CustomTag = field.selector;
+											return <CustomTag>{attributes[fieldName]}</CustomTag>;
+										} else {
+											return <p>{attributes[fieldName]}</p>;
+										};
+									case 'image': 
+										return (
+											<img 
+												src={(typeof attributes[fieldName] === "object") && attributes[fieldName].url}
+												alt={(typeof attributes[fieldName] === "object") && attributes[fieldName].alt}
+											/>
+										);
 									case 'richText': return (<RichText.Content tagName="p" value={attributes[fieldName]} />);
 									default: return null; // by default don't output anything 
 								}
-							
 						})}
 					</div>
 				)

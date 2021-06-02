@@ -11,7 +11,8 @@ const ImageUpload = ({attributes, setAttributes, fieldName, field}) => (
           [fieldName]: {
             id: media.id,
             sizes: media.sizes,
-            url: media.url
+            url: media.url,
+            alt: media.alt,
           }
         } )
       } }
