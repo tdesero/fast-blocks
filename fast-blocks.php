@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Fast Blocks
- * Description:       Create Custom Blocks fast and easy with PHP only.
+ * Description:       Create Custom Gutenberg Blocks fast and easy with PHP only.
  * Requires at least: 5.7
  * Requires PHP:      7.0
  * Version:           0.1.0
@@ -24,6 +24,7 @@ class SingleFastBlock {
 	public function register_block($settings) {
 		register_block_type( $settings['name'], [
 			'editor_script' 	=> 'fast-blocks-editor-script',
+			'editor_style'		=> 'fast-blocks-editor-style',
 			'render_callback' => array($this, 'render_callback'),
 			'attributes'      => $settings['fields']
 		] );
@@ -68,16 +69,23 @@ class FastBlocksPlugin {
 				'You need to run `npm start` or `npm run build`.'
 			);
 		}
-		$index_js     = 'build/index.js';
 		$script_asset = require( $script_asset_path );
 
 		wp_register_script(
 			'fast-blocks-editor-script',
-			plugins_url( $index_js, __FILE__ ),
+			plugins_url( 'build/index.js', __FILE__ ),
 			$script_asset['dependencies'],
 			$script_asset['version']
 		);
 
+		wp_register_style(
+			'fast-blocks-editor-style',
+			plugins_url( 'build/index.css', __FILE__ ),
+			null,
+			$script_asset['version']
+		);
+
+		// make all blocks available in JavaScript
 		wp_add_inline_script(
 			'fast-blocks-editor-script',
 			'const fastBlockBlocks = ' . wp_json_encode( $this->all_blocks ),
@@ -102,6 +110,7 @@ class FastBlocksPlugin {
 /**
  * Plugin Initialization
  */
+
 function fast_blocks_instance() {
 	static $instance;
 	if ($instance === null) {

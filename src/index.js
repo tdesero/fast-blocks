@@ -1,22 +1,34 @@
 import { InnerBlocks, RichText } from '@wordpress/block-editor';
-import { Card, CardBody } from '@wordpress/components';
+import { Card, CardBody, CardHeader } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useState } from '@wordpress/element';
+import { registerBlockType } from '@wordpress/blocks';
 
 
 import { switchComponents } from './switchComponents';
 
+import './editor.scss';
+
 /**
- * This is basically the heart of the JS part of this Plugin.
- * It takes all the fields and information to create a user interface inside the editor.
+ * Register Blocks and automatically create an Editor UI
  * 
- * @param {String} name 
- * @param {Object} fields like block attributes but with a label and a input
- * @param {Object} options options like in wp.blocks.registerBlockType just without attributes
- * @param {Array} children optional template for InnerBlocks
+ * @param {string} name - Block name with slug e.g. my-slug/my-block
+ * @param {Object} fields - All block attributes with a label and a input
+ * 
+ * TODO: learn how to document the following
+ * @param fields.fieldName 
+ * @param fields.fieldName.type
+ * @param fields.fieldName.default
+ * @param fields.fieldName.label
+ * @param fields.fieldName.input 
+ * @param fields.fieldName[selector] - optional selector
+ * 
+ * 
+ * @param {Object} options - All options like in wp.blocks.registerBlockType but without(!) attributes: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * @param {array} [children] - Optional template for InnerBlocks
  */
 function registerHelper( name, fields, options, children ) {
-  const origAttributes = {};
+  const blockAttributes = {};
 
   for (const [fieldName, field] of Object.entries(fields)) {
     // copy relevant parts of the fields object to generate attributes
@@ -24,16 +36,16 @@ function registerHelper( name, fields, options, children ) {
     newValue.type = field.type;
     newValue.default = field.default;
     
-    origAttributes[fieldName] = newValue;
+    blockAttributes[fieldName] = newValue;
   }
 
   const edit = (props) => {
-		const { attributes, setAttributes, isSelected } = props;
+		const { attributes, isSelected } = props;
 		const [ height, setHeight ] = useState(0);
 
 		return (
 			<div
-				style={{minHeight: height }}
+				style={{ minHeight: height }}
 				onMouseDown={(e) => { 
 					/* this should prevent scroll position jumping but there is probably a better way to do this */
 					if (isSelected) return;
@@ -44,31 +56,33 @@ function registerHelper( name, fields, options, children ) {
 				}}
 			>
 					{/* show serversiderender only if it has no children, ssr does not work with children here */}
-					{( isSelected || children ) ? (
-						<Card style={{ background: (!isSelected && !children) && 'transparent'}}>
-							<CardBody>
-								<label style={{fontSize: '10px'}}>Block: {options.title}</label> 
-								{Object.entries(fields).map( ([fieldName, field]) => {
-									return switchComponents(field, setAttributes, fieldName, attributes, props);
-								})}
+					{( isSelected || children ) ? 
+						(
+							<Card className='fbl_card'>
+								<CardHeader className='fbl_block-title'>Block: {options.title}</CardHeader>
+								<CardBody style={{padding: '16px 14px'}}>
+									{Object.entries(fields).map( ([fieldName, field]) => {
+										return switchComponents(props, fieldName, field);
+									})}
 
-								{ children && (
-									<div style={{border: '1px dashed grey', padding: '10px'}} >
-										<InnerBlocks
-											allowedBlocks={ children }
-											orientation='horizontal'
-											renderAppender={ InnerBlocks.ButtonBlockAppender }
-										/>
-									</div>
-								)}
-							</CardBody>
-						</Card>
-					):(
-						<ServerSideRender
-							block={ name }
-							attributes={ { ...attributes } }
-						/>
-					)
+									{ children && (
+										<div style={{border: '1px dashed grey', padding: '10px'}} >
+											<InnerBlocks
+												allowedBlocks={ children }
+												orientation='horizontal'
+												renderAppender={ InnerBlocks.ButtonBlockAppender }
+											/>
+										</div>
+									)}
+								</CardBody>
+							</Card>
+						) :
+						(
+							<ServerSideRender
+								block={ name }
+								attributes={ { ...attributes } }
+							/>
+						)
 					}
 			</div>
 			)
@@ -79,12 +93,13 @@ function registerHelper( name, fields, options, children ) {
     save: ( {attributes} ) => {
 			return (
 				children ? 
-				<InnerBlocks.Content /> : 
-				 /* 	Fallback Content to be saved inside the database/content for example for SEO Plugins etc.
-							also important if you choose to disable the block or if it stops working */ 
+				<InnerBlocks.Content /> :
 				(
 					<div>
 						{Object.entries(fields).map( ([fieldName, field]) => {
+								/* Fallback Content to be saved inside the database/content for example for SEO Plugins etc.
+								also important if you choose to disable the block or if it stops working */ 
+
 								switch (field.input) {
 									// for some fields it is likely, that there should be output
 									case 'text': 
@@ -108,13 +123,12 @@ function registerHelper( name, fields, options, children ) {
 						})}
 					</div>
 				)
-				
 			) // default: for server side rendered blocks, can be overwritten
     },
     ...options,
-    attributes: origAttributes // ALWAYS uses attributes generated by fields object
+    attributes: blockAttributes // ALWAYS uses attributes generated by fields object
   }
-	wp.blocks.registerBlockType(name, blockObj);
+	registerBlockType(name, blockObj);
 }
 
 /**

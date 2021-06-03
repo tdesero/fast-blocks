@@ -1,9 +1,21 @@
-import { RichText } from '@wordpress/block-editor';
+import { RichText, URLInputButton } from '@wordpress/block-editor';
 import { TextControl, ToggleControl, SelectControl, BaseControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from './components/ImageUpload';
 
-export function switchComponents(field, setAttributes, fieldName, attributes, props) {
+/**
+ * Create different Components to make all fields editable.
+ * Basically checks the input value of a field and decides what component is needed
+ * and which attributes should be set (e. g. for images it's usually a object containing url, alt etc.)
+ * 
+ * @param {Object} props - All props passed by edit function of block
+ * @param {string} fieldName
+ * @param {Object} field 
+ * @returns 
+ */
+export function switchComponents(props, fieldName, field) {
+	const { attributes, setAttributes } = props;
+
 	switch (field.input) {
 		case 'checkbox':
 			return (
@@ -14,7 +26,8 @@ export function switchComponents(field, setAttributes, fieldName, attributes, pr
 							[fieldName]: !attributes[fieldName]
 						});
 					}}
-					checked={attributes[fieldName]} />
+					checked={attributes[fieldName]} 
+				/>
 			);
 		case 'text':
 			return (
@@ -25,7 +38,8 @@ export function switchComponents(field, setAttributes, fieldName, attributes, pr
 						setAttributes({
 							[fieldName]: text
 						});
-					}} />
+					}} 
+				/>
 			);
 		case 'select':
 			return (
@@ -37,7 +51,8 @@ export function switchComponents(field, setAttributes, fieldName, attributes, pr
 							[fieldName]: val
 						});
 					}}
-					options={field.options} />
+					options={field.options} 
+				/>
 			);
 		case 'image':
 			return (
@@ -49,22 +64,38 @@ export function switchComponents(field, setAttributes, fieldName, attributes, pr
 				/>
 			);
 		case 'richText':
-			console.log(props);
 			return (
-					<>
+					<BaseControl>
 						<BaseControl label={field.label} />
 						<RichText
-							className='components-text-control__input'
-							style={{ marginBottom: '24px' }}
+							className='fbl_rich-text'
 							value={attributes[fieldName]}
-							onChange={(text) => {
+							onChange={ text => {
 								setAttributes({
 									[fieldName]: text
 								});
 							}}
 							placeholder={__('Add text…')}
 							inlineToolbar />
-					</>
+					</BaseControl>
+			);
+		case 'url':
+			return (
+				<BaseControl className='fbl_url-input'>
+					<BaseControl 
+						className='fbl_url-input__label'
+						label={field.label} 
+					/>
+					<URLInputButton
+						url={attributes[fieldName]}
+						onChange={ url => {
+							setAttributes({
+								[fieldName]: url
+							});
+						}}
+					/>
+					<small className='fbl_url-input__url'>{attributes[fieldName]}</small>
+				</BaseControl>
 			);
 		default:
 			return;
