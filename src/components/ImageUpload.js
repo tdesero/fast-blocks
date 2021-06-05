@@ -3,25 +3,16 @@ import { Button, BaseControl } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
 
-const ImageUpload = ({attributes, setAttributes, fieldName, field}) => (
+const ImageUpload = ({label, onSelect, onRemove, value}) => (
   <MediaUploadCheck>
     <MediaUpload
-      onSelect={ ( media ) => {
-        setAttributes( { 
-          [fieldName]: {
-            id: media.id,
-            sizes: media.sizes,
-            url: media.url,
-            alt: media.alt,
-          }
-        } )
-      } }
+      onSelect={ onSelect }
       allowedTypes={ [ 'image' ] }
-      value={ attributes[fieldName] }
+      value={ value }
       render={ ( { open } ) => (
-        <>
-          <BaseControl label={field.label} />
-          { !attributes[fieldName] ? (
+        <BaseControl>
+          <BaseControl label={label} />
+          { !(value && value.url) ? (
             <Button onClick={ open } isPrimary>
               {__('Open Media Library')}
             </Button>
@@ -29,15 +20,15 @@ const ImageUpload = ({attributes, setAttributes, fieldName, field}) => (
             <>
               <img 
                 onClick={ open } 
-                src={attributes[fieldName].url}
+                src={value.url}
                 style={{width: '150px', height: '150px', objectFit: 'cover', marginRight: '10px', background: 'white'}}
               />
-              <Button onClick={ () => { setAttributes( {[fieldName]: undefined } ) }} isSecondary>
+              <Button onClick={ onRemove } isSecondary>
                 {__('Remove image')}
               </Button>
             </>
           )}
-        </>
+        </BaseControl>
       ) }
     />
   </MediaUploadCheck>

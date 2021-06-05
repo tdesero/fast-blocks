@@ -1,5 +1,5 @@
 === Fast Blocks ===
-Contributors:      Tom Deser
+Contributors:      Tom D
 Tags:              block
 Tested up to:      5.7.0
 Stable tag:        0.1.0
@@ -11,6 +11,7 @@ Create Custom Blocks fast and easy with PHP only.
 == Description ==
 
 Use the function `add_fast_block` to add a block to your theme in PHP. The Plugin automatically creates a interface for your block inside the editor.
+Unlike the default block behaviour all blocks are rendered dynamically. This means changes inside the template are shown immediately without resaving the post or page.
 
 == Installation ==
 
@@ -22,50 +23,105 @@ Use the function `add_fast_block` to add a block to your theme in PHP. The Plugi
 
 = Do I have to know some PHP to use this plugin? =
 
-Yes! this plugin is meant to be used by people that create their own themes.
+Yes! this plugin is meant to be used by developers and people that create their own themes.
 
 = Do I have to know JavaScript? =
 
 No! The JavaScript part is handled completely by the plugin.
 
+= Does it work with SEO Plugins? =
+
+To avoid problems with dynamic blocks and SEO analyzing Plugins, most fields are stored inside the block content the traditional way additionally. But this doesn't mean it is 100% reliable.
+
 == Changelog ==
 
-= 0.1.0 =
+= 0.2.0 =
 * Release
 
 == Example Usage ==
 
-register your block:
+Register your block:
 
-`$easyblocks_test_settings = [
+`$options = [
   'name'      => 'some-slug/block-name',
-  'template'  => '/blocks/test.php', // template from theme-directory
+  // template from theme-directory
+  'template'  => '/blocks/test.php',
   'settings'  => [
-    'title'   => 'Plugin Block', // add the same settings as the original "registerBlockType" function without attributes
+    // same settings as the original "wp.registerBlockType" without attributes.
+    'title'   => 'Plugin Block',
   ],
   'fields'    => [
-    // with the fields array you can define attributes and the inputs/labels that are needed
+    // define attributes and inputs/labels etc. that are needed.
     'headline'  => [
-      'default'   => 'default string',
-      'type'      => 'string',
-      'input'	    => 'text',
-      'label'     => 'My Label',
+      'label'    => 'My Label',
+      'type'     => 'string',
+      'input'	   => 'text',
+      'default'  => 'default string',
+      // optional selector: useful fallback if dynamic rendering does not work. Also good for WP SEO PLugins.
+      'selector' => 'h2',
+    ],
+    'text'  => [
+      'label'    => 'Some Text',
+      'type'     => 'string',
+      'input'	   => 'richText',
+      'default'  => 'default string',
     ],
     'image'   => [
-      'type'  => 'object',
-      'input' => 'image',
-      'label' => 'Label for the Upload Button',
+      'label'   => 'Label for the Upload Button',
+      'type'    => 'object',
+      'input'   => 'image',
+      'default' => [
+        'url'   => 'image.jpeg',
+        'alt'   => 'Alternative Text',
+        'sizes' => []
+      ]
     ],
+    'bgColor' => [
+      'label'   => 'Background',
+      'type'    => 'string',
+      'default' => 'light',
+      'input'	  => 'select',
+      'options' => [
+        ['label' => 'light', 'value' => 'light'],
+        ['label' => 'dark', 'value' => 'dark'],
+      ]
+    ],
+    'someBool' => [
+      // ...
+      'type'    => 'boolean',
+      'input'   => 'checkbox',
+    ],
+    'someArray' => [
+      // ...
+      'type' => 'array',
+      'default' => [],
+      'input' => 'repeater',
+      'query' => [
+        'subField1' => [
+          'type' => 'string',
+          'input' => 'text',
+          'default' => 'default list item',
+        ],
+        'subField2' => [
+          'type' => 'boolean',
+          'input' => 'checkbox',
+          'default' => true,
+        ],
+      ]
+    ]
   ]
 ];
 
-add_fast_block( $easyblocks_test_settings );`
+add_fast_block( $options );`
 
-available inputs: `text`, `richText`, `checkbox`, `select`, `image`.
+Available inputs: `text`, `richText`, `checkbox`, `select`, `image`, `url`.
+At the moment default values are mandatory.
 
-example usage inside template:
+Example usage inside template:
 
 `<div>
   <h2><?php fast_field('headline'); ?></h2>
   <img src="<?php echo get_fast_field('image')['url']; ?>">
 </div>`
+
+For `fast_field` function sanitizing is done with `wp_kses_post`. If you need more complex sanitizing, use `get_fast_field`, sanitize on your own and `echo` the value afterwards.

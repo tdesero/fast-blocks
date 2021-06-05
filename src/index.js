@@ -23,7 +23,6 @@ import './editor.scss';
  * @param fields.fieldName.input 
  * @param fields.fieldName[selector] - optional selector
  * 
- * 
  * @param {Object} options - All options like in wp.blocks.registerBlockType but without(!) attributes: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  * @param {array} [children] - Optional template for InnerBlocks
  */
