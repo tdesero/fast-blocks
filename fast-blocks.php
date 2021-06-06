@@ -45,6 +45,8 @@ class SingleFastBlock {
 			$path = get_stylesheet_directory() . $this->settings['template'];
 			if ( file_exists( $path ) ) {
 				include $path;
+			} else {
+				echo '<p>Template not found for custom block <code>"' . $this->settings['name'] . '"</code>.</p>';
 			}
 
 			$output = ob_get_clean();

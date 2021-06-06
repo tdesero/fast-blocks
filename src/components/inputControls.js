@@ -1,5 +1,5 @@
 import { RichText, URLInputButton } from '@wordpress/block-editor';
-import { TextControl, ToggleControl, CheckboxControl, SelectControl, BaseControl } from '@wordpress/components';
+import { TextControl, ToggleControl, CheckboxControl, SelectControl, BaseControl, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from './ImageUpload';
 
@@ -25,6 +25,23 @@ const inputControls = {
       onChange={setFieldAttributes} 
     />
   ),
+  'number': ({ value, label, setFieldAttributes }) => (
+    <TextControl
+      label={label}
+      type="number" 
+      value={value}
+      onChange={setFieldAttributes}
+    />
+  ),
+  'range': ({ value, field, label, setFieldAttributes }) => ( 
+    <RangeControl
+      label={label}
+      value={value}
+      onChange={setFieldAttributes}
+      min={field.min}
+      max={field.max}
+    />
+   ),
 	'select': ({ value, field, label, setFieldAttributes }) => (
     <SelectControl
       label={label}
@@ -49,7 +66,8 @@ const inputControls = {
         value={value}
         onChange={setFieldAttributes}
         placeholder={__('Add text…')}
-        inlineToolbar />
+        inlineToolbar
+      />
     </BaseControl>
   ),
 	'url': ({ value, label, setFieldAttributes, attributes }) => (
