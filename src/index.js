@@ -5,7 +5,7 @@ import { useState } from '@wordpress/element';
 import { registerBlockType } from '@wordpress/blocks';
 
 
-import { switchComponents } from './switchComponents';
+import { createFieldControls } from './createFieldControls';
 
 import './editor.scss';
 
@@ -61,7 +61,7 @@ function registerHelper( name, fields, options, children ) {
 								<CardHeader className='fbl_block-title'>Block: {options.title}</CardHeader>
 								<CardBody style={{padding: '16px 14px'}}>
 									{Object.entries(fields).map( ([fieldName, field]) => {
-										return switchComponents(props, fieldName, field);
+										return createFieldControls(props, fieldName, field);
 									})}
 
 									{ children && (

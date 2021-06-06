@@ -114,7 +114,7 @@ Register your block:
 
 add_fast_block( $options );`
 
-Available inputs: `text`, `richText`, `checkbox`, `select`, `image`, `url`.
+Available inputs: `text`, `richText`, `checkbox`, `toggle`, `select`, `image`, `url`.
 At the moment default values are mandatory.
 
 Example usage inside template:

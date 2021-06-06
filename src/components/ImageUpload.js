@@ -6,7 +6,15 @@ import { __ } from '@wordpress/i18n';
 const ImageUpload = ({label, onSelect, onRemove, value}) => (
   <MediaUploadCheck>
     <MediaUpload
-      onSelect={ onSelect }
+      onSelect={ (media) => { 
+        onSelect({
+          id: media.id,
+          /* saving all sizes results in a very big js object and issues with the ServerSideRender Component (GET Request) */
+          //sizes: media.sizes,
+          url: media.url,
+          alt: media.alt,
+        })
+      }}
       allowedTypes={ [ 'image' ] }
       value={ value }
       render={ ( { open } ) => (

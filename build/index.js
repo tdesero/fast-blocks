@@ -1,1 +1,698 @@
-!function(e){var t={};function l(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,l),r.l=!0,r.exports}l.m=e,l.c=t,l.d=function(e,t,n){l.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},l.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},l.t=function(e,t){if(1&t&&(e=l(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(l.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)l.d(n,r,function(t){return e[t]}.bind(null,r));return n},l.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return l.d(t,"a",t),t},l.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},l.p="",l(l.s=6)}([function(e,t){e.exports=window.wp.element},function(e,t){e.exports=window.wp.components},function(e,t){e.exports=window.wp.blockEditor},function(e,t){e.exports=window.wp.i18n},function(e,t){e.exports=window.wp.serverSideRender},function(e,t){e.exports=window.wp.blocks},function(e,t,l){"use strict";l.r(t);var n=l(0),r=l(2),c=l(1),a=l(4),o=l.n(a),i=l(5),s=l(3),u=({label:e,onSelect:t,onRemove:l,value:a})=>Object(n.createElement)(r.MediaUploadCheck,null,Object(n.createElement)(r.MediaUpload,{onSelect:t,allowedTypes:["image"],value:a,render:({open:t})=>Object(n.createElement)(c.BaseControl,null,Object(n.createElement)(c.BaseControl,{label:e}),a&&a.url?Object(n.createElement)(n.Fragment,null,Object(n.createElement)("img",{onClick:t,src:a.url,style:{width:"150px",height:"150px",objectFit:"cover",marginRight:"10px",background:"white"}}),Object(n.createElement)(c.Button,{onClick:l,isSecondary:!0},Object(s.__)("Remove image"))):Object(n.createElement)(c.Button,{onClick:t,isPrimary:!0},Object(s.__)("Open Media Library")))}));Object.values(fastBlockBlocks).forEach(e=>{!function(e,t,l,a){const b={};for(const[e,l]of Object.entries(t)){const t={};t.type=l.type,t.default=l.default,b[e]=t}const m={edit:i=>{const{attributes:b,isSelected:m}=i,[d,p]=Object(n.useState)(0);return Object(n.createElement)("div",{style:{minHeight:d},onMouseDown:e=>{if(m)return;e.currentTarget.style.minHeight=null;const t=e.currentTarget.offsetHeight;e.currentTarget.style.minHeight=t+"px",p(t)}},m||a?Object(n.createElement)(c.Card,{className:"fbl_card"},Object(n.createElement)(c.CardHeader,{className:"fbl_block-title"},"Block: ",l.title),Object(n.createElement)(c.CardBody,{style:{padding:"16px 14px"}},Object.entries(t).map(([e,t])=>function(e,t,l){const{attributes:a,setAttributes:o}=e;switch(l.input){case"checkbox":return Object(n.createElement)(c.ToggleControl,{label:l.label,onChange:e=>{o({[t]:!a[t]})},checked:a[t]});case"text":return Object(n.createElement)(c.TextControl,{label:l.label,value:a[t],onChange:e=>{o({[t]:e})}});case"select":return Object(n.createElement)(c.SelectControl,{label:l.label,value:a[t],onChange:e=>{o({[t]:e})},options:l.options});case"image":return Object(n.createElement)(u,{onSelect:e=>{o({[t]:{id:e.id,sizes:e.sizes,url:e.url,alt:e.alt}})},onRemove:()=>{o({[t]:void 0})},value:a[t],label:l.label});case"richText":return Object(n.createElement)(c.BaseControl,null,Object(n.createElement)(c.BaseControl,{label:l.label}),Object(n.createElement)(r.RichText,{className:"fbl_rich-text",value:a[t],onChange:e=>{o({[t]:e})},placeholder:Object(s.__)("Add text…"),inlineToolbar:!0}));case"url":return Object(n.createElement)(c.BaseControl,{className:"fbl_url-input"},Object(n.createElement)(c.BaseControl,{className:"fbl_url-input__label",label:l.label}),Object(n.createElement)(r.URLInputButton,{url:a[t],onChange:e=>{o({[t]:e})}}),Object(n.createElement)("small",{className:"fbl_url-input__url"},a[t]));case"repeater":const i=()=>{const e={};Object.entries(l.query).forEach(([t,l])=>{e[t]=l.default}),o({[t]:[...a[t],e]})},b=e=>{const l=[...a[t]];l.splice(e,1),o({[t]:l})};return Object(n.createElement)(c.BaseControl,{className:"fbl_repeater-inputs"},Object(n.createElement)(c.BaseControl,{label:l.label}),Object(n.createElement)(c.Panel,null,a[t].map((a,o)=>Object(n.createElement)(c.PanelBody,{key:t+o,title:`Repeater ${Object(s.__)("Item")} ${o+1}`,initialOpen:!1,buttonProps:{style:{padding:"16px"}}},Object.entries(a).map(([a])=>function({props:e,fieldName:t,field:l,subFieldName:a,subField:o,key:i}){const{attributes:b,setAttributes:m}=e;function d(e){const l=b[t].slice(0,i),n=b[t].slice(i+1);m({[t]:[...l,{...b[t][i],[a]:e},...n]})}switch(o.input){case"checkbox":return Object(n.createElement)(c.ToggleControl,{label:o.label,onChange:d,checked:b[t][i][a]});case"text":return Object(n.createElement)(c.TextControl,{label:o.label,value:b[t][i][a],onChange:d});case"select":return Object(n.createElement)(c.SelectControl,{label:o.label,value:b[t][i][a],onChange:d,options:l.options});case"image":return Object(n.createElement)(u,{onSelect:e=>{d({id:e.id,sizes:e.sizes,url:e.url,alt:e.alt})},onRemove:()=>{d(void 0)},value:b[t][i][a],label:o.label});case"richText":return Object(n.createElement)(c.BaseControl,null,Object(n.createElement)(c.BaseControl,{label:o.label}),Object(n.createElement)(r.RichText,{className:"fbl_rich-text",value:b[t][i][a],onChange:d,placeholder:Object(s.__)("Add text…"),inlineToolbar:!0}));case"url":return Object(n.createElement)(c.BaseControl,{className:"fbl_url-input"},Object(n.createElement)(c.BaseControl,{className:"fbl_url-input__label",label:l.label}),Object(n.createElement)(r.URLInputButton,{url:b[t][i][a],onChange:d}),Object(n.createElement)("small",{className:"fbl_url-input__url"},b[t][i][a]));default:return}}({props:e,fieldName:t,field:l,subFieldName:a,subField:l.query[a],key:o})),Object(n.createElement)(c.Button,{onClick:()=>{b(o)},isDestructive:!0},Object(s.__)("Remove item"))))),Object(n.createElement)(c.Button,{onClick:i,style:{width:"100%",justifyContent:"center"},isSecondary:!0},"+"));default:return}}(i,e,t)),a&&Object(n.createElement)("div",{style:{border:"1px dashed grey",padding:"10px"}},Object(n.createElement)(r.InnerBlocks,{allowedBlocks:a,orientation:"horizontal",renderAppender:r.InnerBlocks.ButtonBlockAppender})))):Object(n.createElement)(o.a,{block:e,attributes:{...b}}))},save:({attributes:e})=>a?Object(n.createElement)(r.InnerBlocks.Content,null):Object(n.createElement)("div",null,Object.entries(t).map(([t,l])=>{switch(l.input){case"text":if("string"==typeof l.selector){const r=l.selector;return Object(n.createElement)(r,null,e[t])}return Object(n.createElement)("p",null,e[t]);case"image":return Object(n.createElement)("img",{src:"object"==typeof e[t]&&e[t].url,alt:"object"==typeof e[t]&&e[t].alt});case"richText":return Object(n.createElement)(r.RichText.Content,{tagName:"p",value:e[t]});default:return null}})),...l,attributes:b};Object(i.registerBlockType)(e,m)}(e.name,e.fields,e.settings,e.children)})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/components/ImageUpload.js":
+/*!***************************************!*\
+  !*** ./src/components/ImageUpload.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+const ImageUpload = ({
+  label,
+  onSelect,
+  onRemove,
+  value
+}) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["MediaUploadCheck"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["MediaUpload"], {
+  onSelect: media => {
+    onSelect({
+      id: media.id,
+
+      /* saving all sizes results in a very big js object and issues with the ServerSideRender Component (GET Request) */
+      //sizes: media.sizes,
+      url: media.url,
+      alt: media.alt
+    });
+  },
+  allowedTypes: ['image'],
+  value: value,
+  render: ({
+    open
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {
+    label: label
+  }), !(value && value.url) ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    onClick: open,
+    isPrimary: true
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Open Media Library')) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+    onClick: open,
+    src: value.url,
+    style: {
+      width: '150px',
+      height: '150px',
+      objectFit: 'cover',
+      marginRight: '10px',
+      background: 'white'
+    }
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    onClick: onRemove,
+    isSecondary: true
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Remove image'))))
+}));
+
+/* harmony default export */ __webpack_exports__["default"] = (ImageUpload);
+
+/***/ }),
+
+/***/ "./src/components/inputControls.js":
+/*!*****************************************!*\
+  !*** ./src/components/inputControls.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _ImageUpload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ImageUpload */ "./src/components/ImageUpload.js");
+
+
+
+
+
+const inputControls = {
+  'checkbox': ({
+    value,
+    label,
+    setFieldAttributes
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["CheckboxControl"], {
+    label: label,
+    onChange: setFieldAttributes,
+    checked: value
+  }),
+  'toggle': ({
+    value,
+    label,
+    setFieldAttributes
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: label,
+    onChange: setFieldAttributes,
+    checked: value
+  }),
+  'text': ({
+    value,
+    label,
+    setFieldAttributes
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["TextControl"], {
+    label: label,
+    value: value,
+    onChange: setFieldAttributes
+  }),
+  'select': ({
+    value,
+    field,
+    label,
+    setFieldAttributes
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["SelectControl"], {
+    label: label,
+    value: value,
+    onChange: setFieldAttributes,
+    options: field.options
+  }),
+  'image': ({
+    label,
+    value,
+    setFieldAttributes,
+    removeFieldAttributes
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_ImageUpload__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onSelect: setFieldAttributes,
+    onRemove: removeFieldAttributes,
+    value: value,
+    label: label
+  }),
+  'richText': ({
+    value,
+    label,
+    setFieldAttributes
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {
+    label: label
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["RichText"], {
+    className: "fbl_rich-text",
+    value: value,
+    onChange: setFieldAttributes,
+    placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Add text…'),
+    inlineToolbar: true
+  })),
+  'url': ({
+    value,
+    label,
+    setFieldAttributes,
+    attributes
+  }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {
+    className: "fbl_url-input"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {
+    className: "fbl_url-input__label",
+    label: label
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["URLInputButton"], {
+    url: value,
+    onChange: setFieldAttributes
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", {
+    className: "fbl_url-input__url"
+  }, value))
+};
+/* harmony default export */ __webpack_exports__["default"] = (inputControls);
+
+/***/ }),
+
+/***/ "./src/createFieldControls.js":
+/*!************************************!*\
+  !*** ./src/createFieldControls.js ***!
+  \************************************/
+/*! exports provided: createFieldControls */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFieldControls", function() { return createFieldControls; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _createSubFieldControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./createSubFieldControls */ "./src/createSubFieldControls.js");
+/* harmony import */ var _components_inputControls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/inputControls */ "./src/components/inputControls.js");
+
+
+
+
+
+/**
+ * Create different Components to make all fields editable.
+ * Basically checks the input value of a field and decides what component is needed
+ * and which attributes should be set (e. g. for images it's usually a object containing url, alt etc.)
+ * 
+ * @param {Object} props - All props passed by edit function of block
+ * @param {string} fieldName
+ * @param {Object} field 
+ * @returns 
+ */
+
+function createFieldControls(props, fieldName, field) {
+  const {
+    attributes,
+    setAttributes
+  } = props;
+
+  const setFieldAttributes = val => {
+    setAttributes({
+      [fieldName]: val
+    });
+  };
+
+  const removeFieldAttributes = () => {
+    setAttributes({
+      [fieldName]: undefined
+    });
+  };
+
+  if (field.input !== 'repeater') {
+    const InputControl = _components_inputControls__WEBPACK_IMPORTED_MODULE_4__["default"][field.input];
+
+    if (InputControl === undefined) {
+      console.error(field.input + ' Input does not exist');
+      return;
+    }
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InputControl, {
+      setFieldAttributes: setFieldAttributes,
+      removeFieldAttributes: removeFieldAttributes,
+      field: field,
+      label: field.label,
+      value: attributes[fieldName]
+    });
+  } else if (field.input === 'repeater') {
+    const addNew = () => {
+      const newItem = {};
+      Object.entries(field.query).forEach(([key, value]) => {
+        newItem[key] = value.default;
+      });
+      setAttributes({
+        [fieldName]: [...attributes[fieldName], newItem]
+      });
+    };
+
+    const removeItem = index => {
+      const updatedAttr = [...attributes[fieldName]];
+      updatedAttr.splice(index, 1);
+      setAttributes({
+        [fieldName]: updatedAttr
+      });
+    };
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["BaseControl"], {
+      className: "fbl_repeater-inputs"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["BaseControl"], {
+      label: field.label
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Panel"], null, attributes[fieldName].map((attribute, index) => {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
+        key: fieldName + index,
+        title: `Repeater ${Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Item')} ${index + 1}`,
+        initialOpen: false,
+        buttonProps: {
+          style: {
+            padding: '16px'
+          }
+        }
+      }, Object.entries(attribute).map(([subFieldName]) => {
+        return Object(_createSubFieldControls__WEBPACK_IMPORTED_MODULE_3__["createSubFieldControls"])({
+          props,
+          fieldName,
+          field,
+          subFieldName,
+          subField: field.query[subFieldName],
+          key: index
+        });
+      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: () => {
+          removeItem(index);
+        },
+        isDestructive: true
+      }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove item')));
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      onClick: addNew,
+      style: {
+        width: '100%',
+        justifyContent: 'center'
+      },
+      isSecondary: true
+    }, "+"));
+  }
+}
+
+/***/ }),
+
+/***/ "./src/createSubFieldControls.js":
+/*!***************************************!*\
+  !*** ./src/createSubFieldControls.js ***!
+  \***************************************/
+/*! exports provided: createSubFieldControls */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSubFieldControls", function() { return createSubFieldControls; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_inputControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/inputControls */ "./src/components/inputControls.js");
+
+
+
+/**
+ * Create different Components to make all subFields editable.
+ * Very similar to switchComponents function
+ * 
+ * @param {Object} props - All props passed by edit function of block
+ * @param {string} fieldName
+ * @param {Object} field 
+ * @returns 
+ */
+
+function createSubFieldControls({
+  props,
+  fieldName,
+  field,
+  subFieldName,
+  subField,
+  key
+}) {
+  const {
+    attributes,
+    setAttributes
+  } = props;
+
+  const setSubFieldAttributes = val => {
+    const before = attributes[fieldName].slice(0, key);
+    const after = attributes[fieldName].slice(key + 1);
+    setAttributes({
+      [fieldName]: [...before, { ...attributes[fieldName][key],
+        [subFieldName]: val
+      }, ...after]
+    });
+  };
+
+  const removeSubFieldAttributes = () => {
+    setSubFieldAttributes(undefined);
+  };
+
+  const InputControl = _components_inputControls__WEBPACK_IMPORTED_MODULE_2__["default"][subField.input];
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InputControl, {
+    setFieldAttributes: setSubFieldAttributes,
+    removeFieldAttributes: removeSubFieldAttributes,
+    field: subField,
+    label: subField.label,
+    value: attributes[fieldName][key][subFieldName]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/editor.scss":
+/*!*************************!*\
+  !*** ./src/editor.scss ***!
+  \*************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _createFieldControls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./createFieldControls */ "./src/createFieldControls.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+
+
+
+
+
+
+
+
+/**
+ * Register Blocks and automatically create an Editor UI
+ * 
+ * @param {string} name - Block name with slug e.g. my-slug/my-block
+ * @param {Object} fields - All block attributes with a label and a input
+ * 
+ * TODO: learn how to document the following
+ * @param fields.fieldName 
+ * @param fields.fieldName.type
+ * @param fields.fieldName.default
+ * @param fields.fieldName.label
+ * @param fields.fieldName.input 
+ * @param fields.fieldName[selector] - optional selector
+ * 
+ * @param {Object} options - All options like in wp.blocks.registerBlockType but without(!) attributes: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * @param {array} [children] - Optional template for InnerBlocks
+ */
+
+function registerHelper(name, fields, options, children) {
+  const blockAttributes = {};
+
+  for (const [fieldName, field] of Object.entries(fields)) {
+    // copy relevant parts of the fields object to generate attributes
+    const newValue = {};
+    newValue.type = field.type;
+    newValue.default = field.default;
+    blockAttributes[fieldName] = newValue;
+  }
+
+  const edit = props => {
+    const {
+      attributes,
+      isSelected
+    } = props;
+    const [height, setHeight] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      style: {
+        minHeight: height
+      },
+      onMouseDown: e => {
+        /* this should prevent scroll position jumping but there is probably a better way to do this */
+        if (isSelected) return;
+        e.currentTarget.style.minHeight = null;
+        const currentHeight = e.currentTarget.offsetHeight;
+        e.currentTarget.style.minHeight = currentHeight + 'px';
+        setHeight(currentHeight);
+      }
+    }, isSelected || children ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Card"], {
+      className: "fbl_card"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["CardHeader"], {
+      className: "fbl_block-title"
+    }, "Block: ", options.title), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["CardBody"], {
+      style: {
+        padding: '16px 14px'
+      }
+    }, Object.entries(fields).map(([fieldName, field]) => {
+      return Object(_createFieldControls__WEBPACK_IMPORTED_MODULE_5__["createFieldControls"])(props, fieldName, field);
+    }), children && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      style: {
+        border: '1px dashed grey',
+        padding: '10px'
+      }
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"], {
+      allowedBlocks: children,
+      orientation: "horizontal",
+      renderAppender: _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].ButtonBlockAppender
+    })))) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      block: name,
+      attributes: { ...attributes
+      }
+    }));
+  };
+
+  const blockObj = {
+    edit,
+    save: ({
+      attributes
+    }) => {
+      return children ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].Content, null) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object.entries(fields).map(([fieldName, field]) => {
+        /* Fallback Content to be saved inside the database/content for example for SEO Plugins etc.
+        also important if you choose to disable the block or if it stops working */
+        switch (field.input) {
+          // for some fields it is likely, that there should be output
+          case 'text':
+            if (typeof field.selector === "string") {
+              // TODO: check if it is a valid tag
+              const CustomTag = field.selector;
+              return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(CustomTag, null, attributes[fieldName]);
+            } else {
+              return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, attributes[fieldName]);
+            }
+
+            ;
+
+          case 'image':
+            return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+              src: typeof attributes[fieldName] === "object" && attributes[fieldName].url,
+              alt: typeof attributes[fieldName] === "object" && attributes[fieldName].alt
+            });
+
+          case 'richText':
+            return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["RichText"].Content, {
+              tagName: "p",
+              value: attributes[fieldName]
+            });
+
+          default:
+            return null;
+          // by default don't output anything 
+        }
+      })); // default: for server side rendered blocks, can be overwritten
+    },
+    ...options,
+    attributes: blockAttributes // ALWAYS uses attributes generated by fields object
+
+  };
+  Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["registerBlockType"])(name, blockObj);
+}
+/**
+ * Register All Blocks that are added with the PHP helper function add_fast_block
+ * const fastBlockBlocks is made available with PHP
+ */
+
+
+Object.values(fastBlockBlocks).forEach(block => {
+  registerHelper(block.name, block.fields, block.settings, block.children);
+});
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["blockEditor"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["blocks"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["components"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["element"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["i18n"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/server-side-render":
+/*!******************************************!*\
+  !*** external ["wp","serverSideRender"] ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["serverSideRender"]; }());
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map
