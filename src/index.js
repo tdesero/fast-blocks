@@ -80,6 +80,7 @@ function registerHelper( name, fields, options, children ) {
 							<ServerSideRender
 								block={ name }
 								attributes={ { ...attributes } }
+								httpMethod= 'POST'
 							/>
 						)
 					}
