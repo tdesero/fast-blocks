@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { createSubFieldControls } from './createSubFieldControls';
 
 import inputControls from './components/inputControls';
+import WidthWrapper from './components/WidthWrapper';
 
 /**
  * Create different Components to make all fields editable.
@@ -33,14 +34,18 @@ export function createFieldControls(props, fieldName, field) {
 			return;
 		}
 
+		const width = field.width || 1.0;
+
 		return (
-			<InputControl
-				setFieldAttributes={setFieldAttributes}
-				removeFieldAttributes={removeFieldAttributes}
-				field={field}
-				label={field.label}
-				value={attributes[fieldName]}
-			/>
+			<WidthWrapper width={width}>
+				<InputControl
+					setFieldAttributes={setFieldAttributes}
+					removeFieldAttributes={removeFieldAttributes}
+					field={field}
+					label={field.label}
+					value={attributes[fieldName]}
+				/>
+			</WidthWrapper>
 		);
 	} else if (field.input === 'repeater') {
 

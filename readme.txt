@@ -57,6 +57,7 @@ Register your block:
       'type'     => 'string',
       'input'	   => 'text',
       'default'  => 'default string',
+      'width' => 0.5, // optional for all fields except repeater
       // optional selector: useful fallback if dynamic rendering does not work. Also good for WP SEO PLugins.
       'selector' => 'h2',
     ],
