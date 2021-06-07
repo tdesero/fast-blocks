@@ -1,5 +1,5 @@
 import { RichText, URLInputButton } from '@wordpress/block-editor';
-import { TextControl, ToggleControl, CheckboxControl, SelectControl, BaseControl, RangeControl } from '@wordpress/components';
+import { TextControl, ToggleControl, CheckboxControl, SelectControl, BaseControl, RangeControl, TextareaControl} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ImageUpload from './ImageUpload';
 
@@ -18,8 +18,15 @@ const inputControls = {
       checked={value} 
     />
   ),
-	'text': ({ value, label, setFieldAttributes }) => (
+  'text': ({ value, label, setFieldAttributes }) => (
     <TextControl
+      label={label}
+      value={value}
+      onChange={setFieldAttributes} 
+    />
+  ),
+  'textarea': ({ value, label, setFieldAttributes }) => (
+    <TextareaControl
       label={label}
       value={value}
       onChange={setFieldAttributes} 
@@ -42,7 +49,7 @@ const inputControls = {
       max={field.max}
     />
    ),
-	'select': ({ value, field, label, setFieldAttributes }) => (
+  'select': ({ value, field, label, setFieldAttributes }) => (
     <SelectControl
       label={label}
       value={value}
@@ -50,7 +57,7 @@ const inputControls = {
       options={field.options}
     />
   ),
-	'image': ({ label, value, setFieldAttributes, removeFieldAttributes }) => (
+  'image': ({ label, value, setFieldAttributes, removeFieldAttributes }) => (
     <ImageUpload
       onSelect={setFieldAttributes}
       onRemove={removeFieldAttributes}
@@ -70,7 +77,7 @@ const inputControls = {
       />
     </BaseControl>
   ),
-	'url': ({ value, label, setFieldAttributes, attributes }) => (
+  'url': ({ value, label, setFieldAttributes }) => (
     <BaseControl className='fbl_url-input'>
       <BaseControl 
         className='fbl_url-input__label'

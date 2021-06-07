@@ -24,7 +24,9 @@ export function createFieldControls(props, fieldName, field) {
 		});
 	}
 
-	const removeFieldAttributes = () => { setAttributes( {[fieldName]: undefined } ) };
+	const removeFieldAttributes = () => { 
+		setFieldAttributes( undefined );
+	};
 
 	if (field.input !== 'repeater') {
 		const InputControl = inputControls[field.input];
@@ -73,7 +75,7 @@ export function createFieldControls(props, fieldName, field) {
 							return (
 								<PanelBody 
 									key={fieldName + index}
-									title={`Repeater ${__('Item')} ${index + 1}`} 
+									title={ field.single ? `${field.single} ${index + 1}` : `Repeater ${__('Item')} ${index + 1}`} 
 									initialOpen={ false }
 									buttonProps={{style: { padding: '16px'}}}
 								>

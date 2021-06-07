@@ -19,21 +19,26 @@
  */
 class SingleFastBlock {
 	
-	public $settings;
+	private $settings;
+	private $attributes;
 
 	function __construct( $settings ) {
 		$this->settings = $settings;
-		$this->register_block($this->settings);
+		foreach($settings['fields'] as $key => $value) {
+			$this->attributes[$key] = [
+				'type' => $value['type'],
+				'default' => $value['default'],
+			];
+		}
+		$this->register_block();
 	}
 
-	public function register_block( $settings ) {
-		register_block_type( $settings['name'], [
+	private function register_block() {
+		register_block_type( $this->settings['name'], [
 			'editor_script' 	=> 'fast-blocks-editor-script',
 			'editor_style'		=> 'fast-blocks-editor-style',
 			'render_callback' => array($this, 'render_callback'),
-
-			// TODO: cleanup the attributes. ATM all field settings from the fast block helper are added here (including input/label etc.)
-			'attributes'      => $settings['fields']
+			'attributes'      => $this->attributes,
 		] );
 	}
 
@@ -69,7 +74,7 @@ class FastBlocksPlugin {
 		$this->add_scripts();
 	}
 
-	public function add_scripts() {
+	private function add_scripts() {
 		add_action('enqueue_block_editor_assets', array($this, 'script_assets'));
 	}
 
