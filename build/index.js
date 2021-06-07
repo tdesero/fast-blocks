@@ -392,17 +392,46 @@ function createFieldControls(props, fieldName, field) {
       const newItem = {};
       Object.entries(field.query).forEach(([key, value]) => {
         newItem[key] = value.default;
-      });
+      }); // this id is not perfect but should be good enough for now
+
+      newItem.fastBlockId = new Date().valueOf();
+      console.log(newItem);
       setAttributes({
         [fieldName]: [...attributes[fieldName], newItem]
       });
     };
 
     const removeItem = index => {
-      const updatedAttr = [...attributes[fieldName]];
-      updatedAttr.splice(index, 1);
+      const attr = [...attributes[fieldName]];
+      attr.splice(index, 1);
       setAttributes({
-        [fieldName]: updatedAttr
+        [fieldName]: attr
+      });
+    };
+
+    const isLast = index => index === attributes[fieldName].length - 1;
+
+    const isFirst = index => index === 0;
+
+    const moveUp = index => {
+      if (isFirst(index)) return;
+      const attr = [...attributes[fieldName]];
+      const el = attr[index];
+      attr[index] = attr[index - 1];
+      attr[index - 1] = el;
+      setAttributes({
+        [fieldName]: attr
+      });
+    };
+
+    const moveDown = index => {
+      if (isLast(index)) return;
+      const attr = [...attributes[fieldName]];
+      const el = attr[index];
+      attr[index] = attr[index + 1];
+      attr[index + 1] = el;
+      setAttributes({
+        [fieldName]: attr
       });
     };
 
@@ -412,7 +441,7 @@ function createFieldControls(props, fieldName, field) {
       label: field.label
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Panel"], null, attributes[fieldName].map((attribute, index) => {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelBody"], {
-        key: fieldName + index,
+        key: attribute.fastBlockId ? `${fieldName}_${attribute.fastBlockId}` : `${fieldName}_${index}`,
         title: field.single ? `${field.single} ${index + 1}` : `Repeater ${Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Item')} ${index + 1}`,
         initialOpen: false,
         buttonProps: {
@@ -420,21 +449,39 @@ function createFieldControls(props, fieldName, field) {
             padding: '16px'
           }
         }
-      }, Object.entries(attribute).map(([subFieldName]) => {
-        return Object(_createSubFieldControls__WEBPACK_IMPORTED_MODULE_3__["createSubFieldControls"])({
-          props,
-          fieldName,
-          field,
-          subFieldName,
-          subField: field.query[subFieldName],
-          key: index
-        });
-      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["ButtonGroup"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: () => {
+          moveUp(index);
+        },
+        isSmall: true,
+        isSecondary: true,
+        disabled: isFirst(index)
+      }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Move up')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: () => {
+          moveDown(index);
+        },
+        isSmall: true,
+        isSecondary: true,
+        disabled: isLast(index)
+      }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Move down')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: () => {
           removeItem(index);
         },
+        isSmall: true,
         isDestructive: true
-      }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove item')));
+      }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Remove item')))), Object.entries(attribute).map(([subFieldName]) => {
+        // first check if attribute was defined inside fields
+        if (field.query[subFieldName]) {
+          return Object(_createSubFieldControls__WEBPACK_IMPORTED_MODULE_3__["createSubFieldControls"])({
+            props,
+            fieldName,
+            field,
+            subFieldName,
+            subField: field.query[subFieldName],
+            key: index
+          });
+        }
+      }));
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       onClick: addNew,
       style: {

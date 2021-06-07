@@ -12,7 +12,7 @@
  *
  * @package           create-block
  */
-
+ 
 /**
  * Class for a Single Block
  * has methods for registering a block and rendering the block dynamically
@@ -128,7 +128,6 @@ class FastBlocksPlugin {
 /**
  * Plugin Initialization
  */
-
 function fast_blocks_instance() {
 	static $instance;
 	if ($instance === null) {
@@ -145,7 +144,6 @@ add_action( 'init', 'fast_blocks_init' );
 /**
  * Helpers
  */
-
 function add_fast_block( $settings ) {
 	fast_blocks_instance()->register_block( $settings );
 }
