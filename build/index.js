@@ -642,6 +642,7 @@ function registerHelper(name, fields, options, children) {
     const [height, setHeight] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
     const title = options && options.title ? options.title : name;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "fbl_editor-block",
       style: {
         minHeight: height
       },

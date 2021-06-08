@@ -46,6 +46,7 @@ function registerHelper( name, fields, options, children ) {
 
 		return (
 			<div
+				className="fbl_editor-block"
 				style={{ minHeight: height }}
 				onMouseDown={(e) => { 
 					/* this should prevent scroll position jumping but there is probably a better way to do this */

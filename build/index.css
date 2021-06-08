@@ -1,3 +1,7 @@
+.fbl_editor-block {
+  border: 1px dashed #ddd;
+}
+
 .fbl_card .components-card__body {
   display: flex;
   flex-wrap: wrap;

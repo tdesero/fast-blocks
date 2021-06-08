@@ -12,118 +12,13 @@
  *
  * @package           create-block
  */
- 
-/**
- * Class for a Single Block
- * has methods for registering a block and rendering the block dynamically
- */
-class SingleFastBlock {
-	
-	private $settings;
-	private $attributes;
-
-	function __construct( $settings ) {
-		$this->settings = $settings;
-		foreach($settings['fields'] as $key => $value) {
-			$this->attributes[$key] = [
-				'type' => $value['type'],
-				'default' => $value['default'],
-			];
-		}
-		$this->register_block();
-	}
-
-	private function register_block() {
-		register_block_type( $this->settings['name'], [
-			'editor_script' 	=> 'fast-blocks-editor-script',
-			'editor_style'		=> 'fast-blocks-editor-style',
-			'render_callback' => array($this, 'render_callback'),
-			'attributes'      => $this->attributes,
-		] );
-	}
-
-	public function render_callback( $attributes, $content ) {
-		if ($this->settings['template']) {
-			fast_blocks_instance()->set_current_fields( $attributes );
-			ob_start();
-
-			$path = get_stylesheet_directory() . $this->settings['template'];
-			if ( file_exists( $path ) ) {
-				include $path;
-			} else {
-				echo '<p>Template not found for custom block <code>"' . $this->settings['name'] . '"</code>.</p>';
-			}
-
-			$output = ob_get_clean();
-			return $output;
-		}
-	}
-}
 
 /**
- * Main Plugin Class
+ * Classes
  */
-
-class FastBlocksPlugin {
-
-	private $all_blocks = [];
-
-	private $current_block_fields = [];
-
-	public function init() {
-		$this->add_scripts();
-	}
-
-	private function add_scripts() {
-		add_action('enqueue_block_editor_assets', array($this, 'script_assets'));
-	}
-
-	public function script_assets() {
-		$dir = dirname( __FILE__ );
-
-		$script_asset_path = "$dir/build/index.asset.php";
-		if ( ! file_exists( $script_asset_path ) ) {
-			throw new Error(
-				'You need to run `npm start` or `npm run build`.'
-			);
-		}
-		$script_asset = require( $script_asset_path );
-
-		wp_register_script(
-			'fast-blocks-editor-script',
-			plugins_url( 'build/index.js', __FILE__ ),
-			$script_asset['dependencies'],
-			$script_asset['version']
-		);
-
-		wp_register_style(
-			'fast-blocks-editor-style',
-			plugins_url( 'build/index.css', __FILE__ ),
-			null,
-			$script_asset['version']
-		);
-
-		// make all blocks available in JavaScript
-		wp_add_inline_script(
-			'fast-blocks-editor-script',
-			'const fastBlockBlocks = ' . wp_json_encode( $this->all_blocks ),
-			'before'
-		);
-	}
-
-	public function register_block( $settings ) {
-		$block = new SingleFastBlock( $settings );
-		$this->all_blocks[$settings['name']] = $settings;
-	}
-	
-	public function set_current_fields( $attributes ) {
-		$this->current_block_fields = $attributes;
-	}
-
-	public function get_current_fields() {
-		return $this->current_block_fields;
-	}
-}
+require_once( __DIR__ . '/classes/SingleFastBlock.class.php');
+require_once( __DIR__ . '/classes/FastBlocksPlugin.class.php');
+require_once( __DIR__ . '/classes/FastBlockView.class.php');
 
 /**
  * Plugin Initialization
@@ -141,23 +36,15 @@ function fast_blocks_init() {
 }
 add_action( 'init', 'fast_blocks_init' );
 
+function fast_blocks_view_instance() {
+	static $instance;
+	if ($instance === null) {
+		$instance = new FastBlockView();
+	}
+	return $instance;
+}
+
 /**
- * Helpers
+ * Helpers (for theme developers)
  */
-function add_fast_block( $settings ) {
-	fast_blocks_instance()->register_block( $settings );
-}
-
-function fast_field( $field_string ) {
-	$attributes = fast_blocks_instance()->get_current_fields();
-	$field = wp_kses_post( $attributes[$field_string] );
-	
-	echo $field;
-}
-
-function get_fast_field( $field_string ) {
-	$attributes = fast_blocks_instance()->get_current_fields();
-	$field = $attributes[$field_string];
-
-	return $field;
-}
+require_once( __DIR__ . '/inc/helpers.php');
