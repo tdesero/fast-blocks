@@ -121,8 +121,8 @@ At the moment default values are mandatory.
 Example usage inside template:
 
 `<div>
-  <h2><?php fast_field('headline'); ?></h2>
-  <img src="<?php echo get_fast_field('image')['url']; ?>">
+  <h2><?php $block->field('headline'); ?></h2>
+  <img src="<?php echo $block->field_value('image')['url']; ?>">
 </div>`
 
 For `fast_field` function sanitizing is done with `wp_kses_post`. If you need more complex sanitizing, use `get_fast_field`, sanitize on your own and `echo` the value afterwards.
