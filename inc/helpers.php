@@ -7,6 +7,9 @@ function add_fast_block( $settings ) {
 	fast_blocks_instance()->register_block( $settings );
 }
 
+/**
+ * CAUTION: following helper functions will be deleted in near future
+ */
 function fast_field( $field_string ) {
 	fast_blocks_view_instance()->field( $field_string );
 }

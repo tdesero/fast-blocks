@@ -1,6 +1,20 @@
 import { RichText, URLInputButton } from '@wordpress/block-editor';
-import { TextControl, ToggleControl, CheckboxControl, SelectControl, BaseControl, RangeControl, TextareaControl} from '@wordpress/components';
+import {  
+  TextControl, 
+  ToggleControl, 
+  CheckboxControl, 
+  SelectControl, 
+  BaseControl, 
+  Button,
+  RangeControl, 
+  TextareaControl, 
+  DateTimePicker,
+  Popover
+} from '@wordpress/components';
+import { withState } from '@wordpress/compose';
+
 import { __ } from '@wordpress/i18n';
+
 import ImageUpload from './ImageUpload';
 
 const inputControls = {
@@ -90,6 +104,40 @@ const inputControls = {
       <small className='fbl_url-input__url'>{value}</small>
     </BaseControl>
   ),
+  'date': ({ value, label, setFieldAttributes }) => {
+    const CustomPopover = withState( {
+      isVisible: false,
+    } )( ({ isVisible, setState, children }) => {
+      const toggleVisible = () => {
+        setState( ( state ) => ({ isVisible: ! state.isVisible } ));
+      };
+      return (
+        <div style={{position: 'relative'}}>
+          <Button isSecondary onClick={ toggleVisible }>
+              { value ? new Date(value).toLocaleString() : __('Date')}
+          </Button>
+          { isVisible && <Popover position="bottom left">{children}</Popover> }
+        </div>
+      );
+    } );
+
+    return (
+      <BaseControl className='fbl_url-input'>
+        <BaseControl 
+          className='fbl_url-input__label'
+          label={label} 
+        />
+        <CustomPopover>
+          <div style={{ padding: 10 }}>
+            <DateTimePicker 
+              currentDate={value}
+              onChange={setFieldAttributes}
+            />
+          </div>
+        </CustomPopover>
+      </BaseControl>
+    )
+  },
 }
 
 export default inputControls;
