@@ -9,9 +9,11 @@ import {
   RangeControl, 
   TextareaControl, 
   DateTimePicker,
-  Popover
+  Popover,
+  Notice
 } from '@wordpress/components';
 import { withState } from '@wordpress/compose';
+import { useState } from '@wordpress/element';
 
 import { __ } from '@wordpress/i18n';
 
@@ -39,6 +41,35 @@ const inputControls = {
       onChange={setFieldAttributes} 
     />
   ),
+  'email': ({ value, label, setFieldAttributes }) => {
+    const [ isValid, setIsValid ] = useState(true);
+
+    return (
+      <>
+        <TextControl
+          type='email'
+          label={label}
+          value={value}
+          onChange={setFieldAttributes}
+          onBlur={(e) => {
+            // Unfortunately without a form the browser doesn't check validity.
+            // Regex was obviously to complicated, i just copied it from here: 
+            // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+            const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            const email = e.target.value;
+            const isValid = re.test(String(email).toLowerCase());
+            if ( !isValid && !(email === '') ) { 
+              setIsValid( false );
+              setFieldAttributes( '' ); // clean
+            } else {
+              setIsValid( true );
+            }
+          }}
+        />
+        { !isValid && <Notice status="error" isSmall isDismissible={false}>{ __('Invalid email address.') }</Notice>}
+      </>
+    );
+  },
   'textarea': ({ value, label, setFieldAttributes }) => (
     <TextareaControl
       label={label}
@@ -48,8 +79,8 @@ const inputControls = {
   ),
   'number': ({ value, label, setFieldAttributes }) => (
     <TextControl
+      type="number"
       label={label}
-      type="number" 
       value={value}
       onChange={setFieldAttributes}
     />
@@ -108,15 +139,18 @@ const inputControls = {
     const CustomPopover = withState( {
       isVisible: false,
     } )( ({ isVisible, setState, children }) => {
-      const toggleVisible = () => {
-        setState( ( state ) => ({ isVisible: ! state.isVisible } ));
+      const open = () => {
+        setState( () => ({ isVisible: true}));
+      };
+      const hide = () => {
+        setState( () => ({ isVisible: false } ));
       };
       return (
         <div style={{position: 'relative'}}>
-          <Button isSecondary onClick={ toggleVisible }>
+          <Button isSecondary onClick={ !isVisible ? open : null }>
               { value ? new Date(value).toLocaleString() : __('Date')}
           </Button>
-          { isVisible && <Popover position="bottom left">{children}</Popover> }
+          { isVisible && <Popover onClose={ hide } position="bottom left">{children}</Popover> }
         </div>
       );
     } );
