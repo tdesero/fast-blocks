@@ -125,4 +125,4 @@ Example usage inside template:
   <img src="<?php echo $block->field_value('image')['url']; ?>">
 </div>`
 
-For `fast_field` function sanitizing is done with `wp_kses_post`. If you need more complex sanitizing, use `get_fast_field`, sanitize on your own and `echo` the value afterwards.
+For `$block->field` function sanitizing is done with `wp_kses_post`. If you need more complex sanitizing, use `$block->field_value`, sanitize on your own and `echo` the value afterwards.
