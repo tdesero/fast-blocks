@@ -7,34 +7,24 @@ import { createEdit } from './createEdit';
 /**
  * Register Blocks and automatically create an Editor UI
  * 
- * @param {string} name - Block name with slug e.g. my-slug/my-block
- * @param {Object} fields - All block attributes with a label and a input
- * 
- * TODO: learn how to document the following
- * @param fields.fieldName 
- * @param fields.fieldName.type
- * @param fields.fieldName.default
- * @param fields.fieldName.label
- * @param fields.fieldName.input 
- * @param fields.fieldName[selector] - optional selector
- * 
- * @param {Object} options - All options like in wp.blocks.registerBlockType but without(!) attributes: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- * @param {array} [children] - Optional template for InnerBlocks
+ * @param {Object} block - All block attributes with a label and a input
+ * @param {Object} block.fields - { type, default, label, input, [selector]}
+ * @param {Object} fields.options - All options like in wp.blocks.registerBlockType but without(!) attributes, edit & save: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * @param {array} [fields.children] - Optional template for InnerBlocks
  */
-function registerHelper( name, fields, options, children ) {
+function registerHelper({ name, fields, options, children }) {
   const blockAttributes = {};
 
   for (const [fieldName, field] of Object.entries(fields)) {
     // copy relevant parts of the fields object to generate attributes
-    const newValue = {};
-    newValue.type = field.type;
-    newValue.default = field.default;
+    const attr = {};
+    attr.type = field.type;
+    attr.default = field.default;
     
-    blockAttributes[fieldName] = newValue;
+    blockAttributes[fieldName] = attr;
   }
 
   const edit = createEdit({options, name, children, fields});
-  
 	const save = createSave({children, fields});
 	
   const blockObj = {
@@ -52,5 +42,5 @@ function registerHelper( name, fields, options, children ) {
  * const fastBlockBlocks is made available with PHP
  */
 Object.values(fastBlockBlocks).forEach( block => {
-  registerHelper(block.name, block.fields, block.settings, block.children);
+  registerHelper(block);
 })
