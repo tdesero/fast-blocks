@@ -45,29 +45,20 @@ const inputControls = {
     const [ isValid, setIsValid ] = useState(true);
 
     return (
-      <>
-        <TextControl
-          type='email'
-          label={label}
-          value={value}
-          onChange={setFieldAttributes}
-          onBlur={(e) => {
-            // Unfortunately without a form the browser doesn't check validity.
-            // Regex was obviously to complicated, i just copied it from here: 
-            // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
-            const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            const email = e.target.value;
-            const isValid = re.test(String(email).toLowerCase());
-            if ( !isValid && !(email === '') ) { 
-              setIsValid( false );
-              setFieldAttributes( '' ); // clean
-            } else {
-              setIsValid( true );
-            }
-          }}
-        />
-        { !isValid && <Notice status="error" isSmall isDismissible={false}>{ __('Invalid email address.') }</Notice>}
-      </>
+      <TextControl
+        type='email'
+        className={ !isValid ? 'components-base-control--error' : ''}
+        label={label}
+        value={value}
+        onChange={setFieldAttributes}
+        onFocus={(e) => {
+          e.target.reportValidity();
+        }}
+        onBlur={(e) => {
+          const isValid = e.target.checkValidity();
+          setIsValid( isValid );
+        }}
+      />
     );
   },
   'textarea': ({ value, label, setFieldAttributes }) => (

@@ -22,6 +22,13 @@
   .components-range-control__wrapper {
     margin-left: 0;
   }
+
+  .components-base-control--error {
+    input {
+      border-color: rgb(204, 24, 24);
+      box-shadow: 0 0 0 1px rgb(204, 24, 24);
+    }
+  }
 }
 
 .fbl_block-title {
@@ -83,3 +90,4 @@
 .fbl_repeater-inputs {
   width: 100% !important;
 }
+
