@@ -2,7 +2,7 @@
 Contributors:      Tom D
 Tags:              block
 Tested up to:      5.7.0
-Stable tag:        0.1.0
+Stable tag:        0.5.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -115,7 +115,7 @@ Register your block:
 
 add_fast_block( $options );`
 
-Available inputs: `text`, `richText`, `checkbox`, `toggle`, `select`, `image`, `url`.
+Available inputs: `text`, `richText`, `checkbox`, `toggle`, `select`, `image`, `url`, `email`, `date`.
 At the moment default values are mandatory.
 
 Example usage inside template:
