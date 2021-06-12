@@ -36,6 +36,7 @@ function fast_blocks_init() {
 }
 add_action( 'init', 'fast_blocks_init' );
 
+// Instance of view class to be used inside SingleFastBlock class
 function fast_blocks_view_instance() {
 	static $instance;
 	if ($instance === null) {

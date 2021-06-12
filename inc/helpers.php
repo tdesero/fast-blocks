@@ -1,7 +1,9 @@
 <?php
 
 /**
- * Helpers
+ * To be used inside a themes's functions.php to register a block
+ * 
+ * @param array $settings - Array with all block information
  */
 function add_fast_block( $settings ) {
 	fast_blocks_instance()->register_block( $settings );

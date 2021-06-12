@@ -62,26 +62,44 @@ class FastBlocksPlugin {
 		$this->all_blocks[$settings['name']] = $settings;
 	}
 	
+	/**
+	 * @param array $attributes
+	 */
 	public function set_current_attributes( $attributes ) {
 		$this->current_block_attributes = $attributes;
 	}
 
+	/**
+	 * @return array $attributes
+	 */
 	public function get_current_attributes() {
 		return $this->current_block_attributes;
 	}
 
+	/**
+	 * @param array $fields
+	 */
 	public function set_current_fields( $fields ) {
 		$this->current_block_fields = $fields;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function get_current_fields() {
 		return $this->current_block_fields;
 	}
 
+	/**
+	 * @param string $field_string
+	 */
 	public function set_current_field( $field_string ) {
 		$this->current_block_field = $this->current_block_fields[$field_string];
 	}
 
+	/**
+	 * @return array
+	 */
 	public function get_current_field() {
 		return $this->current_block_field;
 	}

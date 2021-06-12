@@ -11,6 +11,8 @@ class SingleFastBlock {
 
 	function __construct( $settings ) {
 		$this->settings = $settings;
+
+		// extract only the necessary information from fields to attributes
 		foreach($settings['fields'] as $key => $value) {
 			$this->attributes[$key] = [
 				'type' => $value['type'],
@@ -20,6 +22,10 @@ class SingleFastBlock {
 		$this->register_block();
 	}
 
+	/**
+	 * Calls register_block_type to register the block serverside
+	 * @see https://developer.wordpress.org/reference/functions/register_block_type/
+	 */
 	private function register_block() {
 		register_block_type( $this->settings['name'], [
 			'editor_script' 	=> 'fast-blocks-editor-script',
@@ -29,6 +35,11 @@ class SingleFastBlock {
 		] );
 	}
 
+	/**
+	 * @param array $attributes - All attributes passed via render_callback
+	 * @param mixed $content - Content of InnerBlocks
+	 * @return string - Returns the template html
+	 */
 	public function render_callback( $attributes, $content ) {
 		if ($this->settings['template']) {
 			fast_blocks_instance()->set_current_attributes( $attributes );
@@ -47,6 +58,10 @@ class SingleFastBlock {
 		}
 	}
 
+	/**
+	 * @param string $template_path - Absolute path to the block template
+	 * @param mixed $content – Content of InnerBlocks
+	 */
 	public function template( $template_path, $content ) {
 		// make view class available as $block in templates
 		$block = fast_blocks_view_instance();
