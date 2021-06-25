@@ -4,12 +4,12 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { useState } from '@wordpress/element';
 import { createFieldControls } from './createFieldControls';
 
-export function createEdit({options, name, children, fields}) {
+export function createEdit({settings, name, children, fields}) {
 	return (props) => {
 		const { attributes, isSelected } = props;
 		const [height, setHeight] = useState(0);
 
-		const title = options && options.title ? options.title : name;
+		const title = settings && settings.title ? settings.title : name;
 
 		return (
 			<div
