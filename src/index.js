@@ -9,8 +9,8 @@ import { createEdit } from './createEdit';
  * 
  * @param {Object} block - All block attributes with a label and a input
  * @param {Object} block.fields - { type, default, label, input, [selector]}
- * @param {Object} fields.options - All options like in wp.blocks.registerBlockType but without(!) attributes, edit & save: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- * @param {array} [fields.children] - Optional template for InnerBlocks
+ * @param {Object} block.options - All options like in wp.blocks.registerBlockType but without(!) attributes, edit & save: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * @param {array} [block.children] - Optional template for InnerBlocks
  */
 function registerHelper({ name, fields, options, children }) {
   const blockAttributes = {};
