@@ -7,11 +7,15 @@ const ImageUpload = ({label, onSelect, onRemove, value}) => (
   <MediaUploadCheck>
     <MediaUpload
       onSelect={ (media) => { 
+        console.log(media)
         onSelect({
           id: media.id,
           sizes: media.sizes,
           url: media.url,
           alt: media.alt,
+          title: media.title,
+          description: media.description,
+          caption: media.caption
         })
       }}
       allowedTypes={ [ 'image' ] }
