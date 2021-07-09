@@ -19,6 +19,8 @@ import { __ } from '@wordpress/i18n';
 
 import ImageUpload from './ImageUpload';
 
+import ClassicEditor from './ClassicEditor';
+
 const inputControls = {
   'checkbox': ({ value, label, setFieldAttributes }) => (
     <CheckboxControl
@@ -163,6 +165,7 @@ const inputControls = {
       </BaseControl>
     )
   },
+  'classic': ClassicEditor,
 }
 
 export default inputControls;
