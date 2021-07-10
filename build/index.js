@@ -1904,11 +1904,15 @@ const ClassicEditor = ({
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {
     label: label
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_tinymce_tinymce_react__WEBPACK_IMPORTED_MODULE_1__["Editor"], {
-    initialValue: value,
-    onBlur: event => setFieldAttributes(event.target.getContent()),
+    onEditorChange: newValue => {
+      setFieldAttributes(newValue);
+    },
+    value: value,
+    plugins: "lists",
     init: {
-      height: 500,
+      height: 300,
       menubar: false,
+      branding: false,
       toolbar: 'undo redo | formatselect | ' + 'bold italic backcolor | alignleft aligncenter ' + 'alignright alignjustify | bullist numlist outdent indent | ' + 'removeformat | help',
       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
     }
@@ -2226,7 +2230,7 @@ const inputControls = {
       onChange: setFieldAttributes
     }))));
   },
-  'classic': _ClassicEditor__WEBPACK_IMPORTED_MODULE_6__["default"]
+  'classicEditor': _ClassicEditor__WEBPACK_IMPORTED_MODULE_6__["default"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (inputControls);
 

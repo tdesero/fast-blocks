@@ -165,7 +165,7 @@ const inputControls = {
       </BaseControl>
     )
   },
-  'classic': ClassicEditor,
+  'classicEditor': ClassicEditor,
 }
 
 export default inputControls;
