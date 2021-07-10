@@ -45,4 +45,13 @@ const ImageUpload = ({label, onSelect, onRemove, value}) => (
   </MediaUploadCheck>
 );
 
-export default ImageUpload;
+export function ImageInput({ label, value, setFieldAttributes, removeFieldAttributes }) {
+  return (
+    <ImageUpload
+      onSelect={setFieldAttributes}
+      onRemove={removeFieldAttributes}
+      value={value}
+      label={label}
+    />
+  )
+} 

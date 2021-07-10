@@ -2,7 +2,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { BaseControl } from '@wordpress/components';
 
 /* TODO: Get this to work */
-const ClassicEditor = ({ value, label, setFieldAttributes }) => {
+export const ClassicEditorInput = ({ value, label, setFieldAttributes }) => {
   return (
     <BaseControl>
       <BaseControl label={label} />
@@ -26,5 +26,3 @@ const ClassicEditor = ({ value, label, setFieldAttributes }) => {
     </BaseControl>
   )
 }
-
-export default ClassicEditor;
