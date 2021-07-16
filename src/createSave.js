@@ -27,7 +27,8 @@ export function createSave({children, fields}) {
 											src={(typeof attributes[fieldName] === "object") && attributes[fieldName].url}
 											alt={(typeof attributes[fieldName] === "object") && attributes[fieldName].alt} />
 									);
-								case 'richText': return (<RichText.Content tagName="p" value={attributes[fieldName]} />);
+								case 'richText': 
+								case 'classicEditor': return (<RichText.Content value={attributes[fieldName]} />);
 								default: return null; // by default don't output anything 
 							}
 						})}
