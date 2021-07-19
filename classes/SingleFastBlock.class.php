@@ -13,7 +13,7 @@ class SingleFastBlock {
 		$this->settings = $settings;
 
 		// extract only the necessary information from fields to attributes
-		foreach($settings['fields'] as $key => $value) {
+		if ( !empty($settings['fields']) ) foreach($settings['fields'] as $key => $value) {
 			$this->attributes[$key] = [
 				'type' => $value['type'],
 				'default' => $value['default'],
@@ -62,7 +62,7 @@ class SingleFastBlock {
 	 * @param string $template_path - Absolute path to the block template
 	 * @param mixed $content – Content of InnerBlocks
 	 */
-	public function template( $template_path, $content ) {
+	public function template( $template_path, $children ) {
 		// make view class available as $block in templates
 		$block = fast_blocks_view_instance();
 		include $template_path;

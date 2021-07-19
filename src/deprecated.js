@@ -47,7 +47,8 @@ export const deprecated = ({ attributes, children, fields, settings }) => {
       /* added 2021-07 */
       attributes,
       ...settings,
-      save: CREATE_SAVE_2021_07({children, fields})
+      save: CREATE_SAVE_2021_07({children, fields}),
+      apiVersion: 1
     }
   ];
 } ;

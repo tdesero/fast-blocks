@@ -91,3 +91,20 @@
   width: 100% !important;
 }
 
+/* Flexbox for innerBlocks */
+.fbl_editor-block {
+  .block-editor-inner-blocks>.block-editor-block-list__layout {
+    display: flex;
+    flex-wrap: wrap;
+
+    >* {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .block-list-appender {
+      width: 100%;
+    }
+  }
+}

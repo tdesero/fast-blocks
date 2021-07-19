@@ -1,12 +1,15 @@
-import { InnerBlocks, RichText } from '@wordpress/block-editor';
+import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
 
 export function createSave({children, fields}) {
-	return ({ attributes }) => {
+	return ({ attributes, className }) => {
+		const blockProps = useBlockProps.save( {
+			className,
+		} );
 		return (
 			children ?
 				<InnerBlocks.Content /> :
 				(
-					<div>
+					<div {...blockProps}>
 						{Object.entries(fields).map(([fieldName, field]) => {
 							/* Fallback Content to be saved inside the database/content for example for SEO Plugins etc.
 							also important if you choose to disable the block or if it stops working */

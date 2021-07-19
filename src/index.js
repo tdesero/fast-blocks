@@ -13,7 +13,8 @@ import { deprecated } from './deprecated';
  * @param {Object} block.options - All options like in wp.blocks.registerBlockType but without(!) attributes, edit & save: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  * @param {array} [block.children] - Optional template for InnerBlocks
  */
-function registerHelper({ name, fields, settings, children }) {
+function registerHelper({ name, fields, settings, children, editWidth }) {
+  
   const blockAttributes = {};
 
   for (const [fieldName, field] of Object.entries(fields)) {
@@ -25,10 +26,11 @@ function registerHelper({ name, fields, settings, children }) {
     blockAttributes[fieldName] = attr;
   }
 
-  const edit = createEdit({settings, name, children, fields});
+  const edit = createEdit({settings, name, children, fields, editWidth});
 	const save = createSave({children, fields});
 	
   const blockObj = {
+    apiVersion: 2,
     edit,
     save,
 		title: name, // fallback (usually overwritten by options.title)
