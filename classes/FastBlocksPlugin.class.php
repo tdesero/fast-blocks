@@ -103,4 +103,17 @@ class FastBlocksPlugin {
 	public function get_current_field() {
 		return $this->current_block_field;
 	}
+
+	/**
+	 * @return array
+	 * returns a list with all registered block names
+	 */
+	public function get_block_list() {
+		$list = [];
+		foreach( $this->all_blocks as $value) {
+			$list[] = $value['name'];
+		}
+
+		return $list;
+	}
 }
