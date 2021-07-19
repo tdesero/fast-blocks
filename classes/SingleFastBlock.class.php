@@ -43,7 +43,9 @@ class SingleFastBlock {
 	public function render_callback( $attributes, $content ) {
 		if ($this->settings['template']) {
 			fast_blocks_instance()->set_current_attributes( $attributes );
-			fast_blocks_instance()->set_current_fields( $this->settings['fields'] );
+			if ( isset($this->settings['fields']) ) {
+				fast_blocks_instance()->set_current_fields( $this->settings['fields'] );
+			}
 			ob_start();
 
 			$path = get_stylesheet_directory() . $this->settings['template'];
