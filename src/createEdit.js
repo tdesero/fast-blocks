@@ -29,7 +29,7 @@ export function createEdit({settings, name, children, fields, editWidth}) {
 					{/* show serversiderender only if it has no children, ssr does not work with children here */}
 					{(isSelected || children) ?
 						(
-							<Card className='fbl_card'>
+							<Card className='fbl_card' size="small">
 								<CardHeader className='fbl_block-title'>Block: {title}</CardHeader>
 								<CardBody style={{ padding: '16px 14px' }}>
 									{Object.entries(fields).map(([fieldName, field]) => {
@@ -37,7 +37,7 @@ export function createEdit({settings, name, children, fields, editWidth}) {
 									})}
 
 									{children && (
-										<div style={{ border: '1px dashed grey', padding: '10px' }}>
+										<div style={{ border: '1px dashed #ddd', padding: 0, borderRadius: 2 }}>
 											<InnerBlocks
 												allowedBlocks={children}
 												orientation='horizontal'
@@ -48,10 +48,13 @@ export function createEdit({settings, name, children, fields, editWidth}) {
 							</Card>
 						) :
 						(
-							<ServerSideRender
-								block={name}
-								attributes={{ ...attributes }}
-								httpMethod='POST' />
+							<div style={{ border: '1px dashed #ddd', padding: 0 }}>
+								<ServerSideRender
+									block={name}
+									attributes={{ ...attributes }}
+									httpMethod='POST' 
+								/>
+							</div>
 						)}
 				</div>
 			</div>
