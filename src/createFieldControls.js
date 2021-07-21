@@ -1,4 +1,4 @@
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, PanelRow } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 
 import inputControls from './components/inputControls';
@@ -50,8 +50,10 @@ export function createFieldControls(props, fieldName, field) {
 		if (field.location === 'inspector') {
 			return (
 				<InspectorControls>
-					<PanelBody title={'Settings'}>
-						{ createInputControlComponent() }
+					<PanelBody>
+						<PanelRow>
+							{ createInputControlComponent() }
+						</PanelRow>
 					</PanelBody>
 				</InspectorControls>
 			);
