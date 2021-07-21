@@ -1,6 +1,9 @@
-/*.fbl_editor-block {
-  border: 1px solid #ddd;
-}*/
+.fbl_editor-block {
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid var(--wp-admin-theme-color);
+  }
+}
 
 .fbl_card {
   .components-card__body {
@@ -101,6 +104,8 @@
       width: 100%;
       margin-left: 0;
       margin-right: 0;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     .block-list-appender {

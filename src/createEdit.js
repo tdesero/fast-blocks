@@ -25,6 +25,9 @@ export function createEdit({settings, name, children, fields, editWidth}) {
 						e.currentTarget.style.minHeight = currentHeight + 'px';
 						setHeight(currentHeight);
 					}}
+					onBlur={() => {
+						setHeight(0);
+					}}
 				>
 					{/* show serversiderender only if it has no children, ssr does not work with children here */}
 					{(isSelected || children) ?
