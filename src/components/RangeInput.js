@@ -6,6 +6,7 @@ export function RangeInput({ value, field, label, setFieldAttributes }) {
       label={label}
       value={value}
       onChange={setFieldAttributes}
+      step={field.step}
       min={field.min}
       max={field.max} />
   );

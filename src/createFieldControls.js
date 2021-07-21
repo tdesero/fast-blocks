@@ -1,4 +1,4 @@
-import { PanelBody, PanelRow } from '@wordpress/components';
+import { PanelBody } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 
 import inputControls from './components/inputControls';
@@ -51,9 +51,7 @@ export function createFieldControls(props, fieldName, field) {
 			return (
 				<InspectorControls>
 					<PanelBody>
-						<PanelRow>
 							{ createInputControlComponent() }
-						</PanelRow>
 					</PanelBody>
 				</InspectorControls>
 			);
