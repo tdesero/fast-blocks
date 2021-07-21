@@ -14,6 +14,10 @@ import { deprecated } from './deprecated';
  * @param {array} [block.children] - Optional template for InnerBlocks
  */
 function registerHelper({ name, fields, settings, children, editWidth }) {
+  if ( !fields ) {
+    // to prevent errors if fields are non existing (e.g. in a row/columns block)
+    fields = [];
+  }
   
   const blockAttributes = {};
 
