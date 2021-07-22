@@ -13,11 +13,9 @@ import { deprecated } from './deprecated';
  * @param {Object} block.options - All options like in wp.blocks.registerBlockType but without(!) attributes, edit & save: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  * @param {array} [block.children] - Optional template for InnerBlocks
  */
-function registerHelper({ name, fields, settings, children, editWidth }) {
-  if ( !fields ) {
-    // to prevent errors if fields are non existing (e.g. in a row/columns block)
-    fields = [];
-  }
+function registerHelper(block) {
+  const { name, settings, children } = block;
+  const fields = block.fields || [];
   
   const blockAttributes = {};
 
@@ -30,7 +28,7 @@ function registerHelper({ name, fields, settings, children, editWidth }) {
     blockAttributes[fieldName] = attr;
   }
 
-  const edit = createEdit({settings, name, children, fields, editWidth});
+  const edit = createEdit({fields, ...block});
 	const save = createSave({children, fields});
 	
   const blockObj = {
