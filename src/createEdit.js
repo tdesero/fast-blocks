@@ -1,15 +1,27 @@
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
-import { Card, CardBody, CardHeader, Popover } from '@wordpress/components';
+import { InnerBlocks, useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { Card, CardBody, CardHeader, PanelBody } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useState } from '@wordpress/element';
 import { createFieldControls } from './createFieldControls';
+import { EditorPopover } from './EditorPopover';
 
-export function createEdit({settings, name, children, fields, editWidth, editPopover}) {
-	return (props) => {
-		const { attributes, isSelected } = props;
-		const [height, setHeight] = useState(0);
+export function createEdit({settings, name, children, fields, editWidth, editView}) {
+	return (EditProps) => {
+		const { attributes, isSelected } = EditProps;
+		const [ height, setHeight ] = useState( 0 );
+
 		const blockProps = useBlockProps( { style: { width: editWidth * 100 + '%' }} );
 		const title = settings && settings.title ? settings.title : name;
+
+		const [ popoverVisible, setPopoverVisible ] = useState( false );
+		const hidePopover = () => {
+			setPopoverVisible( () => false );
+		}
+		const showPopover = () => {
+			setPopoverVisible( () => true );
+		}
+
+		const hasAdvancedEditView = (editView === 'popover') || (editView === 'inspector');
 
 		return (
 			<div {...blockProps} >
@@ -30,54 +42,50 @@ export function createEdit({settings, name, children, fields, editWidth, editPop
 					}}
 				>
 					{/* show serversiderender only if it has no children, ssr does not work with children here */}
-					{(isSelected || children) ?
+					{( (isSelected && !hasAdvancedEditView) || children ) ?
 						(
-							(!editPopover) ? 
-								(
-									<Card className='fbl_card' size="small">
-										<CardHeader className='fbl_block-title'>Block: {title}</CardHeader>
-										<CardBody style={{ padding: '16px 14px' }}>
-											{Object.entries(fields).map(([fieldName, field]) => {
-												return createFieldControls(props, fieldName, field);
-											})}
+							<Card className='fbl_card' size="small">
+								<CardHeader className='fbl_block-title'>Block: {title}</CardHeader>
+								<CardBody style={{ padding: '16px 14px' }}>
+									{Object.entries(fields).map(([fieldName, field]) => {
+										return createFieldControls(EditProps, fieldName, field);
+									})}
 
-											{children && (
-												<div style={{ border: '1px dashed #ddd', padding: 0, borderRadius: 2 }}>
-													<InnerBlocks
-														allowedBlocks={children}
-														orientation='horizontal'
-														renderAppender={InnerBlocks.ButtonBlockAppender} />
-												</div>
-											)}
-										</CardBody>
-									</Card>
-								) : (
-									<>
-										<Popover position="middle center">
-											<Card className='fbl_card' size="small" style={{width: 600}}>
-												<CardHeader className='fbl_block-title'>Block: {title}</CardHeader>
-												<CardBody style={{ padding: '16px 14px' }}>
-													{Object.entries(fields).map(([fieldName, field]) => {
-														return createFieldControls(props, fieldName, field);
-													})}
-												</CardBody>
-											</Card>
-										</Popover>
-										<ServerSideRender
-											block={name}
-											attributes={{ ...attributes }}
-											httpMethod='POST' 
-										/>
-									</>
-								)
+									{children && (
+										<div style={{ border: '1px dashed #ddd', padding: 0, borderRadius: 2 }}>
+											<InnerBlocks
+												allowedBlocks={children}
+												orientation='horizontal'
+												renderAppender={InnerBlocks.ButtonBlockAppender} />
+										</div>
+									)}
+								</CardBody>
+							</Card>
 						) :
 						(
-							<div style={{ border: '1px dashed #ddd', padding: 0 }}>
+							<div onClick={showPopover} style={{ border: '1px dashed #ddd', padding: 0, minHeight: 50 }}>
+								{ (isSelected && editView === 'popover' && popoverVisible) && (
+									<EditorPopover 
+										title={title} 
+										fields={fields} 
+										EditProps={EditProps} 
+										onClose={hidePopover} 
+									/>
+								)}
 								<ServerSideRender
 									block={name}
 									attributes={{ ...attributes }}
 									httpMethod='POST' 
 								/>
+								{ (isSelected && editView === 'inspector') && (
+									<InspectorControls>
+										<PanelBody>
+											{Object.entries(fields).map(([fieldName, field]) => {
+												return createFieldControls(EditProps, fieldName, field);
+											})}
+										</PanelBody>
+									</InspectorControls>
+								)}
 							</div>
 						)}
 				</div>
@@ -85,3 +93,4 @@ export function createEdit({settings, name, children, fields, editWidth, editPop
 		);
 	};
 }
+

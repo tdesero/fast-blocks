@@ -113,3 +113,6 @@
     }
   }
 }
+
+/* tinymce dropdown fix */
+.mce-menu {z-index: 9999999 !important}

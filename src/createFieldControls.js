@@ -41,7 +41,10 @@ export function createFieldControls(props, fieldName, field) {
 		);
 
 		if (InputControl === undefined) {
-			console.error( field.input + ' Input does not exist');
+			if ( field.input ) {
+				/* this might look strange but the error should only log when there is a input defined at all */
+				console.error( field.input + ' Input does not exist inside field ' + fieldName);
+			}
 			return;
 		}
 
