@@ -29,7 +29,7 @@ export function createEdit({settings, name, children, fields, editWidth, editVie
 					className="fbl_editor-block"
 					style={{ minHeight: height }}
 					onMouseDown={(e) => {
-						/* this should prevent scroll position jumping but there is probably a better way to do this */
+						/* this should prevent scroll position jumping for now but there is probably a better way to do this */
 						if (isSelected)
 							return;
 						e.currentTarget.style.minHeight = null;

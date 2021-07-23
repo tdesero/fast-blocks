@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 export function RichTextInput({ value, label, setFieldAttributes }) {
   return (
     <BaseControl>
-      <BaseControl label={label} />
+      <label className='fbl_url-input__label'>{label}</label>
       <RichText
         className='fbl_rich-text'
         value={value}

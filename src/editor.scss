@@ -42,7 +42,10 @@
 
 .fbl_url-input {
   &__label {
+    margin-bottom: 8px;
     width: 100%;
+    display: block;
+    cursor: default;
   }
 
   >* {
@@ -68,6 +71,12 @@
 
   .block-editor-url-input__button-modal {
     position: absolute;
+    z-index: 1;
+  }
+
+  /* fix for input inside url input button */
+  .block-editor-block-list__block .block-editor-url-input input[type=text], .block-editor-url-input input[type=text], .components-popover .block-editor-url-input input[type=text] {
+    width: unset;
   }
 }
 

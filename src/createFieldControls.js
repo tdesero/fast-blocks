@@ -54,7 +54,7 @@ export function createFieldControls(props, fieldName, field) {
 			return (
 				<InspectorControls>
 					<PanelBody>
-							{ createInputControlComponent() }
+						{ createInputControlComponent() }
 					</PanelBody>
 				</InspectorControls>
 			);

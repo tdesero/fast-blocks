@@ -81,7 +81,9 @@ export function createRepeater({ field, setAttributes, fieldName, attributes, pr
 					);
 				})}
 			</Panel>
-			<Button onClick={addNew} style={{ width: '100%', justifyContent: 'center' }} isSecondary>+</Button>
+			{( !field.limit || (field.limit > attributes[fieldName].length) ) && (
+				<Button onClick={addNew} style={{ width: '100%', justifyContent: 'center' }} isSecondary>+</Button>
+			)}
 		</BaseControl>
 	);
 }
