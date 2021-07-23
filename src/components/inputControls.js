@@ -13,19 +13,19 @@ import { DateInput } from './DateInput';
 import { ClassicEditorInput } from './ClassicEditorInput';
 
 const inputControls = {
-  'checkbox': CheckboxInput,
-  'toggle': ToggleInput,
-  'text': TextInput,
-  'email': EmailInput,
-  'textarea': TextareaInput,
-  'number': NumberInput,
-  'range': RangeInput,
-  'select': SelectInput,
-  'image': ImageInput,
-  'richText': RichTextInput,
-  'url': URLInput,
-  'date': DateInput,
-  'classicEditor': ClassicEditorInput,
-}
+	checkbox: CheckboxInput,
+	toggle: ToggleInput,
+	text: TextInput,
+	email: EmailInput,
+	textarea: TextareaInput,
+	number: NumberInput,
+	range: RangeInput,
+	select: SelectInput,
+	image: ImageInput,
+	richText: RichTextInput,
+	url: URLInput,
+	date: DateInput,
+	classicEditor: ClassicEditorInput,
+};
 
 export default inputControls;

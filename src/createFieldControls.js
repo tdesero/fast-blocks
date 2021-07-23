@@ -9,63 +9,70 @@ import { createRepeater } from './createRepeater';
  * Create different Components to make all fields editable.
  * Basically checks the input value of a field and decides what component is needed
  * and which attributes should be set (e. g. for images it's usually a object containing url, alt etc.)
- * 
+ *
  * @param {Object} props - All props passed by edit function of block
  * @param {string} fieldName
- * @param {Object} field 
- * @returns 
+ * @param {Object} field
+ * @return
  */
-export function createFieldControls(props, fieldName, field) {
+export function createFieldControls( props, fieldName, field ) {
 	const { attributes, setAttributes } = props;
 
-	const setFieldAttributes = (val) => {
-		setAttributes({
-			[fieldName]: val
-		});
-	}
+	const setFieldAttributes = ( val ) => {
+		setAttributes( {
+			[ fieldName ]: val,
+		} );
+	};
 
-	const removeFieldAttributes = () => { 
+	const removeFieldAttributes = () => {
 		setFieldAttributes( undefined );
 	};
 
-	if (field.input !== 'repeater') {
-		const InputControl = inputControls[field.input];
+	if ( field.input !== 'repeater' ) {
+		const InputControl = inputControls[ field.input ];
 		const createInputControlComponent = () => (
 			<InputControl
-				setFieldAttributes={setFieldAttributes}
-				removeFieldAttributes={removeFieldAttributes}
-				field={field}
-				label={field.label}
-				value={attributes[fieldName]}
+				setFieldAttributes={ setFieldAttributes }
+				removeFieldAttributes={ removeFieldAttributes }
+				field={ field }
+				label={ field.label }
+				value={ attributes[ fieldName ] }
 			/>
 		);
 
-		if (InputControl === undefined) {
+		if ( InputControl === undefined ) {
 			if ( field.input ) {
 				/* this might look strange but the error should only log when there is a input defined at all */
-				console.error( field.input + ' Input does not exist inside field ' + fieldName);
+				console.error(
+					field.input +
+						' Input does not exist inside field ' +
+						fieldName
+				);
 			}
 			return;
 		}
 
 		const width = field.width || 1.0;
 
-		if (field.location === 'inspector') {
+		if ( field.location === 'inspector' ) {
 			return (
 				<InspectorControls>
-					<PanelBody>
-						{ createInputControlComponent() }
-					</PanelBody>
+					<PanelBody>{ createInputControlComponent() }</PanelBody>
 				</InspectorControls>
 			);
-		} else {
-			return (
-				<WidthWrapper width={width}>
-					{ createInputControlComponent() }
-				</WidthWrapper>
-			);
 		}
-	} else if (field.input === 'repeater') {
-		return createRepeater({field, setAttributes, fieldName, attributes, props});
+		return (
+			<WidthWrapper width={ width }>
+				{ createInputControlComponent() }
+			</WidthWrapper>
+		);
+	} else if ( field.input === 'repeater' ) {
+		return createRepeater( {
+			field,
+			setAttributes,
+			fieldName,
+			attributes,
+			props,
+		} );
 	}
 }
