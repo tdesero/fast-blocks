@@ -6,7 +6,7 @@ import { createFieldControls } from './createFieldControls';
 import { EditorPopover } from './EditorPopover';
 import { useSelect } from '@wordpress/data';
 
-export function createEdit({settings, name, children, fields, editWidth, editView, childrenLimit}) {
+export function createEdit({settings, name, children, fields, editWidth, editView, childrenLimit, preview}) {
 	return (EditProps) => {
 		const { attributes, isSelected, clientId } = EditProps;
 		const [ height, setHeight ] = useState( 0 );
@@ -56,7 +56,7 @@ export function createEdit({settings, name, children, fields, editWidth, editVie
 					}}
 				>
 					{/* show serversiderender only if it has no children, ssr does not work with children here */}
-					{( (isSelected && !hasAdvancedEditView) || children ) ?
+					{( (isSelected && !hasAdvancedEditView) || children || (preview === false) ) ?
 						(
 							<Card className='fbl_card' size="small">
 								<CardHeader className='fbl_block-title'>Block: {title}</CardHeader>
