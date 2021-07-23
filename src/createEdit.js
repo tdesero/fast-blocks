@@ -4,15 +4,17 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { useState } from '@wordpress/element';
 import { createFieldControls } from './createFieldControls';
 import { EditorPopover } from './EditorPopover';
+import { useSelect } from '@wordpress/data';
 
-export function createEdit({settings, name, children, fields, editWidth, editView}) {
+export function createEdit({settings, name, children, fields, editWidth, editView, childrenLimit}) {
 	return (EditProps) => {
-		const { attributes, isSelected } = EditProps;
+		const { attributes, isSelected, clientId } = EditProps;
 		const [ height, setHeight ] = useState( 0 );
 
 		const blockProps = useBlockProps( { style: { width: editWidth * 100 + '%' }} );
 		const title = settings && settings.title ? settings.title : name;
 
+		/* only for popover */
 		const [ popoverVisible, setPopoverVisible ] = useState( false );
 		const hidePopover = () => {
 			setPopoverVisible( () => false );
@@ -21,7 +23,19 @@ export function createEdit({settings, name, children, fields, editWidth, editVie
 			setPopoverVisible( () => true );
 		}
 
+		/* AdvancedEditView means 'popover' oder 'inspector' for ALL fields */
 		const hasAdvancedEditView = (editView === 'popover') || (editView === 'inspector');
+
+		/* limit innerBlocks children (if it has children) */
+		const innerBlockCount = useSelect( ( select ) => select( 'core/block-editor' ).getBlock( clientId ).innerBlocks ).length;
+		const MyInnerBlocksAppender = () => {
+			if ( !childrenLimit || innerBlockCount < childrenLimit ) {
+				return InnerBlocks.ButtonBlockAppender;
+			} else {
+				return false;
+			}
+		}
+		const InnerBlocksAppenderToUse = MyInnerBlocksAppender();
 
 		return (
 			<div {...blockProps} >
@@ -56,7 +70,8 @@ export function createEdit({settings, name, children, fields, editWidth, editVie
 											<InnerBlocks
 												allowedBlocks={children}
 												orientation='horizontal'
-												renderAppender={InnerBlocks.ButtonBlockAppender} />
+												renderAppender={InnerBlocksAppenderToUse} 
+											/>
 										</div>
 									)}
 								</CardBody>
