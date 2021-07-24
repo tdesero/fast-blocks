@@ -29,7 +29,7 @@ export function FieldControl( { editProps, fieldName, field } ) {
 		setFieldAttributes( undefined );
 	};
 
-	if ( field.input !== 'repeater' ) {
+	const createFieldControl = () => {
 		const InputControl = inputControls[ field.input ];
 		const createInputControlComponent = () => (
 			<InputControl
@@ -67,7 +67,9 @@ export function FieldControl( { editProps, fieldName, field } ) {
 				{ createInputControlComponent() }
 			</WidthWrapper>
 		);
-	} else if ( field.input === 'repeater' ) {
+	}
+
+	if ( field.input === 'repeater' ) {
 		const props = {
 			field,
 			setAttributes,
@@ -76,5 +78,7 @@ export function FieldControl( { editProps, fieldName, field } ) {
 			editProps,
 		}
 		return <RepeaterFieldControl { ...props }  />;
+	} else {
+		return <>{ createFieldControl() }</>;
 	}
 }
