@@ -1,22 +1,23 @@
 import { PanelBody } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 
-import inputControls from './components/inputControls';
-import WidthWrapper from './components/WidthWrapper';
-import { createRepeater } from './createRepeater';
+import inputControls from './input-controls';
+import WidthWrapper from './WidthWrapper';
+import { RepeaterFieldControl } from './RepeaterFieldControl';
 
 /**
  * Create different Components to make all fields editable.
  * Basically checks the input value of a field and decides what component is needed
  * and which attributes should be set (e. g. for images it's usually a object containing url, alt etc.)
  *
- * @param {Object} props - All props passed by edit function of block
- * @param {string} fieldName
- * @param {Object} field
+ * @param {Object} props
+ * @param {Object} props.editProps - All props passed by edit function of block
+ * @param {string} props.fieldName
+ * @param {Object} props.field
  * @return
  */
-export function createFieldControls( props, fieldName, field ) {
-	const { attributes, setAttributes } = props;
+export function FieldControl( { editProps, fieldName, field } ) {
+	const { attributes, setAttributes } = editProps;
 
 	const setFieldAttributes = ( val ) => {
 		setAttributes( {
@@ -49,7 +50,7 @@ export function createFieldControls( props, fieldName, field ) {
 						fieldName
 				);
 			}
-			return;
+			return null;
 		}
 
 		const width = field.width || 1.0;
@@ -67,12 +68,13 @@ export function createFieldControls( props, fieldName, field ) {
 			</WidthWrapper>
 		);
 	} else if ( field.input === 'repeater' ) {
-		return createRepeater( {
+		const props = {
 			field,
 			setAttributes,
 			fieldName,
 			attributes,
-			props,
-		} );
+			editProps,
+		}
+		return <RepeaterFieldControl { ...props }  />;
 	}
 }

@@ -6,8 +6,8 @@ import {
 import { Card, CardBody, CardHeader, PanelBody } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useState } from '@wordpress/element';
-import { createFieldControls } from './createFieldControls';
-import { EditorPopover } from './EditorPopover';
+import { FieldControl } from './components/FieldControl';
+import { EditorPopover } from './components/EditorPopover';
 import { useSelect } from '@wordpress/data';
 
 export function createEdit( {
@@ -20,12 +20,12 @@ export function createEdit( {
 	childrenLimit,
 	preview,
 } ) {
-	return ( EditProps ) => {
-		const { attributes, isSelected, clientId } = EditProps;
+	return ( editProps ) => {
+		const { attributes, isSelected, clientId } = editProps;
 		const [ height, setHeight ] = useState( 0 );
 
 		const blockProps = useBlockProps( {
-			style: { width: editWidth * 100 + '%' },
+			style: { flexBasis: editWidth * 100 + '%' },
 		} );
 		const title = settings && settings.title ? settings.title : name;
 
@@ -55,6 +55,15 @@ export function createEdit( {
 		};
 		const InnerBlocksAppenderToUse = MyInnerBlocksAppender();
 
+		function allFieldControls(editProps) {
+			return Object.entries(fields).map(
+				([fieldName, field]) => {
+					const props = { editProps, fieldName, field };
+					return <FieldControl {...props} />;
+				}
+			);
+		}
+
 		return (
 			<div { ...blockProps }>
 				<div
@@ -81,15 +90,7 @@ export function createEdit( {
 								Block: { title }
 							</CardHeader>
 							<CardBody style={ { padding: '16px 14px' } }>
-								{ Object.entries( fields ).map(
-									( [ fieldName, field ] ) => {
-										return createFieldControls(
-											EditProps,
-											fieldName,
-											field
-										);
-									}
-								) }
+							 	{ allFieldControls(editProps) }
 
 								{ children && (
 									<div
@@ -125,7 +126,7 @@ export function createEdit( {
 									<EditorPopover
 										title={ title }
 										fields={ fields }
-										EditProps={ EditProps }
+										editProps={ editProps }
 										onClose={ hidePopover }
 									/>
 								) }
@@ -137,15 +138,7 @@ export function createEdit( {
 							{ isSelected && editView === 'inspector' && (
 								<InspectorControls>
 									<PanelBody>
-										{ Object.entries( fields ).map(
-											( [ fieldName, field ] ) => {
-												return createFieldControls(
-													EditProps,
-													fieldName,
-													field
-												);
-											}
-										) }
+										{ allFieldControls(editProps) }
 									</PanelBody>
 								</InspectorControls>
 							) }

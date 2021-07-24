@@ -1,7 +1,7 @@
 import { Card, CardBody, CardHeader, Popover } from '@wordpress/components';
-import { createFieldControls } from './createFieldControls';
+import { FieldControl } from './FieldControl';
 
-export function EditorPopover( { title, fields, EditProps, onClose } ) {
+export function EditorPopover( { title, fields, editProps, onClose } ) {
 	return (
 		<Popover position="middle center" onClose={ onClose }>
 			<Card className="fbl_card" size="small" style={ { width: 600 } }>
@@ -11,11 +11,12 @@ export function EditorPopover( { title, fields, EditProps, onClose } ) {
 				<CardBody style={ { padding: '16px 14px' } }>
 					{ Object.entries( fields ).map(
 						( [ fieldName, field ] ) => {
-							return createFieldControls(
-								EditProps,
+							const props = {
+								editProps,
 								fieldName,
 								field
-							);
+							}
+							return <FieldControl { ...props } />;
 						}
 					) }
 				</CardBody>

@@ -1,14 +1,12 @@
 import { __ } from '@wordpress/i18n';
-import inputControls from './components/inputControls';
+import inputControls from './input-controls';
 
 /**
  * Create different Components to make all subFields editable.
  * Very similar to switchComponents function
  *
- * @param props.props
  * @param {Object} props - All props passed by edit function of block
- * @param {string} fieldName
- * @param {Object} field
+ * @param props.editProps
  * @param props.fieldName
  * @param props.field
  * @param props.subFieldName
@@ -16,24 +14,24 @@ import inputControls from './components/inputControls';
  * @param props.key
  * @return
  */
-export function createSubFieldControls( {
-	props,
+export function SubFieldControl( {
+	editProps,
 	fieldName,
 	field,
 	subFieldName,
 	subField,
-	key,
+	indexKey,
 } ) {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes } = editProps;
 
 	const setSubFieldAttributes = ( val ) => {
-		const before = attributes[ fieldName ].slice( 0, key );
-		const after = attributes[ fieldName ].slice( key + 1 );
+		const before = attributes[ fieldName ].slice( 0, indexKey );
+		const after = attributes[ fieldName ].slice( indexKey + 1 );
 		setAttributes( {
 			[ fieldName ]: [
 				...before,
 				{
-					...attributes[ fieldName ][ key ],
+					...attributes[ fieldName ][ indexKey ],
 					[ subFieldName ]: val,
 				},
 				...after,
@@ -53,7 +51,7 @@ export function createSubFieldControls( {
 			removeFieldAttributes={ removeSubFieldAttributes }
 			field={ subField }
 			label={ subField.label }
-			value={ attributes[ fieldName ][ key ][ subFieldName ] }
+			value={ attributes[ fieldName ][ indexKey ][ subFieldName ] }
 		/>
 	);
 }

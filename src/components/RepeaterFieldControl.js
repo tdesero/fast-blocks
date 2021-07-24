@@ -7,14 +7,14 @@ import {
 	PanelRow,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { createSubFieldControls } from './createSubFieldControls';
+import { SubFieldControl } from './SubFieldControl';
 
-export function createRepeater( {
+export function RepeaterFieldControl( {
 	field,
 	setAttributes,
 	fieldName,
 	attributes,
-	props,
+	editProps,
 } ) {
 	const addNew = () => {
 		const newItem = {};
@@ -116,15 +116,16 @@ export function createRepeater( {
 								( [ subFieldName ] ) => {
 									// first check if attribute was defined inside fields
 									if ( field.query[ subFieldName ] ) {
-										return createSubFieldControls( {
-											props,
+										const props = {
+											editProps,
 											fieldName,
 											field,
 											subFieldName,
 											subField:
 												field.query[ subFieldName ],
-											key: index,
-										} );
+											indexKey: index,
+										}
+										return <SubFieldControl { ...props } />;
 									}
 								}
 							) }
