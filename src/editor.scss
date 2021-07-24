@@ -1,8 +1,26 @@
 .fbl_editor-block {
   border: 1px solid transparent;
+  position: relative;
   &:hover {
     border: 1px solid var(--wp-admin-theme-color);
   }
+}
+
+.fbl_edit-btn-overlay {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  margin: .5rem;
+  opacity: 0;
+
+  &.is-selected {
+    opacity: 1;
+  }
+}
+
+*:hover>.fbl_edit-btn-overlay {
+  opacity: 1;
 }
 
 .fbl_card {

@@ -29,15 +29,6 @@ export function createEdit( {
 		} );
 		const title = settings && settings.title ? settings.title : name;
 
-		/* only for popover */
-		const [ popoverVisible, setPopoverVisible ] = useState( false );
-		const hidePopover = () => {
-			setPopoverVisible( () => false );
-		};
-		const showPopover = () => {
-			setPopoverVisible( () => true );
-		};
-
 		/* AdvancedEditView means 'popover' oder 'inspector' for ALL fields */
 		const hasAdvancedEditView =
 			editView === 'popover' || editView === 'inspector';
@@ -113,21 +104,18 @@ export function createEdit( {
 						</Card>
 					) : (
 						<div
-							onClick={ showPopover }
 							style={ {
 								border: '1px dashed #ddd',
 								padding: 0,
 								minHeight: 50,
 							} }
 						>
-							{ isSelected &&
-								editView === 'popover' &&
-								popoverVisible && (
+							{ editView === 'popover' && (
 									<EditorPopover
 										title={ title }
 										fields={ fields }
 										editProps={ editProps }
-										onClose={ hidePopover }
+										isSelected={ isSelected }
 									/>
 								) }
 							<ServerSideRender
