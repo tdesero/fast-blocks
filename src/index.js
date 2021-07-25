@@ -9,9 +9,12 @@ import { deprecated } from './deprecated';
  * Register Blocks and automatically create an Editor UI
  *
  * @param {Object} block - All block attributes with a label and a input
- * @param {Object} block.fields - { type, default, label, input, [selector]}
- * @param {Object} block.options - All options like in wp.blocks.registerBlockType but without(!) attributes, edit & save: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * @param {string} block.name - e.g. mytheme/my-block
+ * @param {Object} block.fields - { type, default, label, input, [selector], [width] }
+ * @param {Object} block.settings - All options like in wp.blocks.registerBlockType but without(!) attributes, edit & save: @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  * @param {Array} [block.children] - Optional template for InnerBlocks
+ * @param {string} [block.editView] - Optional setting for editing UI
+ * @param {number} [block.editWidth] - Width of block inside editor. Usefull for children Blocks.
  */
 function registerHelper( block ) {
 	const { name, settings, children } = block;
