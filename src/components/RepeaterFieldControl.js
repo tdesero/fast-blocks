@@ -8,6 +8,7 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { SubFieldControl } from './SubFieldControl';
+import { arrowUp, arrowDown, trash } from '@wordpress/icons';
 
 export function RepeaterFieldControl( {
 	field,
@@ -79,39 +80,28 @@ export function RepeaterFieldControl( {
 							initialOpen={ false }
 							buttonProps={ { style: { padding: '16px' } } }
 						>
-							<PanelRow>
-								<ButtonGroup>
-									<Button
-										onClick={ () => {
-											moveUp( index );
-										} }
-										isSmall
-										isSecondary
-										disabled={ isFirst( index ) }
-									>
-										{ __( 'Move up' ) }
-									</Button>
-									<Button
-										onClick={ () => {
-											moveDown( index );
-										} }
-										isSmall
-										isSecondary
-										disabled={ isLast( index ) }
-									>
-										{ __( 'Move down' ) }
-									</Button>
-									<Button
-										onClick={ () => {
-											removeItem( index );
-										} }
-										isSmall
-										isDestructive
-									>
-										{ __( 'Remove item' ) }
-									</Button>
-								</ButtonGroup>
-							</PanelRow>
+							<div className="fbl_repeater-btns">
+								<Button
+									onClick={ () => {
+										moveUp( index );
+									} }
+									disabled={ isFirst( index ) }
+									icon={ arrowUp }
+								/>
+								<Button
+									onClick={ () => {
+										moveDown( index );
+									} }
+									disabled={ isLast( index ) }
+									icon={ arrowDown }
+								/>
+								<Button
+									onClick={ () => {
+										removeItem( index );
+									} }
+									icon={ trash }
+								/>
+							</div>
 							{ Object.entries( attribute ).map(
 								( [ subFieldName ] ) => {
 									// first check if attribute was defined inside fields
