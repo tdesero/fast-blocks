@@ -22,17 +22,17 @@ export const ClassicEditorInput = ( { value, label, setFieldAttributes } ) => {
 					setFieldAttributes( newValue );
 				} }
 				value={ value }
-				plugins="lists textcolor colorpicker"
+				plugins="lists textcolor colorpicker link"
 				init={ {
 					height: 300,
 					menubar: false,
 					branding: false,
 					textcolor_map: colorMap,
 					toolbar:
-						'undo redo | formatselect | ' +
-						'bold italic forecolor backcolor | alignleft aligncenter ' +
-						'alignright alignjustify | bullist numlist outdent indent | ' +
-						'removeformat | help',
+						'undo redo formatselect ' +
+						'bold italic forecolor backcolor alignleft aligncenter ' +
+						'alignright alignjustify bullist numlist outdent indent ' +
+						'link removeformat help',
 					content_style:
 						'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
 				} }
