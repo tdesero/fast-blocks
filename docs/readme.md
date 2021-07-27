@@ -15,9 +15,10 @@
 - `date` (type: 'string')
 - `classicEditor` (type: 'string') This is actually a TinyMCE Component
 
-## Example inside functions.php of your theme:
+## Example inside `functions.php` of your theme:
 
-`$options = [
+```php
+$options = [
   'name'      => 'some-slug/block-name',
   // template from theme-directory
   'template'  => '/blocks/test.php',
@@ -89,4 +90,14 @@
 ];
 
 add_fast_block( $options );
-`
+```
+
+
+## Example usage inside template:
+
+```php
+<div>
+  <h2><?php $block->field('headline'); ?></h2>
+  <img src="<?php echo $block->field_value('image')['url']; ?>">
+</div>
+```
