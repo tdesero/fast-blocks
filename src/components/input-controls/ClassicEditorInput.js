@@ -32,7 +32,7 @@ export const ClassicEditorInput = ( { value, label, setFieldAttributes } ) => {
 						'undo redo formatselect ' +
 						'bold italic forecolor backcolor alignleft aligncenter ' +
 						'alignright alignjustify bullist numlist outdent indent ' +
-						'link removeformat help',
+						'link unlink removeformat help',
 					content_style:
 						'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
 				} }
