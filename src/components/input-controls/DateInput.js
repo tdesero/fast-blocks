@@ -40,7 +40,11 @@ export function DateInput( { value, label, setFieldAttributes } ) {
 				<div style={ { padding: 10 } }>
 					<DateTimePicker
 						currentDate={ value }
-						onChange={ setFieldAttributes }
+						onChange={ (val) => {
+							// make sure there is an empty string instead of just null bc null causes error on ssr component
+							if (!val) val = '';
+							setFieldAttributes(val) 
+						}}
 					/>
 				</div>
 			</CustomPopover>
