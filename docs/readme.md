@@ -9,6 +9,7 @@
 - `[children]`: This enables nested blocks. Note: preview will be disabled.
 - `[childrenLimit]`: Define a maximum for children blocks.
 - `[editWidth]`: Define a width for the block preview (usefull for nested blocks). e.g. `6/12` or `.25`.
+- `[preview]`: optionally set it to `false` if the ssr-preview makes any trouble and you just need the interface.
 
 ## Available Field Inputs:
 - `checkbox` (type: 'boolean')
