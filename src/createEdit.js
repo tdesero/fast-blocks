@@ -92,7 +92,10 @@ export function createEdit( {
 										} }
 									>
 										<InnerBlocks
-											allowedBlocks={ children }
+											allowedBlocks={
+												// Can't set it to true, because it means ALL blocks are allowed including e.g. a single column
+												Array.isArray( children ) ? children : undefined
+											}
 											orientation="horizontal"
 											renderAppender={
 												InnerBlocksAppenderToUse
