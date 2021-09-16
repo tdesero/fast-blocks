@@ -1,5 +1,6 @@
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button, BaseControl } from '@wordpress/components';
+import { trash } from '@wordpress/icons';
 
 import { __ } from '@wordpress/i18n';
 
@@ -28,22 +29,15 @@ const ImageUpload = ( { label, onSelect, onRemove, value } ) => (
 							{ __( 'Open Media Library' ) }
 						</Button>
 					) : (
-						<>
+						<div className="fbl_img-preview-box">
 							<img
 								onClick={ open }
 								src={ value.url }
-								style={ {
-									width: '150px',
-									height: '150px',
-									objectFit: 'cover',
-									marginRight: '10px',
-									background: 'white',
-								} }
+								className="fbl_img-preview-box__img"
 							/>
-							<Button onClick={ onRemove } isSecondary>
-								{ __( 'Remove image' ) }
+							<Button className="fbl_img-preview-box__btn" isPrimary isDestructive onClick={ onRemove } icon={trash}>
 							</Button>
-						</>
+						</div>
 					) }
 				</BaseControl>
 			) }

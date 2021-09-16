@@ -126,6 +126,27 @@
   width: 100% !important;
 }
 
+.fbl_img-preview-box {
+  position: relative;
+  display: inline-block;
+
+  &__btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 5px !important;
+  }
+
+  &__img {
+    width: 150px; 
+    height: 150px !important; 
+    object-fit: cover;
+    background: white;
+    border: 1px solid rgb(226, 228, 231);
+    border-radius: 3px;
+  }
+}
+
 /* Flexbox for innerBlocks */
 .fbl_editor-block {
   .block-editor-inner-blocks>.block-editor-block-list__layout {
@@ -153,3 +174,18 @@
 .interface-interface-skeleton__content {
   z-index: unset;
 } */
+
+/* Make 100% sure that inputs look like they should by scoping it in .fbl_card */
+.fbl_card {
+  .components-text-control__input, .components-text-control__input[type=color], .components-text-control__input[type=date], .components-text-control__input[type=datetime-local], .components-text-control__input[type=datetime], .components-text-control__input[type=email], .components-text-control__input[type=month], .components-text-control__input[type=number], .components-text-control__input[type=password], .components-text-control__input[type=tel], .components-text-control__input[type=text], .components-text-control__input[type=time], .components-text-control__input[type=url], .components-text-control__input[type=week] {
+    width: 100%;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+    padding: 6px 8px;
+    box-shadow: 0 0 0 transparent;
+    transition: box-shadow .1s linear;
+    border-radius: 2px;
+    border: 1px solid #757575;
+    font-size: 16px;
+    line-height: normal;
+  }
+}
