@@ -15,8 +15,8 @@ class SingleFastBlock {
 		// extract only the necessary information from fields to attributes
 		if ( !empty($settings['fields']) ) foreach($settings['fields'] as $key => $value) {
 			$this->attributes[$key] = [
-				'type' => $value['type'],
-				'default' => $value['default'],
+				'type' => isset( $value['type'] ) ? $value['type'] : 'string',
+				'default' => isset( $value['default'] ) ? $value['default'] : '',
 			];
 		}
 		$this->register_block();

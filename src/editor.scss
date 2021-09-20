@@ -50,12 +50,13 @@
       box-shadow: 0 0 0 1px rgb(204, 24, 24);
     }
   }
-}
 
-.fbl_block-title {
-  font-size: 13px;
-  margin-bottom: 13px;
-  background-color: #f8f8f8;
+  .fbl_block-title {
+    padding: 16px;
+    font-size: 13px;
+    margin-bottom: 13px;
+    background-color: #f8f8f8;
+  }
 }
 
 .fbl_url-input {
@@ -99,10 +100,12 @@
   }
 }
 
-.fbl_rich-text {
+.fbl_rich-text,
+.fbl_card .fbl_rich-text {
   width: 100%;
   min-height: 50px;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+  font-size: 13px;
   padding: 6px 8px;
   box-shadow: 0 0 0 transparent;
   transition: box-shadow .1s linear;
@@ -196,6 +199,7 @@
 }
 
 .fbl_card {
+  .fbl_url-input__label,
   .components-card__header,
   .components-base-control__label {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
