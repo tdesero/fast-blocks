@@ -14,17 +14,17 @@
 ## Available Field Inputs:
 - `checkbox` (type: 'boolean')
 - `toggle` (type: 'boolean')
-- `text` (type: 'string') 
+- `text` (type: 'string') optionally set a `charLimit`
 - `email` (type: 'string') 
-- `textarea` (type: 'string')
+- `textarea` (type: 'string') optionally set a `charLimit`
 - `number` (type: 'string')
 - `range` (type: 'number') you can also add `min`, `max` and `step`
 - `select` (type: 'string' / 'number')
 - `image` (type: 'object')
-- `richText` (type: 'string')
+- `richText` (type: 'string') optionally set a `charLimit`
 - `url` (type: 'string')
 - `date` (type: 'string')
-- `classicEditor` (type: 'string') This is actually a TinyMCE Component
+- `classicEditor` (type: 'string') This is actually a TinyMCE Component. Optionally set a `charLimit`
 - `repeater` a more complex field with subfields. you can optionally `limit` these.
 
 Fields always need a `type`, `input` and `default`.
@@ -57,6 +57,7 @@ $options = [
       'type'     => 'string',
       'input'	   => 'richText',
       'default'  => 'default string',
+      'charLimit' => 120 //optionallyy
     ],
     'image'   => [
       'label'   => 'Label for the Upload Button',

@@ -45,9 +45,12 @@
   }
 
   .components-base-control--error {
-    input {
-      border-color: rgb(204, 24, 24);
-      box-shadow: 0 0 0 1px rgb(204, 24, 24);
+    input,
+    .fbl_rich-text,
+    .mce-tinymce,
+    textarea {
+      border-color: rgb(204, 24, 24) !important;
+      box-shadow: 0 0 0 1px rgb(204, 24, 24) !important;
     }
   }
 
