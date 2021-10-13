@@ -2,7 +2,7 @@
 Contributors:      Tom D
 Tags:              block
 Tested up to:      5.8.0
-Stable tag:        0.7.9
+Stable tag:        0.8.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,8 +35,9 @@ To avoid problems with dynamic blocks and SEO analyzing Plugins, most fields are
 
 == Changelog ==
 
-= 0.2.0 =
+= 0.8.0 =
 * Release
+added "allowTransformFrom" option
 
 == Example Usage ==
 

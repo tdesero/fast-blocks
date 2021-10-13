@@ -10,6 +10,7 @@
 - `[childrenLimit]`: Define a maximum for children blocks.
 - `[editWidth]`: Define a width for the block preview (usefull for nested blocks). e.g. `6/12` or `.25`.
 - `[preview]`: optionally set it to `false` if the ssr-preview makes any trouble and you just need the interface.
+- `[allowTransformFrom]`: Array with similar blocks to transform from. Must have the same attributes to work properly. Example for inner blocks: `['core/group']`
 
 ## Available Field Inputs:
 - `checkbox` (type: 'boolean')
@@ -108,13 +109,59 @@ $options = [
 add_fast_block( $options );
 ```
 
-
 ## Example usage inside template:
+use `$block->field('yourFieldName')` to echo the field directly. The field will will be sanitized with wp_kses_post()
+use `$block->field_value('yourFieldName')` to get the value without echoing. Usefull for stored objects or arrays. You will have to sanitize on your own
 
 ```html
 <div>
   <h2><?php $block->field('headline'); ?></h2>
-  <img src="<?php echo $block->field_value('image')['url']; ?>">
+  <img src="<?php echo $block->field_value('image')['url']; ?>"><!-- CAUTION: in production you should sanitize the value -->
 </div>
 ```
 
+# Example for a simple Row and Columns
+
+```php 
+add_fast_block([
+  'name'          => 'bs/row',
+  'template'      => '/blocks/row.php',
+  'settings' => [
+    'title' => 'Spalten',
+    'supports' => [
+      'color' => [
+        'background' => true,
+        'text' => false,
+      ]
+    ]
+  ],
+  'children'      => ['bs/col-3', 'bs/col-6'],
+  'childrenLimit' => 6,
+]);
+
+add_fast_block([
+  'name'      => 'bs/col-3',
+  'template'  => '/blocks/col-3.php',
+  'settings' => [
+    'title' => 'Spalte Schmal',
+    'parent' => ['bs/row']
+  ],
+  'children'  => true, // true means all are allowed
+  'editWidth' => 4 / 12,
+  'allowTransformFrom' => ['bs/col-6']
+]);
+
+// ...bs/col-6 would be more or less the same as bs/col-3
+```
+
+```html
+<div class="row">
+  <?php echo $children; ?>
+</div>
+```
+
+```html
+<div class="col-3">
+  <?php echo $children; ?>
+</div>
+```
