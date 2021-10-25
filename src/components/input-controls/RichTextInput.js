@@ -3,7 +3,7 @@ import { BaseControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 
-import countChars from "../../helpers/coundChars";
+import countChars from "../../helpers/countChars";
 
 export function RichTextInput({ value, label, setFieldAttributes, field }) {
 	const [charCount, setCharCount] = useState(countChars(value));

@@ -2,7 +2,7 @@ import { TextControl } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
-import countChars from "../../helpers/coundChars";
+import countChars from "../../helpers/countChars";
 
 export function TextInput({ value, label, setFieldAttributes, field }) {
 	const [charCount, setCharCount] = useState(countChars(value));

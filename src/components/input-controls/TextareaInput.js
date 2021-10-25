@@ -2,7 +2,7 @@ import { TextareaControl } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
-import countChars from "../../helpers/coundChars";
+import countChars from "../../helpers/countChars";
 
 export function TextareaInput({ value, label, setFieldAttributes, field }) {
 	const [charCount, setCharCount] = useState(countChars(value));

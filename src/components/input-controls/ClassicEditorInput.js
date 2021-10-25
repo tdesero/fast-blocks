@@ -4,7 +4,7 @@ import { select } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 
-import countChars from "../../helpers/coundChars";
+import countChars from "../../helpers/countChars";
 
 // make sure this tinymce is added in index.asset.php as dependency
 import "@wordpress/tinymce";
