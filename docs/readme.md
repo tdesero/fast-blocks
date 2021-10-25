@@ -22,6 +22,7 @@
 - `range` (type: 'number') you can also add `min`, `max` and `step`
 - `select` (type: 'string' / 'number')
 - `image` (type: 'object')
+- `file` (type: 'object')
 - `richText` (type: 'string') optionally set a `charLimit`
 - `url` (type: 'string')
 - `date` (type: 'string')

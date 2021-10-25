@@ -1,16 +1,17 @@
-import { CheckboxInput } from './CheckboxInput';
-import { ToggleInput } from './ToggleInput';
-import { TextInput } from './TextInput';
-import { EmailInput } from './EmailInput';
-import { TextareaInput } from './TextareaInput';
-import { NumberInput } from './NumberInput';
-import { RangeInput } from './RangeInput';
-import { SelectInput } from './SelectInput';
-import { ImageInput } from './ImageInput';
-import { RichTextInput } from './RichTextInput';
-import { URLInput } from './URLInput';
-import { DateInput } from './DateInput';
-import { ClassicEditorInput } from './ClassicEditorInput';
+import { CheckboxInput } from "./CheckboxInput";
+import { ToggleInput } from "./ToggleInput";
+import { TextInput } from "./TextInput";
+import { EmailInput } from "./EmailInput";
+import { TextareaInput } from "./TextareaInput";
+import { NumberInput } from "./NumberInput";
+import { RangeInput } from "./RangeInput";
+import { SelectInput } from "./SelectInput";
+import { ImageInput } from "./ImageInput";
+import { FileInput } from "./FileInput";
+import { RichTextInput } from "./RichTextInput";
+import { URLInput } from "./URLInput";
+import { DateInput } from "./DateInput";
+import { ClassicEditorInput } from "./ClassicEditorInput";
 
 const inputControls = {
 	checkbox: CheckboxInput,
@@ -22,6 +23,7 @@ const inputControls = {
 	range: RangeInput,
 	select: SelectInput,
 	image: ImageInput,
+	file: FileInput,
 	richText: RichTextInput,
 	url: URLInput,
 	date: DateInput,
