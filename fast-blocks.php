@@ -4,7 +4,7 @@
  * Description:       Create Custom Gutenberg Blocks fast and easily in PHP.
  * Requires at least: 5.7
  * Requires PHP:      7.0
- * Version:           0.8.0
+ * Version:           0.8.5
  * Author:            Tom D
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html

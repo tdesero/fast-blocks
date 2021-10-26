@@ -25,6 +25,7 @@ export function RichTextInput({ value, label, setFieldAttributes, field }) {
 				<RichText
 					className="fbl_rich-text"
 					value={value}
+					allowedFormats={field.allowedFormats}
 					onChange={setFieldAttributes}
 					placeholder={__("Add text…")}
 					inlineToolbar
