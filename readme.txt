@@ -1,5 +1,5 @@
 === Fast Blocks ===
-Contributors:      Tom D
+Contributors:      tdesero
 Tags:              block
 Tested up to:      5.8.0
 Stable tag:        0.8.5
