@@ -2,18 +2,13 @@ import { useSelect } from "@wordpress/data";
 import { ComboboxControl } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 
-function sanitizeString(str) {
-	str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim, "");
-	return str.trim();
-}
-
 export function PostTypeEntryInput({
 	value,
 	label,
 	setFieldAttributes,
 	field,
 }) {
-	const postType = sanitizeString(field.postType);
+	const postType = field.postType;
 	const posts = useSelect((select) =>
 		select("core").getEntityRecords("postType", postType, {
 			per_page: -1,
