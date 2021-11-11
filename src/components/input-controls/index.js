@@ -12,6 +12,7 @@ import { RichTextInput } from "./RichTextInput";
 import { URLInput } from "./URLInput";
 import { DateInput } from "./DateInput";
 import { ClassicEditorInput } from "./ClassicEditorInput";
+import { PostTypeEntryInput } from "./PostTypeEntryInput";
 
 const inputControls = {
 	checkbox: CheckboxInput,
@@ -28,6 +29,7 @@ const inputControls = {
 	url: URLInput,
 	date: DateInput,
 	classicEditor: ClassicEditorInput,
+	postTypeEntry: PostTypeEntryInput,
 };
 
 export default inputControls;
