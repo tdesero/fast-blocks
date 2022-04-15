@@ -169,6 +169,7 @@
     }
 
     .block-list-appender {
+      position: relative;
       width: 100%;
     }
   }
@@ -215,4 +216,9 @@
     padding-left: 0;
     margin-bottom: 0;
   }
+}
+
+.fbl_card .block-list-appender {
+  position: relative !important;
+  width: 100%;
 }
