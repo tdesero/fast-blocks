@@ -1,7 +1,7 @@
 === Fast Blocks ===
 Contributors:      tdesero
 Tags:              block
-Tested up to:      5.9.1
+Tested up to:      6.5.5
 Stable tag:        0.8.6
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
