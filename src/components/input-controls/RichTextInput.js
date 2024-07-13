@@ -20,8 +20,7 @@ export function RichTextInput({ value, label, setFieldAttributes, field }) {
 
 	return (
 		<>
-			<BaseControl className={!isValid ? "components-base-control--error" : ""}>
-				<label className="fbl_url-input__label">{label}</label>
+			<BaseControl label={label} className={!isValid ? "components-base-control--error" : ""}>
 				<RichText
 					className="fbl_rich-text"
 					value={value}
