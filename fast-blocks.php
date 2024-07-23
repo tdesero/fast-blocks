@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Plugin Name:       Fast Blocks
  * Description:       Create Custom Gutenberg Blocks fast and easily in PHP.
  * Requires at least: 5.7
  * Requires PHP:      7.0
- * Version:           0.8.6
+ * Version:           0.8.7
  * Author:            Tom D
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,14 +17,15 @@
 /**
  * Classes
  */
-require_once( __DIR__ . '/classes/SingleFastBlock.class.php');
-require_once( __DIR__ . '/classes/FastBlocksPlugin.class.php');
-require_once( __DIR__ . '/classes/FastBlockView.class.php');
+require_once(__DIR__ . '/classes/SingleFastBlock.class.php');
+require_once(__DIR__ . '/classes/FastBlocksPlugin.class.php');
+require_once(__DIR__ . '/classes/FastBlockView.class.php');
 
 /**
  * Plugin Initialization
  */
-function fast_blocks_instance() {
+function fast_blocks_instance()
+{
 	static $instance;
 	if ($instance === null) {
 		$instance = new FastBlocksPlugin();
@@ -31,13 +33,15 @@ function fast_blocks_instance() {
 	return $instance;
 }
 
-function fast_blocks_init() {
+function fast_blocks_init()
+{
 	fast_blocks_instance()->init();
 }
-add_action( 'init', 'fast_blocks_init' );
+add_action('init', 'fast_blocks_init');
 
 // Instance of view class to be used inside SingleFastBlock class
-function fast_blocks_view_instance() {
+function fast_blocks_view_instance()
+{
 	static $instance;
 	if ($instance === null) {
 		$instance = new FastBlockView();
@@ -48,4 +52,4 @@ function fast_blocks_view_instance() {
 /**
  * Helpers (for theme developers)
  */
-require_once( __DIR__ . '/inc/helpers.php');
+require_once(__DIR__ . '/inc/helpers.php');
