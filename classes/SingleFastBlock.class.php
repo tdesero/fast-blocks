@@ -4,19 +4,21 @@
  * Class for a Single Block
  * has methods for registering a block and rendering the block dynamically
  */
-class SingleFastBlock {
-	
+class SingleFastBlock
+{
+
 	private $settings;
 	private $attributes;
 
-	function __construct( $settings ) {
+	function __construct($settings)
+	{
 		$this->settings = $settings;
 
 		// extract only the necessary information from fields to attributes
-		if ( !empty($settings['fields']) ) foreach($settings['fields'] as $key => $value) {
+		if (!empty($settings['fields'])) foreach ($settings['fields'] as $key => $value) {
 			$this->attributes[$key] = [
-				'type' => isset( $value['type'] ) ? $value['type'] : 'string',
-				'default' => isset( $value['default'] ) ? $value['default'] : '',
+				'type' => isset($value['type']) ? $value['type'] : 'string',
+				'default' => isset($value['default']) ? $value['default'] : '',
 			];
 		}
 		$this->register_block();
@@ -26,13 +28,14 @@ class SingleFastBlock {
 	 * Calls register_block_type to register the block serverside
 	 * @see https://developer.wordpress.org/reference/functions/register_block_type/
 	 */
-	private function register_block() {
-		register_block_type( $this->settings['name'], [
+	private function register_block()
+	{
+		register_block_type($this->settings['name'], [
 			'editor_script' 	=> 'fast-blocks-editor-script',
 			'editor_style'		=> 'fast-blocks-editor-style',
 			'render_callback' => array($this, 'render_callback'),
 			'attributes'      => $this->attributes,
-		] );
+		]);
 	}
 
 	/**
@@ -40,17 +43,18 @@ class SingleFastBlock {
 	 * @param mixed $content - Content of InnerBlocks
 	 * @return string - Returns the template html
 	 */
-	public function render_callback( $attributes, $content ) {
+	public function render_callback($attributes, $content)
+	{
 		if ($this->settings['template']) {
-			fast_blocks_instance()->set_current_attributes( $attributes );
-			if ( isset($this->settings['fields']) ) {
-				fast_blocks_instance()->set_current_fields( $this->settings['fields'] );
+			fast_blocks_instance()->set_current_attributes($attributes);
+			if (isset($this->settings['fields'])) {
+				fast_blocks_instance()->set_current_fields($this->settings['fields']);
 			}
 			ob_start();
 
 			$path = get_stylesheet_directory() . $this->settings['template'];
-			if ( file_exists( $path ) ) {
-				$this->template( $path, $content );
+			if (file_exists($path)) {
+				$this->template($path, $content);
 			} else {
 				echo '<p>Template not found for custom block <code>"' . $this->settings['name'] . '"</code>.</p>';
 			}
@@ -62,9 +66,10 @@ class SingleFastBlock {
 
 	/**
 	 * @param string $template_path - Absolute path to the block template
-	 * @param mixed $content – Content of InnerBlocks
+	 * @param mixed $children – Content of InnerBlocks
 	 */
-	public function template( $template_path, $children ) {
+	public function template($template_path, $children)
+	{
 		// make view class available as $block in templates
 		$block = fast_blocks_view_instance();
 		include $template_path;
