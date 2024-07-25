@@ -70,12 +70,14 @@ You can optionally provide a
     'label'   => 'Bild',
     'type'    => 'object',
     'input'   => 'image',
+    'focalPointPicker' => true, // optionally add focalPoint for the image
     // default can also be an empty array []
     'default' => [
         // this is also what you will receive in the template when calling $block->field_value
         'url'   => '<url-to-the-image>',
         'alt'   => '',
         'sizes' => [/* ... */],
+        'focalPoint' => ['x': 0.5, 'y': 0.5] // if "focalPointPicker" is true
     ],
 ],
 ```
