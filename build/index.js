@@ -1729,7 +1729,8 @@ const ImageUpload = ({
   label,
   onSelect,
   onRemove,
-  value
+  value,
+  field
 }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
   onSelect: media => {
     console.log(media);
@@ -1740,10 +1741,18 @@ const ImageUpload = ({
       alt: media.alt,
       title: media.title,
       description: media.description,
-      caption: media.caption
+      caption: media.caption,
+      width: media.width,
+      height: media.height,
+      ...(field.focalPointPicker ? {
+        focalPoint: {
+          x: 0.5,
+          y: 0.5
+        }
+      } : {})
     });
   },
-  allowedTypes: ['image'],
+  allowedTypes: ["image"],
   value: value,
   render: ({
     open
@@ -1751,8 +1760,26 @@ const ImageUpload = ({
     label: label
   }), !(value && value.url) ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     onClick: open,
-    isPrimary: true
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Open Media Library')) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    variant: "primary"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Open Media Library")) : field.focalPointPicker ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      maxWidth: 240
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FocalPointPicker, {
+    url: value.url,
+    value: value.focalPoint,
+    onChange: focalPoint => onSelect({
+      ...value,
+      focalPoint
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "tertiary",
+    onClick: open
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Replace Image")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "tertiary",
+    isDestructive: true,
+    onClick: onRemove
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Remove"))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "fbl_img-preview-box"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     onClick: open,
@@ -1760,7 +1787,7 @@ const ImageUpload = ({
     className: "fbl_img-preview-box__img"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: "fbl_img-preview-box__btn",
-    isPrimary: true,
+    variant: "secondary",
     isDestructive: true,
     onClick: onRemove,
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -1770,13 +1797,15 @@ function ImageInput({
   label,
   value,
   setFieldAttributes,
-  removeFieldAttributes
+  removeFieldAttributes,
+  field
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ImageUpload, {
     onSelect: setFieldAttributes,
     onRemove: removeFieldAttributes,
     value: value,
-    label: label
+    label: label,
+    field: field
   });
 }
 

@@ -87,7 +87,9 @@
   position: absolute;
   z-index: 1;
 }
-.fbl_url-input .block-editor-block-list__block .block-editor-url-input input[type=text], .fbl_url-input .block-editor-url-input input[type=text], .fbl_url-input .components-popover .block-editor-url-input input[type=text] {
+.fbl_url-input .block-editor-block-list__block .block-editor-url-input input[type=text],
+.fbl_url-input .block-editor-url-input input[type=text],
+.fbl_url-input .components-popover .block-editor-url-input input[type=text] {
   width: unset;
 }
 
@@ -129,6 +131,7 @@
   right: 0;
   bottom: 0;
   margin: 5px !important;
+  background: #fff !important;
 }
 .fbl_img-preview-box__img {
   display: block;
@@ -168,7 +171,20 @@
   z-index: unset;
 } */
 /* Make 100% sure that inputs look like they should by scoping it in .fbl_card */
-.fbl_card .components-text-control__input, .fbl_card .components-text-control__input[type=color], .fbl_card .components-text-control__input[type=date], .fbl_card .components-text-control__input[type=datetime-local], .fbl_card .components-text-control__input[type=datetime], .fbl_card .components-text-control__input[type=email], .fbl_card .components-text-control__input[type=month], .fbl_card .components-text-control__input[type=number], .fbl_card .components-text-control__input[type=password], .fbl_card .components-text-control__input[type=tel], .fbl_card .components-text-control__input[type=text], .fbl_card .components-text-control__input[type=time], .fbl_card .components-text-control__input[type=url], .fbl_card .components-text-control__input[type=week] {
+.fbl_card .components-text-control__input,
+.fbl_card .components-text-control__input[type=color],
+.fbl_card .components-text-control__input[type=date],
+.fbl_card .components-text-control__input[type=datetime-local],
+.fbl_card .components-text-control__input[type=datetime],
+.fbl_card .components-text-control__input[type=email],
+.fbl_card .components-text-control__input[type=month],
+.fbl_card .components-text-control__input[type=number],
+.fbl_card .components-text-control__input[type=password],
+.fbl_card .components-text-control__input[type=tel],
+.fbl_card .components-text-control__input[type=text],
+.fbl_card .components-text-control__input[type=time],
+.fbl_card .components-text-control__input[type=url],
+.fbl_card .components-text-control__input[type=week] {
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
   padding: 6px 8px;
@@ -179,7 +195,20 @@
   font-size: 13px;
   line-height: normal;
 }
-.fbl_card .components-text-control__input:focus, .fbl_card .components-text-control__input[type=color]:focus, .fbl_card .components-text-control__input[type=date]:focus, .fbl_card .components-text-control__input[type=datetime-local]:focus, .fbl_card .components-text-control__input[type=datetime]:focus, .fbl_card .components-text-control__input[type=email]:focus, .fbl_card .components-text-control__input[type=month]:focus, .fbl_card .components-text-control__input[type=number]:focus, .fbl_card .components-text-control__input[type=password]:focus, .fbl_card .components-text-control__input[type=tel]:focus, .fbl_card .components-text-control__input[type=text]:focus, .fbl_card .components-text-control__input[type=time]:focus, .fbl_card .components-text-control__input[type=url]:focus, .fbl_card .components-text-control__input[type=week]:focus {
+.fbl_card .components-text-control__input:focus,
+.fbl_card .components-text-control__input[type=color]:focus,
+.fbl_card .components-text-control__input[type=date]:focus,
+.fbl_card .components-text-control__input[type=datetime-local]:focus,
+.fbl_card .components-text-control__input[type=datetime]:focus,
+.fbl_card .components-text-control__input[type=email]:focus,
+.fbl_card .components-text-control__input[type=month]:focus,
+.fbl_card .components-text-control__input[type=number]:focus,
+.fbl_card .components-text-control__input[type=password]:focus,
+.fbl_card .components-text-control__input[type=tel]:focus,
+.fbl_card .components-text-control__input[type=text]:focus,
+.fbl_card .components-text-control__input[type=time]:focus,
+.fbl_card .components-text-control__input[type=url]:focus,
+.fbl_card .components-text-control__input[type=week]:focus {
   border-color: var(--wp-admin-theme-color);
   box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
 }
