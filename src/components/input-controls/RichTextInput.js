@@ -1,9 +1,18 @@
 import { RichText } from "@wordpress/block-editor";
-import { BaseControl } from "@wordpress/components";
+import { BaseControl, SlotFillProvider, Popover } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 
 import countChars from "../../helpers/countChars";
+
+const PopoverFix = ({ children }) => {
+	return (
+		<SlotFillProvider>
+			{children}
+			<Popover.Slot />
+		</SlotFillProvider>
+	);
+};
 
 export function RichTextInput({ value, label, setFieldAttributes, field }) {
 	const [charCount, setCharCount] = useState(countChars(value));
@@ -20,15 +29,20 @@ export function RichTextInput({ value, label, setFieldAttributes, field }) {
 
 	return (
 		<>
-			<BaseControl label={label} className={!isValid ? "components-base-control--error" : ""}>
-				<RichText
-					className="fbl_rich-text"
-					value={value}
-					allowedFormats={field.allowedFormats}
-					onChange={setFieldAttributes}
-					placeholder={__("Add text…")}
-					inlineToolbar
-				/>
+			<BaseControl
+				label={label}
+				className={!isValid ? "components-base-control--error" : ""}
+			>
+				<PopoverFix>
+					<RichText
+						className="fbl_rich-text"
+						value={value}
+						allowedFormats={field.allowedFormats}
+						onChange={setFieldAttributes}
+						placeholder={__("Add text…")}
+						inlineToolbar
+					/>
+				</PopoverFix>
 			</BaseControl>
 			{field.charLimit && (
 				<p
