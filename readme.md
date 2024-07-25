@@ -3,6 +3,10 @@
 Use the function `add_fast_block` to add a block to your theme in PHP. The Plugin automatically creates a interface for your block inside the editor.
 Unlike the default block behaviour all blocks are rendered dynamically. This means changes inside the template are shown immediately without resaving the post or page.
 
+[Options](./docs/options.md)
+[Field Inputs](./docs/filed-inputs.md)
+[Examples](./docs/examples.md)
+
 ## Example Usage
 
 Register your block:
