@@ -1,182 +1,196 @@
 .fbl_editor-block {
-  border: 1px solid transparent;
-  position: relative;
-  &:hover {
-    border: 1px solid var(--wp-admin-theme-color);
-  }
+	border: 1px solid transparent;
+	position: relative;
+	&:hover {
+		border: 1px solid var(--wp-admin-theme-color);
+	}
 }
 
 .fbl_edit-btn-overlay {
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  top: 0;
-  margin: .5rem;
-  opacity: 0;
+	position: absolute;
+	z-index: 1;
+	right: 0;
+	top: 0;
+	margin: 0.5rem;
+	opacity: 0;
 
-  &.is-selected {
-    opacity: 1;
-  }
+	&.is-selected {
+		opacity: 1;
+	}
 }
 
-*:hover>.fbl_edit-btn-overlay {
-  opacity: 1;
+*:hover > .fbl_edit-btn-overlay {
+	opacity: 1;
 }
 
 .fbl_card {
-  .components-card__body {
-    display: flex;
-    flex-wrap: wrap;
+	.components-card__body {
+		display: flex;
+		flex-wrap: wrap;
 
-    >* {
-      padding-left: 10px;
-      padding-right: 10px;
-      width: 100%;
-      min-width: 120px;
-    }
-  }
+		> * {
+			padding-left: 10px;
+			padding-right: 10px;
+			width: 100%;
+			min-width: 120px;
+		}
+	}
 
-  .components-button {
-    border-radius: 2px;
-  }
+	.components-button {
+		border-radius: 2px;
+	}
 
-  .components-range-control__wrapper {
-    margin-left: 0;
-  }
+	.components-range-control__wrapper {
+		margin-left: 0;
+	}
 
-  .components-base-control--error {
-    input,
-    .fbl_rich-text,
-    .mce-tinymce,
-    textarea {
-      border-color: rgb(204, 24, 24) !important;
-      box-shadow: 0 0 0 1px rgb(204, 24, 24) !important;
-    }
-  }
+	.components-base-control--error {
+		input,
+		.fbl_rich-text,
+		.mce-tinymce,
+		textarea {
+			border-color: rgb(204, 24, 24) !important;
+			box-shadow: 0 0 0 1px rgb(204, 24, 24) !important;
+		}
+	}
 
-  .fbl_block-title {
-    padding: 16px;
-    font-size: 13px;
-    margin-bottom: 13px;
-    background-color: #f8f8f8;
-  }
+	.fbl_block-title {
+		padding: 16px;
+		font-size: 13px;
+		margin-bottom: 13px;
+		background-color: #f8f8f8;
+	}
 }
 
 .fbl_url-input {
-  &__label {
-    margin-bottom: 8px;
-    width: 100%;
-    display: block;
-    cursor: default;
-  }
+	&__label {
+		margin-bottom: 8px;
+		width: 100%;
+		display: block;
+		cursor: default;
+	}
 
-  >* {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+	> * {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
 
-  &__url {
-    display: inline-block;
-    padding-left: 16px;
-    color: gray;
-    width: calc(100% - 36px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: default;
-  }
+	&__url {
+		display: inline-block;
+		padding-left: 16px;
+		color: gray;
+		width: calc(100% - 36px);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		cursor: default;
+	}
 
-  .block-editor-url-input__button {
-    display: inline-block;
-    vertical-align: middle;
-  }
+	.block-editor-url-input__button {
+		display: inline-block;
+		vertical-align: middle;
+	}
 
-  .block-editor-url-input__button-modal {
-    position: absolute;
-    z-index: 1;
-  }
+	.block-editor-url-input__button-modal {
+		position: absolute;
+		z-index: 1;
+	}
 
-  /* fix for input inside url input button */
-  .block-editor-block-list__block .block-editor-url-input input[type=text], .block-editor-url-input input[type=text], .components-popover .block-editor-url-input input[type=text] {
-    width: unset;
-  }
+	/* fix for input inside url input button */
+	.block-editor-block-list__block .block-editor-url-input input[type="text"],
+	.block-editor-url-input input[type="text"],
+	.components-popover .block-editor-url-input input[type="text"] {
+		width: unset;
+	}
 }
 
 .fbl_rich-text,
 .fbl_card .fbl_rich-text {
-  width: 100%;
-  min-height: 50px;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
-  font-size: 13px;
-  padding: 6px 8px;
-  box-shadow: 0 0 0 transparent;
-  transition: box-shadow .1s linear;
-  border-radius: 2px;
-  border: 1px solid #757575;
+	width: 100%;
+	min-height: 50px;
+	font-family:
+		-apple-system,
+		BlinkMacSystemFont,
+		Segoe UI,
+		Roboto,
+		Oxygen-Sans,
+		Ubuntu,
+		Cantarell,
+		Helvetica Neue,
+		sans-serif;
+	font-size: 13px;
+	padding: 6px 8px;
+	box-shadow: 0 0 0 transparent;
+	transition: box-shadow 0.1s linear;
+	border-radius: 2px;
+	border: 1px solid #757575;
 
-  &:focus {
-    border-color: #007cba;
-    border-color: var(--wp-admin-theme-color);
-    box-shadow: 0 0 0 1px #007cba;
-    box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
-    outline: 2px solid transparent;
-  }
+	&:focus {
+		border-color: #007cba;
+		border-color: var(--wp-admin-theme-color);
+		box-shadow: 0 0 0 1px #007cba;
+		box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+		outline: 2px solid transparent;
+	}
 }
 
 .fbl_repeater-btns {
-  text-align: right;
+	text-align: right;
 }
 
 .fbl_repeater-inputs {
-  width: 100% !important;
+	width: 100% !important;
 }
 
 .fbl_img-preview-box {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 
-  &__btn {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 5px !important;
-  }
+	&__btn {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		margin: 5px !important;
+		background: #fff !important;
+	}
 
-  &__img {
-    display: block;
-    width: 150px; 
-    height: 150px !important; 
-    object-fit: cover;
-    background: white;
-    border: 1px solid rgb(226, 228, 231);
-    border-radius: 3px;
-  }
+	&__img {
+		display: block;
+		width: 150px;
+		height: 150px !important;
+		object-fit: cover;
+		background: white;
+		border: 1px solid rgb(226, 228, 231);
+		border-radius: 3px;
+	}
 }
 
 /* Flexbox for innerBlocks */
 .fbl_editor-block {
-  .block-editor-inner-blocks>.block-editor-block-list__layout {
-    display: flex;
-    flex-wrap: wrap;
+	.block-editor-inner-blocks > .block-editor-block-list__layout {
+		display: flex;
+		flex-wrap: wrap;
 
-    >* {
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
+		> * {
+			width: 100%;
+			margin-left: 0;
+			margin-right: 0;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
 
-    .block-list-appender {
-      position: relative;
-      width: 100%;
-    }
-  }
+		.block-list-appender {
+			position: relative;
+			width: 100%;
+		}
+	}
 }
 
 /* tinymce dropdown fix */
-.mce-menu {z-index: 9999999 !important}
+.mce-menu {
+	z-index: 9999999 !important;
+}
 
 /* z-index fix (just testing) 
 .interface-interface-skeleton__content {
@@ -185,40 +199,63 @@
 
 /* Make 100% sure that inputs look like they should by scoping it in .fbl_card */
 .fbl_card {
-  .components-text-control__input, .components-text-control__input[type=color], .components-text-control__input[type=date], .components-text-control__input[type=datetime-local], .components-text-control__input[type=datetime], .components-text-control__input[type=email], .components-text-control__input[type=month], .components-text-control__input[type=number], .components-text-control__input[type=password], .components-text-control__input[type=tel], .components-text-control__input[type=text], .components-text-control__input[type=time], .components-text-control__input[type=url], .components-text-control__input[type=week] {
-    width: 100%;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
-    padding: 6px 8px;
-    box-shadow: 0 0 0 transparent;
-    transition: box-shadow .1s linear;
-    border-radius: 2px;
-    border: 1px solid #757575;
-    font-size: 13px;
-    line-height: normal;
+	.components-text-control__input,
+	.components-text-control__input[type="color"],
+	.components-text-control__input[type="date"],
+	.components-text-control__input[type="datetime-local"],
+	.components-text-control__input[type="datetime"],
+	.components-text-control__input[type="email"],
+	.components-text-control__input[type="month"],
+	.components-text-control__input[type="number"],
+	.components-text-control__input[type="password"],
+	.components-text-control__input[type="tel"],
+	.components-text-control__input[type="text"],
+	.components-text-control__input[type="time"],
+	.components-text-control__input[type="url"],
+	.components-text-control__input[type="week"] {
+		width: 100%;
+		font-family:
+			-apple-system,
+			BlinkMacSystemFont,
+			Segoe UI,
+			Roboto,
+			Oxygen-Sans,
+			Ubuntu,
+			Cantarell,
+			Helvetica Neue,
+			sans-serif;
+		padding: 6px 8px;
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.1s linear;
+		border-radius: 2px;
+		border: 1px solid #757575;
+		font-size: 13px;
+		line-height: normal;
 
-    &:focus {
-      border-color: var(--wp-admin-theme-color);
-      box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
-    }
-  }
+		&:focus {
+			border-color: var(--wp-admin-theme-color);
+			box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+		}
+	}
 }
 
 .fbl_card {
-  .fbl_url-input__label,
-  .components-card__header,
-  .components-base-control__label {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    font-size: 13px;
-    color: #1e1e1e;
-  }
+	.fbl_url-input__label,
+	.components-card__header,
+	.components-base-control__label {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+		font-size: 13px;
+		color: #1e1e1e;
+	}
 
-  .components-combobox-control ul {
-    padding-left: 0;
-    margin-bottom: 0;
-  }
+	.components-combobox-control ul {
+		padding-left: 0;
+		margin-bottom: 0;
+	}
 }
 
 .fbl_card .block-list-appender {
-  position: relative !important;
-  width: 100%;
+	position: relative !important;
+	width: 100%;
 }
