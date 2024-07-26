@@ -1,6 +1,11 @@
 import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
-import { Button, BaseControl, FocalPointPicker } from "@wordpress/components";
-import { trash } from "@wordpress/icons";
+import {
+	Button,
+	BaseControl,
+	FocalPointPicker,
+	Placeholder,
+} from "@wordpress/components";
+import { trash, image } from "@wordpress/icons";
 
 import { __ } from "@wordpress/i18n";
 
@@ -25,42 +30,45 @@ const ImageUpload = ({ label, onSelect, onRemove, value, field }) => (
 			allowedTypes={["image"]}
 			value={value}
 			render={({ open }) => (
-				<BaseControl>
-					<BaseControl label={label} />
-					{!(value && value.url) ? (
-						<Button onClick={open} variant="primary">
-							{__("Open Media Library")}
-						</Button>
-					) : field.focalPointPicker ? (
-						<div style={{ maxWidth: 240 }}>
-							<FocalPointPicker
-								url={value.url}
-								value={value.focalPoint}
-								onChange={(focalPoint) => onSelect({ ...value, focalPoint })}
-							/>
-							<Button variant="tertiary" onClick={open}>
-								{__("Replace Image")}
-							</Button>
-							<Button variant="tertiary" isDestructive onClick={onRemove}>
-								{__("Remove")}
-							</Button>
-						</div>
-					) : (
-						<div className="fbl_img-preview-box">
-							<img
-								onClick={open}
-								src={value.url}
-								className="fbl_img-preview-box__img"
-							/>
-							<Button
-								className="fbl_img-preview-box__btn"
-								variant="secondary"
-								isDestructive
-								onClick={onRemove}
-								icon={trash}
-							></Button>
-						</div>
-					)}
+				<BaseControl label={label}>
+					<div style={{ maxWidth: 240 }}>
+						{!(value && value.url) ? (
+							<Placeholder icon={image} label={__("Add Image")}>
+								<Button onClick={open} variant="primary">
+									{__("Open Media Library")}
+								</Button>
+							</Placeholder>
+						) : field.focalPointPicker ? (
+							<>
+								<FocalPointPicker
+									url={value.url}
+									value={value.focalPoint}
+									onChange={(focalPoint) => onSelect({ ...value, focalPoint })}
+								/>
+								<Button variant="tertiary" onClick={open}>
+									{__("Replace")}
+								</Button>
+								<Button variant="tertiary" isDestructive onClick={onRemove}>
+									{__("Remove")}
+								</Button>
+							</>
+						) : (
+							<div className="fbl_img-preview-box">
+								<img
+									onClick={open}
+									src={value.url}
+									className="fbl_img-preview-box__img"
+								/>
+								<Button
+									className="fbl_img-preview-box__btn"
+									variant="secondary"
+									isDestructive
+									onClick={onRemove}
+									icon={trash}
+								></Button>
+							</div>
+						)}
+					</div>
 				</BaseControl>
 			)}
 		/>
