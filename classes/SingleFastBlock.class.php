@@ -43,20 +43,30 @@ class SingleFastBlock
 	 * @param mixed $content - Content of InnerBlocks
 	 * @return string - Returns the template html
 	 */
-	public function render_callback($attributes, $content)
+	public function render_callback($attributes, $content, $wp_block)
 	{
 		if ($this->settings['template']) {
 			fast_blocks_instance()->set_current_attributes($attributes);
 			if (isset($this->settings['fields'])) {
 				fast_blocks_instance()->set_current_fields($this->settings['fields']);
 			}
+
+
+
 			ob_start();
 
-			$path = get_stylesheet_directory() . $this->settings['template'];
-			if (file_exists($path)) {
-				$this->template($path, $content);
+			// now either use the provided template_render_callback or default template rendering
+			if (isset($this->settings['template_render_callback'])) {
+				// use provided template render callback
+				$this->custom_template($attributes, $content, $wp_block);
 			} else {
-				echo '<p>Template not found for custom block <code>"' . $this->settings['name'] . '"</code>.</p>';
+				// default template rendering
+				$path = get_stylesheet_directory() . $this->settings['template'];
+				if (file_exists($path)) {
+					$this->template($path, $content);
+				} else {
+					echo '<p>Template not found for custom block <code>"' . $this->settings['name'] . '"</code>.</p>';
+				}
 			}
 
 			$output = ob_get_clean();
@@ -70,8 +80,14 @@ class SingleFastBlock
 	 */
 	public function template($template_path, $children)
 	{
-		// make view class available as $block in templates
+		// DO NOT DELETE $block: makes view class available as $block in templates
 		$block = fast_blocks_view_instance();
 		include $template_path;
+	}
+
+	public function custom_template($attributes, $content, $wp_block)
+	{
+		$template_location = $this->settings['template'];
+		call_user_func($this->settings['template_render_callback'], $template_location, $attributes, $content, $wp_block);
 	}
 }

@@ -4,7 +4,7 @@ Fields require value for `type`, `input` and `default`.
 You can optionally provide a 
 - `label`,
 - `width` (e.g. `.5` for 50%) and a 
-- `location` to move the field from to block to the `inspector`
+- `location` to move the field from the block to the `inspector`
 
 ## Available Field Inputs:
 - `checkbox` (type: 'boolean')
