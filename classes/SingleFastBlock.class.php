@@ -55,8 +55,8 @@ class SingleFastBlock
 
 			ob_start();
 
-			// now either use the provided template_render_callback or default template rendering
-			if (isset($this->settings['template_render_callback'])) {
+			// now either use the provided templateRenderCallback or default template rendering
+			if (isset($this->settings['templateRenderCallback'])) {
 				// use provided template render callback
 				$this->custom_template($attributes, $content, $wp_block);
 			} else {
@@ -88,6 +88,6 @@ class SingleFastBlock
 	public function custom_template($attributes, $content, $wp_block)
 	{
 		$template_location = $this->settings['template'];
-		call_user_func($this->settings['template_render_callback'], $template_location, $attributes, $content, $wp_block);
+		call_user_func($this->settings['templateRenderCallback'], $template_location, $attributes, $content, $wp_block);
 	}
 }

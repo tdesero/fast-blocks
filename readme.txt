@@ -35,6 +35,11 @@ To avoid problems with dynamic blocks and SEO analyzing Plugins, most fields are
 
 == Changelog ==
 
+= 0.9.0 =
+* Release
+- added "focalPointPicker" as option for image field
+- added 'templateRenderCallback' option when registering the block
+
 = 0.8.0 =
 * Release
 added "allowTransformFrom" option
