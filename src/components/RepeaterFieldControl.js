@@ -1,26 +1,18 @@
 import { useState } from "@wordpress/element";
-import {
-	BaseControl,
-	Button,
-	ButtonGroup,
-	Panel,
-	PanelBody,
-	PanelRow,
-	Card,
-	CardHeader,
-	CardBody,
-} from "@wordpress/components";
+import { BaseControl, Button, Card, CardBody } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { SubFieldControl } from "./SubFieldControl";
 import {
 	Icon,
-	arrowUp,
-	arrowDown,
 	trash,
 	chevronUp,
 	chevronDown,
 	plus,
+	dragHandle,
 } from "@wordpress/icons";
+import { SortableContext, useSortable, arrayMove } from "@dnd-kit/sortable";
+import { DndContext } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 export function RepeaterFieldControl({
 	field,
@@ -70,24 +62,49 @@ export function RepeaterFieldControl({
 		setAttributes({ [fieldName]: attr });
 	};
 
+	const onDndMove = (newItems) => {
+		setAttributes({ [fieldName]: newItems });
+	};
+
 	return (
 		<BaseControl label={field.label} className="fbl_repeater-inputs">
 			<div className="fbl_repeater-inputs__inner">
-				{attributes[fieldName].map((attribute, index) => {
-					const props = {
-						attribute,
-						fieldName,
-						index,
-						field,
-						moveUp,
-						isFirst,
-						moveDown,
-						isLast,
-						removeItem,
-						editProps,
-					};
-					return <RepeaterCard {...props} />;
-				})}
+				<DndContext
+					onDragEnd={({ active, over }) => {
+						if (over && active.id !== over?.id) {
+							const activeIndex = attributes[fieldName].findIndex(
+								({ fastBlockId }) => fastBlockId === active.id,
+							);
+							const overIndex = attributes[fieldName].findIndex(
+								({ fastBlockId }) => fastBlockId === over.id,
+							);
+
+							onDndMove(
+								arrayMove(attributes[fieldName], activeIndex, overIndex),
+							);
+						}
+					}}
+				>
+					<SortableContext
+						items={attributes[fieldName].map((i) => i.fastBlockId)}
+					>
+						{attributes[fieldName].map((attribute, index) => {
+							const props = {
+								attribute,
+								fieldName,
+								index,
+								field,
+								moveUp,
+								isFirst,
+								moveDown,
+								isLast,
+								removeItem,
+								editProps,
+							};
+							return <RepeaterCard {...props} />;
+						})}
+					</SortableContext>
+				</DndContext>
 
 				{(!field.limit || field.limit > attributes[fieldName].length) && (
 					<Button
@@ -95,6 +112,7 @@ export function RepeaterFieldControl({
 						onClick={addNew}
 						style={{ width: "100%", justifyContent: "center", height: 48 }}
 						variant="secondary"
+						aria-label={__("Add Item")}
 					></Button>
 				)}
 			</div>
@@ -113,31 +131,43 @@ function RepeaterCard({
 	removeItem,
 	editProps,
 }) {
+	const { attributes, listeners, setNodeRef, transform, transition } =
+		useSortable({ id: attribute.fastBlockId });
+
+	const style = {
+		transform: CSS.Transform.toString(transform),
+		transition,
+	};
+
 	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<Card
+			ref={setNodeRef}
+			style={style}
 			key={
 				attribute.fastBlockId
 					? `${fieldName}_${attribute.fastBlockId}`
 					: `${fieldName}_${index}`
 			}
 		>
-			<div className="fbl_repeater-card__header" draggable>
-				<strong
-					onClick={() => {
-						setIsOpen(!isOpen);
-					}}
-				>
-					{field.single
-						? `${field.single} ${index + 1}`
-						: `Repeater ${__("Item")} ${index + 1}`}
-				</strong>
+			<div
+				className="fbl_repeater-card__header"
+				onClick={() => {
+					setIsOpen(!isOpen);
+				}}
+			>
+				<Icon icon={dragHandle} {...attributes} {...listeners} />
+				{field.single
+					? `${field.single} ${index + 1}`
+					: `Repeater ${__("Item")} ${index + 1}`}
 
 				<div style={{ display: "flex", marginLeft: "auto" }}>
 					{isOpen && (
 						<div style={{ display: "flex", flexDirection: "column" }}>
 							<Button
-								onClick={() => {
+								onClick={(e) => {
+									e.stopPropagation();
 									moveUp(index);
 								}}
 								disabled={isFirst(index)}
@@ -145,7 +175,8 @@ function RepeaterCard({
 								style={{ height: 18 }}
 							/>
 							<Button
-								onClick={() => {
+								onClick={(e) => {
+									e.stopPropagation();
 									moveDown(index);
 								}}
 								disabled={isLast(index)}
@@ -155,7 +186,8 @@ function RepeaterCard({
 						</div>
 					)}
 					<Button
-						onClick={() => {
+						onClick={(e) => {
+							e.stopPropagation();
 							removeItem(index);
 						}}
 						icon={trash}
