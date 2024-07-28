@@ -101,7 +101,16 @@ export function RepeaterFieldControl({
 								removeItem,
 								editProps,
 							};
-							return <RepeaterCard {...props} />;
+							return (
+								<RepeaterCard
+									key={
+										attribute.fastBlockId
+											? `${fieldName}_${attribute.fastBlockId}`
+											: `${fieldName}_${index}`
+									}
+									{...props}
+								/>
+							);
 						})}
 					</SortableContext>
 				</DndContext>
@@ -142,22 +151,19 @@ function RepeaterCard({
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<Card
-			ref={setNodeRef}
-			style={style}
-			key={
-				attribute.fastBlockId
-					? `${fieldName}_${attribute.fastBlockId}`
-					: `${fieldName}_${index}`
-			}
-		>
+		<Card ref={setNodeRef} style={style}>
 			<div
 				className="fbl_repeater-card__header"
 				onClick={() => {
 					setIsOpen(!isOpen);
 				}}
 			>
-				<Icon icon={dragHandle} {...attributes} {...listeners} />
+				<Icon
+					icon={dragHandle}
+					className="fbl_repeater-card__drag-handle"
+					{...attributes}
+					{...listeners}
+				/>
 				{field.single
 					? `${field.single} ${index + 1}`
 					: `Repeater ${__("Item")} ${index + 1}`}
