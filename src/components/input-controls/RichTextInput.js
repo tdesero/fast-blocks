@@ -1,5 +1,11 @@
-import { RichText } from "@wordpress/block-editor";
-import { BaseControl, SlotFillProvider, Popover } from "@wordpress/components";
+import { RichText, BlockControls } from "@wordpress/block-editor";
+import {
+	BaseControl,
+	SlotFillProvider,
+	Popover,
+	Slot,
+	Fill,
+} from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 
@@ -9,7 +15,7 @@ const PopoverFix = ({ children }) => {
 	return (
 		<SlotFillProvider>
 			{children}
-			<Popover.Slot />
+			<Slot name="RichText.Toolbar" />
 		</SlotFillProvider>
 	);
 };
@@ -43,6 +49,9 @@ export function RichTextInput({ value, label, setFieldAttributes, field }) {
 						inlineToolbar
 					/>
 				</PopoverFix>
+				<Fill name="RichText.Toolbar">
+					<BlockControls />
+				</Fill>
 			</BaseControl>
 			{field.charLimit && (
 				<p
