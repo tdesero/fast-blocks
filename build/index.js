@@ -6067,6 +6067,37 @@ function Icon({
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/block-default.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/block-default.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * WordPress dependencies
+ */
+
+
+const blockDefault = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_0__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_0__.Path, {
+    d: "M19 8h-1V6h-5v2h-2V6H6v2H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm.5 10c0 .3-.2.5-.5.5H5c-.3 0-.5-.2-.5-.5v-8c0-.3.2-.5.5-.5h14c.3 0 .5.2.5.5v8z"
+  })
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (blockDefault);
+//# sourceMappingURL=block-default.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/icons/build-module/library/chevron-down.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/chevron-down.js ***!
@@ -6657,9 +6688,11 @@ function RepeaterFieldControl({
       editProps
     };
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RepeaterCard, {
+      key: attribute.fastBlockId ? `${fieldName}_${attribute.fastBlockId}` : `${fieldName}_${index}`,
       ...props
     });
   }))), (!field.limit || field.limit > attributes[fieldName].length) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: "fbl_repeater-inputs__appender",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
     onClick: addNew,
     style: {
@@ -6699,8 +6732,7 @@ function RepeaterCard({
   const [isOpen, setIsOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Card, {
     ref: setNodeRef,
-    style: style,
-    key: attribute.fastBlockId ? `${fieldName}_${attribute.fastBlockId}` : `${fieldName}_${index}`
+    style: style
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "fbl_repeater-card__header",
     onClick: () => {
@@ -6708,9 +6740,12 @@ function RepeaterCard({
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+    className: "fbl_repeater-card__drag-handle",
     ...attributes,
     ...listeners
-  }), field.single ? `${field.single} ${index + 1}` : `Repeater ${(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Item")} ${index + 1}`, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "fbl_repeater-card__title"
+  }, field.single ? `${field.single} ${index + 1}` : `Repeater ${(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Item")} ${index + 1}`), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
       marginLeft: "auto"
@@ -6957,10 +6992,9 @@ const ClassicEditorInput = ({
   const help = field.charLimit ? `${(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Characters")}: ${charCount} / ${field.charLimit}` : undefined;
   const isValid = !(field.charLimit && charCount > field.charLimit);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+    label: label,
     className: !isValid ? "components-base-control--error" : ""
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-    label: label
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tinymce_tinymce_react__WEBPACK_IMPORTED_MODULE_1__.Editor, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tinymce_tinymce_react__WEBPACK_IMPORTED_MODULE_1__.Editor, {
     onEditorChange: newValue => {
       setFieldAttributes(newValue);
     },
@@ -7798,6 +7832,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_EditorPopover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/EditorPopover */ "./src/components/EditorPopover.js");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/block-default.js");
+
 
 
 
@@ -7877,16 +7914,14 @@ function createEdit({
       size: "small"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CardHeader, {
       className: "fbl_block-title"
-    }, "Block: ", title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CardBody, {
-      style: {
-        padding: "16px 14px"
-      }
-    }, allFieldControls(editProps), children && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      style: {
-        border: "1px dashed #ddd",
-        padding: 0,
-        borderRadius: 2
-      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"]
+    }), "Block: ", title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CardBody, {
+      className: "fbl_card__body"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "fbl_card__content-wrapper"
+    }, allFieldControls(editProps)), children && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "fbl_card__inner-blocks-wrapper"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
       allowedBlocks:
       // Can't set it to true, because it means ALL blocks are allowed including e.g. a single column
