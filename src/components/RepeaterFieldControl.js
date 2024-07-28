@@ -7,7 +7,7 @@ import {
 	trash,
 	chevronUp,
 	chevronDown,
-	plus,
+	plusCircle,
 	dragHandle,
 } from "@wordpress/icons";
 import { SortableContext, useSortable, arrayMove } from "@dnd-kit/sortable";
@@ -108,7 +108,7 @@ export function RepeaterFieldControl({
 
 				{(!field.limit || field.limit > attributes[fieldName].length) && (
 					<Button
-						icon={plus}
+						icon={plusCircle}
 						onClick={addNew}
 						style={{ width: "100%", justifyContent: "center", height: 48 }}
 						variant="secondary"
@@ -135,7 +135,7 @@ function RepeaterCard({
 		useSortable({ id: attribute.fastBlockId });
 
 	const style = {
-		transform: CSS.Transform.toString(transform),
+		transform: CSS.Translate.toString(transform),
 		transition,
 	};
 
