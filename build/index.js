@@ -1066,11 +1066,11 @@ function EditorPopover({
   const showPopover = () => {
     setPopoverVisible(() => true);
   };
-  const isSelectedClass = isSelected ? ' is-selected' : '';
+  const isSelectedClass = isSelected ? " is-selected" : "";
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "fbl_edit-btn-overlay" + isSelectedClass
   }, Object.entries(fields).filter(([fieldName, field]) => {
-    return field.location === 'inspector';
+    return field.location === "inspector";
   }).map(([fieldName, field]) => {
     const props = {
       editProps,
@@ -1085,14 +1085,15 @@ function EditorPopover({
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
     onClick: showPopover
   }), popoverVisible && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
-    title: 'Block: ' + title,
+    title: "Block: " + title,
     onRequestClose: hidePopover,
     style: {
       width: 600
     },
-    shouldCloseOnClickOutside: false
+    shouldCloseOnClickOutside: false,
+    overlayClassName: "fbl_edit-overlay"
   }, Object.entries(fields).filter(([fieldName, field]) => {
-    return field.location !== 'inspector';
+    return field.location !== "inspector";
   }).map(([fieldName, field]) => {
     const props = {
       editProps,
@@ -1104,8 +1105,8 @@ function EditorPopover({
     });
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
-      textAlign: 'right',
-      marginTop: '2rem'
+      textAlign: "right",
+      marginTop: "2rem"
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isPrimary: true,
@@ -1287,17 +1288,16 @@ function RepeaterFieldControl({
     });
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+    label: field.label,
     className: "fbl_repeater-inputs"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
-    label: field.label
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Panel, null, attributes[fieldName].map((attribute, index) => {
+  }, attributes[fieldName].map((attribute, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
       key: attribute.fastBlockId ? `${fieldName}_${attribute.fastBlockId}` : `${fieldName}_${index}`,
-      title: field.single ? `${field.single} ${index + 1}` : `Repeater ${(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Item')} ${index + 1}`,
+      title: field.single ? `${field.single} ${index + 1}` : `Repeater ${(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Item")} ${index + 1}`,
       initialOpen: false,
       buttonProps: {
         style: {
-          padding: '16px'
+          padding: "16px"
         }
       }
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -1335,13 +1335,13 @@ function RepeaterFieldControl({
         });
       }
     }));
-  })), (!field.limit || field.limit > attributes[fieldName].length) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }), (!field.limit || field.limit > attributes[fieldName].length) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     onClick: addNew,
     style: {
-      width: '100%',
-      justifyContent: 'center'
+      width: "100%",
+      justifyContent: "center"
     },
-    isSecondary: true
+    variant: "secondary"
   }, "+"));
 }
 
@@ -2047,7 +2047,9 @@ __webpack_require__.r(__webpack_exports__);
 const PopoverFix = ({
   children
 }) => {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SlotFillProvider, null, children, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover.Slot, null));
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SlotFillProvider, null, children, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Slot, {
+    name: "RichText.Toolbar"
+  }));
 };
 function RichTextInput({
   value,
@@ -2071,7 +2073,9 @@ function RichTextInput({
     onChange: setFieldAttributes,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Add text…"),
     inlineToolbar: true
-  }))), field.charLimit && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Fill, {
+    name: "RichText.Toolbar"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null))), field.charLimit && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     style: {
       fontStyle: "normal",
       color: "rgb(117, 117, 117)",

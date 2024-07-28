@@ -230,4 +230,14 @@
   width: 100%;
 }
 
+/* z-index */
+.fbl_edit-overlay {
+  z-index: 100000 !important;
+}
+
+.components-popover__fallback-container {
+  position: relative;
+  z-index: 100001 !important;
+}
+
 /*# sourceMappingURL=index.css.map*/
