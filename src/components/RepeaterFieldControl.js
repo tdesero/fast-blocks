@@ -117,6 +117,7 @@ export function RepeaterFieldControl({
 
 				{(!field.limit || field.limit > attributes[fieldName].length) && (
 					<Button
+						className="fbl_repeater-inputs__appender"
 						icon={plusCircle}
 						onClick={addNew}
 						style={{ width: "100%", justifyContent: "center", height: 48 }}
@@ -164,10 +165,11 @@ function RepeaterCard({
 					{...attributes}
 					{...listeners}
 				/>
-				{field.single
-					? `${field.single} ${index + 1}`
-					: `Repeater ${__("Item")} ${index + 1}`}
-
+				<span className="fbl_repeater-card__title">
+					{field.single
+						? `${field.single} ${index + 1}`
+						: `Repeater ${__("Item")} ${index + 1}`}
+				</span>
 				<div style={{ display: "flex", marginLeft: "auto" }}>
 					{isOpen && (
 						<div style={{ display: "flex", flexDirection: "column" }}>

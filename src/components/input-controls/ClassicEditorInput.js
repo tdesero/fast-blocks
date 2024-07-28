@@ -35,8 +35,10 @@ export const ClassicEditorInput = ({
 	const isValid = !(field.charLimit && charCount > field.charLimit);
 
 	return (
-		<BaseControl className={!isValid ? "components-base-control--error" : ""}>
-			<BaseControl label={label} />
+		<BaseControl
+			label={label}
+			className={!isValid ? "components-base-control--error" : ""}
+		>
 			<Editor
 				onEditorChange={(newValue) => {
 					setFieldAttributes(newValue);

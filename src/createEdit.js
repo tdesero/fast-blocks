@@ -9,6 +9,7 @@ import { useState } from "@wordpress/element";
 import { FieldControl } from "./components/FieldControl";
 import { EditorPopover } from "./components/EditorPopover";
 import { useSelect } from "@wordpress/data";
+import { Icon, blockDefault } from "@wordpress/icons";
 
 export function createEdit({
 	settings,
@@ -35,7 +36,7 @@ export function createEdit({
 
 		/* limit innerBlocks children (if it has children) */
 		const innerBlockCount = useSelect(
-			(select) => select("core/block-editor").getBlock(clientId).innerBlocks
+			(select) => select("core/block-editor").getBlock(clientId).innerBlocks,
 		).length;
 		const MyInnerBlocksAppender = () => {
 			if (!childrenLimit || innerBlockCount < childrenLimit) {
@@ -75,19 +76,14 @@ export function createEdit({
 					preview === false ? (
 						<Card className="fbl_card" size="small">
 							<CardHeader className="fbl_block-title">
-								Block: {title}
+								<Icon icon={blockDefault}></Icon>Block: {title}
 							</CardHeader>
-							<CardBody style={{ padding: "16px 14px" }}>
-								{allFieldControls(editProps)}
-
+							<CardBody className="fbl_card__body">
+								<div className="fbl_card__content-wrapper">
+									{allFieldControls(editProps)}
+								</div>
 								{children && (
-									<div
-										style={{
-											border: "1px dashed #ddd",
-											padding: 0,
-											borderRadius: 2,
-										}}
-									>
+									<div className="fbl_card__inner-blocks-wrapper">
 										<InnerBlocks
 											allowedBlocks={
 												// Can't set it to true, because it means ALL blocks are allowed including e.g. a single column
