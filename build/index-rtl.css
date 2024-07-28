@@ -114,12 +114,23 @@
   outline: 2px solid transparent;
 }
 
-.fbl_repeater-btns {
-  text-align: left;
-}
-
 .fbl_repeater-inputs {
   width: 100% !important;
+}
+.fbl_repeater-inputs__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fbl_repeater-inputs .components-card__body > * {
+  padding: 0;
+}
+
+.fbl_repeater-card__header {
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 48px;
 }
 
 .fbl_img-preview-box {

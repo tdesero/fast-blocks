@@ -1,3 +1,4 @@
+import { useState } from "@wordpress/element";
 import {
 	BaseControl,
 	Button,
@@ -5,10 +6,21 @@ import {
 	Panel,
 	PanelBody,
 	PanelRow,
+	Card,
+	CardHeader,
+	CardBody,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { SubFieldControl } from "./SubFieldControl";
-import { arrowUp, arrowDown, trash } from "@wordpress/icons";
+import {
+	Icon,
+	arrowUp,
+	arrowDown,
+	trash,
+	chevronUp,
+	chevronDown,
+	plus,
+} from "@wordpress/icons";
 
 export function RepeaterFieldControl({
 	field,
@@ -60,70 +72,120 @@ export function RepeaterFieldControl({
 
 	return (
 		<BaseControl label={field.label} className="fbl_repeater-inputs">
-			{attributes[fieldName].map((attribute, index) => {
-				return (
-					<PanelBody
-						key={
-							attribute.fastBlockId
-								? `${fieldName}_${attribute.fastBlockId}`
-								: `${fieldName}_${index}`
-						}
-						title={
-							field.single
-								? `${field.single} ${index + 1}`
-								: `Repeater ${__("Item")} ${index + 1}`
-						}
-						initialOpen={false}
-						buttonProps={{ style: { padding: "16px" } }}
-					>
-						<div className="fbl_repeater-btns">
+			<div className="fbl_repeater-inputs__inner">
+				{attributes[fieldName].map((attribute, index) => {
+					const props = {
+						attribute,
+						fieldName,
+						index,
+						field,
+						moveUp,
+						isFirst,
+						moveDown,
+						isLast,
+						removeItem,
+						editProps,
+					};
+					return <RepeaterCard {...props} />;
+				})}
+
+				{(!field.limit || field.limit > attributes[fieldName].length) && (
+					<Button
+						icon={plus}
+						onClick={addNew}
+						style={{ width: "100%", justifyContent: "center", height: 48 }}
+						variant="secondary"
+					></Button>
+				)}
+			</div>
+		</BaseControl>
+	);
+}
+function RepeaterCard({
+	attribute,
+	fieldName,
+	index,
+	field,
+	moveUp,
+	isFirst,
+	moveDown,
+	isLast,
+	removeItem,
+	editProps,
+}) {
+	const [isOpen, setIsOpen] = useState(false);
+	return (
+		<Card
+			key={
+				attribute.fastBlockId
+					? `${fieldName}_${attribute.fastBlockId}`
+					: `${fieldName}_${index}`
+			}
+		>
+			<div className="fbl_repeater-card__header" draggable>
+				<strong
+					onClick={() => {
+						setIsOpen(!isOpen);
+					}}
+				>
+					{field.single
+						? `${field.single} ${index + 1}`
+						: `Repeater ${__("Item")} ${index + 1}`}
+				</strong>
+
+				<div style={{ display: "flex", marginLeft: "auto" }}>
+					{isOpen && (
+						<div style={{ display: "flex", flexDirection: "column" }}>
 							<Button
 								onClick={() => {
 									moveUp(index);
 								}}
 								disabled={isFirst(index)}
-								icon={arrowUp}
+								icon={chevronUp}
+								style={{ height: 18 }}
 							/>
 							<Button
 								onClick={() => {
 									moveDown(index);
 								}}
 								disabled={isLast(index)}
-								icon={arrowDown}
-							/>
-							<Button
-								onClick={() => {
-									removeItem(index);
-								}}
-								icon={trash}
+								icon={chevronDown}
+								style={{ height: 18 }}
 							/>
 						</div>
-						{Object.entries(attribute).map(([subFieldName]) => {
-							// first check if attribute was defined inside fields
-							if (field.query[subFieldName]) {
-								const props = {
-									editProps,
-									fieldName,
-									field,
-									subFieldName,
-									subField: field.query[subFieldName],
-									indexKey: index,
-								};
-								return <SubFieldControl {...props} />;
-							}
-						})}
-					</PanelBody>
-				);
-			})}
-			{(!field.limit || field.limit > attributes[fieldName].length) && (
-				<Button
-					onClick={addNew}
-					style={{ width: "100%", justifyContent: "center" }}
-					variant="secondary"
-				>
-					+
-				</Button>
+					)}
+					<Button
+						onClick={() => {
+							removeItem(index);
+						}}
+						icon={trash}
+					/>
+					<Button
+						icon={isOpen ? chevronUp : chevronDown}
+						onClick={() => {
+							setIsOpen(!isOpen);
+						}}
+					></Button>
+				</div>
+			</div>
+			{isOpen && (
+				<CardBody initialOpen={false}>
+					{Object.entries(attribute).map(([subFieldName]) => {
+						// first check if attribute was defined inside fields
+						if (field.query[subFieldName]) {
+							const props = {
+								editProps,
+								fieldName,
+								field,
+								subFieldName,
+								subField: field.query[subFieldName],
+								indexKey: index,
+							};
+							return <SubFieldControl {...props} />;
+						}
+					})}
+				</CardBody>
 			)}
-		</BaseControl>
+		</Card>
 	);
 }

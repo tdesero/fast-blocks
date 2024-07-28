@@ -135,12 +135,25 @@
 	}
 }
 
-.fbl_repeater-btns {
-	text-align: right;
-}
-
 .fbl_repeater-inputs {
 	width: 100% !important;
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.components-card__body > * {
+		padding: 0;
+	}
+}
+
+.fbl_repeater-card__header {
+	padding: 0 24px;
+	display: flex;
+	align-items: center;
+	height: 48px;
 }
 
 .fbl_img-preview-box {
