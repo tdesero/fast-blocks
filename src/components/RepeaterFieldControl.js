@@ -1,14 +1,18 @@
-import {
-	BaseControl,
-	Button,
-	ButtonGroup,
-	Panel,
-	PanelBody,
-	PanelRow,
-} from "@wordpress/components";
+import { useState } from "@wordpress/element";
+import { BaseControl, Button, Card, CardBody } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { SubFieldControl } from "./SubFieldControl";
-import { arrowUp, arrowDown, trash } from "@wordpress/icons";
+import {
+	Icon,
+	trash,
+	chevronUp,
+	chevronDown,
+	plusCircle,
+	dragHandle,
+} from "@wordpress/icons";
+import { SortableContext, useSortable, arrayMove } from "@dnd-kit/sortable";
+import { DndContext } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 export function RepeaterFieldControl({
 	field,
@@ -58,72 +62,170 @@ export function RepeaterFieldControl({
 		setAttributes({ [fieldName]: attr });
 	};
 
+	const onDndMove = (newItems) => {
+		setAttributes({ [fieldName]: newItems });
+	};
+
 	return (
 		<BaseControl label={field.label} className="fbl_repeater-inputs">
-			{attributes[fieldName].map((attribute, index) => {
-				return (
-					<PanelBody
-						key={
-							attribute.fastBlockId
-								? `${fieldName}_${attribute.fastBlockId}`
-								: `${fieldName}_${index}`
+			<div className="fbl_repeater-inputs__inner">
+				<DndContext
+					onDragEnd={({ active, over }) => {
+						if (over && active.id !== over?.id) {
+							const activeIndex = attributes[fieldName].findIndex(
+								({ fastBlockId }) => fastBlockId === active.id,
+							);
+							const overIndex = attributes[fieldName].findIndex(
+								({ fastBlockId }) => fastBlockId === over.id,
+							);
+
+							onDndMove(
+								arrayMove(attributes[fieldName], activeIndex, overIndex),
+							);
 						}
-						title={
-							field.single
-								? `${field.single} ${index + 1}`
-								: `Repeater ${__("Item")} ${index + 1}`
-						}
-						initialOpen={false}
-						buttonProps={{ style: { padding: "16px" } }}
+					}}
+				>
+					<SortableContext
+						items={attributes[fieldName].map((i) => i.fastBlockId)}
 					>
-						<div className="fbl_repeater-btns">
+						{attributes[fieldName].map((attribute, index) => {
+							const props = {
+								attribute,
+								fieldName,
+								index,
+								field,
+								moveUp,
+								isFirst,
+								moveDown,
+								isLast,
+								removeItem,
+								editProps,
+							};
+							return (
+								<RepeaterCard
+									key={
+										attribute.fastBlockId
+											? `${fieldName}_${attribute.fastBlockId}`
+											: `${fieldName}_${index}`
+									}
+									{...props}
+								/>
+							);
+						})}
+					</SortableContext>
+				</DndContext>
+
+				{(!field.limit || field.limit > attributes[fieldName].length) && (
+					<Button
+						className="fbl_repeater-inputs__appender"
+						icon={plusCircle}
+						onClick={addNew}
+						style={{ width: "100%", justifyContent: "center", height: 48 }}
+						variant="secondary"
+						aria-label={__("Add Item")}
+					></Button>
+				)}
+			</div>
+		</BaseControl>
+	);
+}
+function RepeaterCard({
+	attribute,
+	fieldName,
+	index,
+	field,
+	moveUp,
+	isFirst,
+	moveDown,
+	isLast,
+	removeItem,
+	editProps,
+}) {
+	const { attributes, listeners, setNodeRef, transform, transition } =
+		useSortable({ id: attribute.fastBlockId });
+
+	const style = {
+		transform: CSS.Translate.toString(transform),
+		transition,
+	};
+
+	const [isOpen, setIsOpen] = useState(false);
+
+	return (
+		<Card ref={setNodeRef} style={style}>
+			<div
+				className="fbl_repeater-card__header"
+				onClick={() => {
+					setIsOpen(!isOpen);
+				}}
+			>
+				<Icon
+					icon={dragHandle}
+					className="fbl_repeater-card__drag-handle"
+					{...attributes}
+					{...listeners}
+				/>
+				<span className="fbl_repeater-card__title">
+					{field.single
+						? `${field.single} ${index + 1}`
+						: `Repeater ${__("Item")} ${index + 1}`}
+				</span>
+				<div style={{ display: "flex", marginLeft: "auto" }}>
+					{isOpen && (
+						<div style={{ display: "flex", flexDirection: "column" }}>
 							<Button
-								onClick={() => {
+								onClick={(e) => {
+									e.stopPropagation();
 									moveUp(index);
 								}}
 								disabled={isFirst(index)}
-								icon={arrowUp}
+								icon={chevronUp}
+								style={{ height: 18 }}
 							/>
 							<Button
-								onClick={() => {
+								onClick={(e) => {
+									e.stopPropagation();
 									moveDown(index);
 								}}
 								disabled={isLast(index)}
-								icon={arrowDown}
-							/>
-							<Button
-								onClick={() => {
-									removeItem(index);
-								}}
-								icon={trash}
+								icon={chevronDown}
+								style={{ height: 18 }}
 							/>
 						</div>
-						{Object.entries(attribute).map(([subFieldName]) => {
-							// first check if attribute was defined inside fields
-							if (field.query[subFieldName]) {
-								const props = {
-									editProps,
-									fieldName,
-									field,
-									subFieldName,
-									subField: field.query[subFieldName],
-									indexKey: index,
-								};
-								return <SubFieldControl {...props} />;
-							}
-						})}
-					</PanelBody>
-				);
-			})}
-			{(!field.limit || field.limit > attributes[fieldName].length) && (
-				<Button
-					onClick={addNew}
-					style={{ width: "100%", justifyContent: "center" }}
-					variant="secondary"
-				>
-					+
-				</Button>
+					)}
+					<Button
+						onClick={(e) => {
+							e.stopPropagation();
+							removeItem(index);
+						}}
+						icon={trash}
+					/>
+					<Button
+						icon={isOpen ? chevronUp : chevronDown}
+						onClick={() => {
+							setIsOpen(!isOpen);
+						}}
+					></Button>
+				</div>
+			</div>
+			{isOpen && (
+				<CardBody initialOpen={false}>
+					{Object.entries(attribute).map(([subFieldName]) => {
+						// first check if attribute was defined inside fields
+						if (field.query[subFieldName]) {
+							const props = {
+								editProps,
+								fieldName,
+								field,
+								subFieldName,
+								subField: field.query[subFieldName],
+								indexKey: index,
+							};
+							return <SubFieldControl {...props} />;
+						}
+					})}
+				</CardBody>
 			)}
-		</BaseControl>
+		</Card>
 	);
 }
