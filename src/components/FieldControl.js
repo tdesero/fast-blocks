@@ -1,9 +1,10 @@
-import { PanelBody } from '@wordpress/components';
-import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody } from "@wordpress/components";
+import { InspectorControls } from "@wordpress/block-editor";
 
-import inputControls from './input-controls';
-import WidthWrapper from './WidthWrapper';
-import { RepeaterFieldControl } from './RepeaterFieldControl';
+import inputControls from "./input-controls";
+import WidthWrapper from "./WidthWrapper";
+import { RepeaterFieldControl } from "./RepeaterFieldControl";
+import { ExperimentalRepeaterFieldControl } from "./ExperimentalRepeaterFieldControl";
 
 /**
  * Create different Components to make all fields editable.
@@ -16,38 +17,36 @@ import { RepeaterFieldControl } from './RepeaterFieldControl';
  * @param {Object} props.field
  * @return
  */
-export function FieldControl( { editProps, fieldName, field } ) {
+export function FieldControl({ editProps, fieldName, field }) {
 	const { attributes, setAttributes } = editProps;
 
-	const setFieldAttributes = ( val ) => {
-		setAttributes( {
-			[ fieldName ]: val,
-		} );
+	const setFieldAttributes = (val) => {
+		setAttributes({
+			[fieldName]: val,
+		});
 	};
 
 	const removeFieldAttributes = () => {
-		setFieldAttributes( undefined );
+		setFieldAttributes(undefined);
 	};
 
 	const createFieldControl = () => {
-		const InputControl = inputControls[ field.input ];
+		const InputControl = inputControls[field.input];
 		const createInputControlComponent = () => (
 			<InputControl
-				setFieldAttributes={ setFieldAttributes }
-				removeFieldAttributes={ removeFieldAttributes }
-				field={ field }
-				label={ field.label }
-				value={ attributes[ fieldName ] }
+				setFieldAttributes={setFieldAttributes}
+				removeFieldAttributes={removeFieldAttributes}
+				field={field}
+				label={field.label}
+				value={attributes[fieldName]}
 			/>
 		);
 
-		if ( InputControl === undefined ) {
-			if ( field.input ) {
+		if (InputControl === undefined) {
+			if (field.input) {
 				/* this might look strange but the error should only log when there is a input defined at all */
 				console.error(
-					field.input +
-						' Input does not exist inside field ' +
-						fieldName
+					field.input + " Input does not exist inside field " + fieldName,
 				);
 			}
 			return null;
@@ -55,30 +54,28 @@ export function FieldControl( { editProps, fieldName, field } ) {
 
 		const width = field.width || 1.0;
 
-		if ( field.location === 'inspector' ) {
+		if (field.location === "inspector") {
 			return (
 				<InspectorControls>
-					<PanelBody>{ createInputControlComponent() }</PanelBody>
+					<PanelBody>{createInputControlComponent()}</PanelBody>
 				</InspectorControls>
 			);
 		}
 		return (
-			<WidthWrapper width={ width }>
-				{ createInputControlComponent() }
-			</WidthWrapper>
+			<WidthWrapper width={width}>{createInputControlComponent()}</WidthWrapper>
 		);
-	}
+	};
 
-	if ( field.input === 'repeater' ) {
+	if (field.input === "repeater") {
 		const props = {
 			field,
 			setAttributes,
 			fieldName,
 			attributes,
 			editProps,
-		}
-		return <RepeaterFieldControl { ...props }  />;
+		};
+		return <ExperimentalRepeaterFieldControl {...props} />;
 	} else {
-		return <>{ createFieldControl() }</>;
+		return <>{createFieldControl()}</>;
 	}
 }

@@ -18,7 +18,10 @@
 		"@tinymce/tinymce-react": "^5.1.1",
 		"@wordpress/block-editor": "^13.3.0",
 		"@wordpress/blocks": "^13.3.0",
-		"@wordpress/i18n": "^5.3.0"
+		"@wordpress/i18n": "^5.3.0",
+		"immutability-helper": "^3.1.1",
+		"react-dnd": "^16.0.1",
+		"react-dnd-html5-backend": "^16.0.1"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^27"
