@@ -24,20 +24,19 @@ const MediaUploadComponent = ({ label, onSelect, onRemove, value }) => (
 			render={({ open }) => (
 				<BaseControl label={label}>
 					<div style={{ maxWidth: 240 }}>
-						{!value ? (
+						{!(value && value.url) ? (
 							<Placeholder icon={file} label={__("File")}>
-								<Button onClick={open} isPrimary>
+								<Button onClick={open} variant="primary">
 									{__("Open Media Library")}
 								</Button>
 							</Placeholder>
 						) : (
-							<div style={{ display: "inline-flex" }}>
-								<Button isSecondary isOutline onClick={open}>
+							<div style={{ display: "inline-flex", gap: 8 }}>
+								<Button variant="secondary" isOutline onClick={open}>
 									{value.filename}
 								</Button>
 								<Button
-									isPrimary
-									isDestructive
+									variant="tertiary"
 									onClick={onRemove}
 									icon={trash}
 								></Button>

@@ -84,18 +84,9 @@
 }
 
 .fbl_url-input {
-	&__label {
-		margin-bottom: 8px;
-		width: 100%;
-		display: block;
-		cursor: default;
-	}
-
-	> * {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-	}
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 
 	&__url {
 		display: inline-block;
@@ -292,9 +283,7 @@
 }
 
 .fbl_card {
-	.fbl_url-input__label,
-	.components-card__header,
-	.components-base-control__label {
+	.components-card__header {
 		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 			Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 		font-size: 13px;
