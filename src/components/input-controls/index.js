@@ -13,6 +13,7 @@ import { URLInput } from "./URLInput";
 import { DateInput } from "./DateInput";
 import { ClassicEditorInput } from "./ClassicEditorInput";
 import { PostTypeEntryInput } from "./PostTypeEntryInput";
+import { ColorPaletteInput } from "./ColorPaletteInput";
 
 const inputControls = {
 	checkbox: CheckboxInput,
@@ -30,6 +31,7 @@ const inputControls = {
 	date: DateInput,
 	classicEditor: ClassicEditorInput,
 	postTypeEntry: PostTypeEntryInput,
+	colorPalette: ColorPaletteInput,
 };
 
 export default inputControls;

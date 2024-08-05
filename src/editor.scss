@@ -35,6 +35,11 @@
 		border-radius: 2px;
 	}
 
+	// because of conflict with .components-button
+	.components-circular-option-picker__option {
+		border-radius: 50%;
+	}
+
 	.components-range-control__wrapper {
 		margin-left: 0;
 	}
