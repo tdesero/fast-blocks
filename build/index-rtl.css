@@ -34,6 +34,9 @@
 .fbl_card .components-button {
   border-radius: 2px;
 }
+.fbl_card .components-circular-option-picker__option {
+  border-radius: 50%;
+}
 .fbl_card .components-range-control__wrapper {
   margin-right: 0;
 }

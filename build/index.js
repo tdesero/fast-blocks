@@ -7019,6 +7019,54 @@ const ClassicEditorInput = ({
 
 /***/ }),
 
+/***/ "./src/components/input-controls/ColorPaletteInput.js":
+/*!************************************************************!*\
+  !*** ./src/components/input-controls/ColorPaletteInput.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ColorPaletteInput: () => (/* binding */ ColorPaletteInput)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function ColorPaletteInput({
+  value,
+  field,
+  label,
+  setFieldAttributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+    label: label
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      maxWidth: 240
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+    value: value.color,
+    onChange: newColor => {
+      // I want to be able to have it as an object NOT just the hex value
+      const newColorObject = field.colors.find(item => item.color === newColor);
+      setFieldAttributes(newColorObject || {});
+    },
+    colors: field.colors.map(({
+      color,
+      name
+    }) => ({
+      color,
+      name
+    }))
+  })));
+}
+
+/***/ }),
+
 /***/ "./src/components/input-controls/DateInput.js":
 /*!****************************************************!*\
   !*** ./src/components/input-controls/DateInput.js ***!
@@ -7441,6 +7489,39 @@ function PostTypeEntryInput({
 
 /***/ }),
 
+/***/ "./src/components/input-controls/RadioInput.js":
+/*!*****************************************************!*\
+  !*** ./src/components/input-controls/RadioInput.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   RadioInput: () => (/* binding */ RadioInput)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function RadioInput({
+  value,
+  field,
+  label,
+  setFieldAttributes
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RadioControl, {
+    label: label,
+    selected: value,
+    onChange: setFieldAttributes,
+    options: field.options
+  });
+}
+
+/***/ }),
+
 /***/ "./src/components/input-controls/RangeInput.js":
 /*!*****************************************************!*\
   !*** ./src/components/input-controls/RangeInput.js ***!
@@ -7771,6 +7852,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DateInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DateInput */ "./src/components/input-controls/DateInput.js");
 /* harmony import */ var _ClassicEditorInput__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ClassicEditorInput */ "./src/components/input-controls/ClassicEditorInput.js");
 /* harmony import */ var _PostTypeEntryInput__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./PostTypeEntryInput */ "./src/components/input-controls/PostTypeEntryInput.js");
+/* harmony import */ var _ColorPaletteInput__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ColorPaletteInput */ "./src/components/input-controls/ColorPaletteInput.js");
+/* harmony import */ var _RadioInput__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./RadioInput */ "./src/components/input-controls/RadioInput.js");
+
+
 
 
 
@@ -7801,7 +7886,9 @@ const inputControls = {
   url: _URLInput__WEBPACK_IMPORTED_MODULE_11__.URLInput,
   date: _DateInput__WEBPACK_IMPORTED_MODULE_12__.DateInput,
   classicEditor: _ClassicEditorInput__WEBPACK_IMPORTED_MODULE_13__.ClassicEditorInput,
-  postTypeEntry: _PostTypeEntryInput__WEBPACK_IMPORTED_MODULE_14__.PostTypeEntryInput
+  postTypeEntry: _PostTypeEntryInput__WEBPACK_IMPORTED_MODULE_14__.PostTypeEntryInput,
+  colorPalette: _ColorPaletteInput__WEBPACK_IMPORTED_MODULE_15__.ColorPaletteInput,
+  radio: _RadioInput__WEBPACK_IMPORTED_MODULE_16__.RadioInput
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (inputControls);
 
