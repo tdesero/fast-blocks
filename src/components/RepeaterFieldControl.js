@@ -210,7 +210,7 @@ function RepeaterCard({
 			</div>
 			{isOpen && (
 				<CardBody initialOpen={false}>
-					{Object.entries(attribute).map(([subFieldName]) => {
+					{Object.entries(field.query).map(([subFieldName]) => {
 						// first check if attribute was defined inside fields
 						if (field.query[subFieldName]) {
 							const props = {
