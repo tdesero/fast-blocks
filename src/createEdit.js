@@ -48,7 +48,7 @@ export function createEdit({
 
 		function allFieldControls(editProps) {
 			return Object.entries(fields).map(([fieldName, field]) => {
-				const props = { editProps, fieldName, field };
+				const props = { editProps, fieldName, field, editView };
 				return <FieldControl {...props} />;
 			});
 		}
