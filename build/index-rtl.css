@@ -152,7 +152,17 @@
 }
 
 .fbl_repeater-card__title {
+  display: block;
   min-width: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fbl_repeater-card__desc {
+  font-size: 0.75em;
+  font-weight: 400;
+  opacity: 0.5;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

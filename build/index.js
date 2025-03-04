@@ -6776,6 +6776,10 @@ function RepeaterCard({
     transition
   };
   const [isOpen, setIsOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const getFirstAttributeValue = () => {
+    const val = Object.values(attribute)?.[0];
+    return typeof val === 'string' ? val : '';
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Card, {
     ref: setNodeRef,
     style: style
@@ -6789,12 +6793,15 @@ function RepeaterCard({
     className: "fbl_repeater-card__drag-handle",
     ...attributes,
     ...listeners
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "fbl_repeater-card__title"
-  }, field.single ? `${field.single} ${index + 1}` : `Repeater ${(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Item")} ${index + 1}`), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, field.single ? `${field.single} ${index + 1}` : `Repeater ${(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Item")} ${index + 1}`), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "fbl_repeater-card__desc"
+  }, getFirstAttributeValue())), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
-      marginLeft: "auto"
+      marginLeft: "auto",
+      alignItems: 'center'
     }
   }, isOpen && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
@@ -6822,14 +6829,14 @@ function RepeaterCard({
       height: 18
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    size: "compact",
+    size: "small",
     onClick: e => {
       e.stopPropagation();
       removeItem(index);
     },
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    size: "compact",
+    size: "small",
     onClick: e => {
       e.stopPropagation();
       duplicateItem(index);
