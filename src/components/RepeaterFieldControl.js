@@ -9,6 +9,7 @@ import {
 	chevronDown,
 	plusCircle,
 	dragHandle,
+	copy,
 } from "@wordpress/icons";
 import { SortableContext, useSortable, arrayMove } from "@dnd-kit/sortable";
 import { DndContext } from "@dnd-kit/core";
@@ -28,7 +29,7 @@ export function RepeaterFieldControl({
 		});
 		// this id is not perfect but should be good enough for now
 		newItem.fastBlockId = new Date().valueOf();
-		console.log(newItem);
+		
 		setAttributes({
 			[fieldName]: [...attributes[fieldName], newItem],
 		});
@@ -37,6 +38,16 @@ export function RepeaterFieldControl({
 	const removeItem = (index) => {
 		const attr = [...attributes[fieldName]];
 		attr.splice(index, 1);
+		setAttributes({ [fieldName]: attr });
+	};
+
+	const duplicateItem = (index) => {
+		const attr = [...attributes[fieldName]];
+		const newItem = {
+			...attributes[fieldName][index],
+			fastBlockId: new Date().valueOf(), // override id
+		};
+		attr.splice(index, 0, newItem);
 		setAttributes({ [fieldName]: attr });
 	};
 
@@ -99,6 +110,7 @@ export function RepeaterFieldControl({
 								moveDown,
 								isLast,
 								removeItem,
+								duplicateItem,
 								editProps,
 							};
 							return (
@@ -139,6 +151,7 @@ function RepeaterCard({
 	moveDown,
 	isLast,
 	removeItem,
+	duplicateItem,
 	editProps,
 }) {
 	const { attributes, listeners, setNodeRef, transform, transition } =
@@ -194,11 +207,20 @@ function RepeaterCard({
 						</div>
 					)}
 					<Button
+						size="compact"
 						onClick={(e) => {
 							e.stopPropagation();
 							removeItem(index);
 						}}
 						icon={trash}
+					/>
+					<Button
+						size="compact"
+						onClick={(e) => {
+							e.stopPropagation();
+							duplicateItem(index);
+						}}
+						icon={copy}
 					/>
 					<Button
 						icon={isOpen ? chevronUp : chevronDown}
