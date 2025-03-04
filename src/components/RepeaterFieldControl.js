@@ -164,6 +164,12 @@ function RepeaterCard({
 
 	const [isOpen, setIsOpen] = useState(false);
 
+	const getFirstAttributeValue = () => {
+		const val = Object.values(attribute)?.[0];
+
+		return typeof val === 'string' ? val : '';
+	}
+
 	return (
 		<Card ref={setNodeRef} style={style}>
 			<div
@@ -178,12 +184,17 @@ function RepeaterCard({
 					{...attributes}
 					{...listeners}
 				/>
-				<span className="fbl_repeater-card__title">
-					{field.single
-						? `${field.single} ${index + 1}`
-						: `Repeater ${__("Item")} ${index + 1}`}
-				</span>
-				<div style={{ display: "flex", marginLeft: "auto" }}>
+				<div className="fbl_repeater-card__title">
+					<div>
+						{field.single
+							? `${field.single} ${index + 1}`
+							: `Repeater ${__("Item")} ${index + 1}`}
+					</div>
+					<div className="fbl_repeater-card__desc">
+							{ getFirstAttributeValue() }
+					</div>
+				</div>
+				<div style={{ display: "flex", marginLeft: "auto", alignItems: 'center' }}>
 					{isOpen && (
 						<div style={{ display: "flex", flexDirection: "column" }}>
 							<Button
@@ -207,7 +218,7 @@ function RepeaterCard({
 						</div>
 					)}
 					<Button
-						size="compact"
+						size="small"
 						onClick={(e) => {
 							e.stopPropagation();
 							removeItem(index);
@@ -215,7 +226,7 @@ function RepeaterCard({
 						icon={trash}
 					/>
 					<Button
-						size="compact"
+						size="small"
 						onClick={(e) => {
 							e.stopPropagation();
 							duplicateItem(index);
