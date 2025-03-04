@@ -1,1 +1,286 @@
-.fbl_editor-block{border:1px solid transparent;position:relative}.fbl_editor-block:hover{border:1px solid var(--wp-admin-theme-color)}.fbl_edit-btn-overlay{margin:.5rem;opacity:0;position:absolute;right:0;top:0;z-index:1}.fbl_edit-btn-overlay.is-selected,:hover>.fbl_edit-btn-overlay{opacity:1}.fbl_card .fbl_card__body{align-items:center;display:flex;flex-direction:column;padding:16px 14px}.fbl_card .components-button{border-radius:2px}.fbl_card .components-circular-option-picker__option{border-radius:50%}.fbl_card .components-range-control__wrapper{margin-left:0}.fbl_card .components-base-control--error .fbl_rich-text,.fbl_card .components-base-control--error .mce-tinymce,.fbl_card .components-base-control--error input,.fbl_card .components-base-control--error textarea{border-color:#cc1818!important;box-shadow:0 0 0 1px #cc1818!important}.fbl_card .fbl_block-title{background-color:#f8f8f8;font-size:13px;font-weight:500;gap:12px;justify-content:start;margin-bottom:13px;padding:16px}.fbl_card__content-wrapper{display:flex;flex-wrap:wrap;margin:auto;max-width:720px;row-gap:8px;width:100%}.fbl_card__content-wrapper>*{min-width:120px;padding-left:10px;padding-right:10px;width:100%}.fbl_card__inner-blocks-wrapper{border:1px dashed #ddd;border-radius:2;padding:0;width:100%}.fbl_url-input{align-items:center;display:flex;flex-wrap:wrap}.fbl_url-input__url{color:gray;cursor:default;display:inline-block;overflow:hidden;padding-left:16px;text-overflow:ellipsis;white-space:nowrap;width:calc(100% - 36px)}.fbl_url-input .block-editor-url-input__button{display:inline-block;vertical-align:middle}.fbl_url-input .block-editor-url-input__button-modal{position:absolute;z-index:1}.fbl_url-input .block-editor-block-list__block .block-editor-url-input input[type=text],.fbl_url-input .block-editor-url-input input[type=text],.fbl_url-input .components-popover .block-editor-url-input input[type=text]{width:unset}.fbl_card .fbl_rich-text,.fbl_rich-text{border:1px solid #757575;border-radius:2px;box-shadow:0 0 0 transparent;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;font-size:13px;min-height:50px;padding:6px 8px;transition:box-shadow .1s linear;width:100%}.fbl_card .fbl_rich-text:focus,.fbl_rich-text:focus{border-color:#007cba;border-color:var(--wp-admin-theme-color);box-shadow:0 0 0 1px #007cba;box-shadow:0 0 0 1px var(--wp-admin-theme-color);outline:2px solid transparent}.fbl_repeater-inputs{width:100%!important}.fbl_repeater-inputs__inner{display:flex;flex-direction:column;gap:8px}.fbl_repeater-inputs .components-card__body>*{padding:0}.fbl_repeater-card__header{align-items:center;cursor:pointer;display:flex;font-weight:500;gap:8px;padding:8px}.fbl_repeater-card__title{min-width:40px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fbl_repeater-card__drag-handle{cursor:grab;flex-shrink:0}.fbl_repeater-inputs__appender{--wp-admin-theme-color:#000}.fbl_img-preview-box{display:inline-block;position:relative}.fbl_img-preview-box__btn{background:#fff!important;bottom:0;margin:5px!important;position:absolute;right:0}.fbl_img-preview-box__img{background:#fff;border:1px solid #e2e4e7;border-radius:3px;display:block;height:150px!important;-o-object-fit:cover;object-fit:cover;width:150px}.fbl_editor-block .block-editor-inner-blocks>.block-editor-block-list__layout{display:flex;flex-wrap:wrap}.fbl_editor-block .block-editor-inner-blocks>.block-editor-block-list__layout>*{margin:10px 0;width:100%}.fbl_editor-block .block-editor-inner-blocks>.block-editor-block-list__layout .block-list-appender{position:relative;width:100%}.mce-menu{z-index:9999999!important}.fbl_card .components-text-control__input,.fbl_card .components-text-control__input[type=color],.fbl_card .components-text-control__input[type=date],.fbl_card .components-text-control__input[type=datetime-local],.fbl_card .components-text-control__input[type=datetime],.fbl_card .components-text-control__input[type=email],.fbl_card .components-text-control__input[type=month],.fbl_card .components-text-control__input[type=number],.fbl_card .components-text-control__input[type=password],.fbl_card .components-text-control__input[type=tel],.fbl_card .components-text-control__input[type=text],.fbl_card .components-text-control__input[type=time],.fbl_card .components-text-control__input[type=url],.fbl_card .components-text-control__input[type=week]{border:1px solid #757575;border-radius:2px;box-shadow:0 0 0 transparent;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;font-size:13px;line-height:normal;padding:6px 8px;transition:box-shadow .1s linear;width:100%}.fbl_card .components-text-control__input:focus,.fbl_card .components-text-control__input[type=color]:focus,.fbl_card .components-text-control__input[type=date]:focus,.fbl_card .components-text-control__input[type=datetime-local]:focus,.fbl_card .components-text-control__input[type=datetime]:focus,.fbl_card .components-text-control__input[type=email]:focus,.fbl_card .components-text-control__input[type=month]:focus,.fbl_card .components-text-control__input[type=number]:focus,.fbl_card .components-text-control__input[type=password]:focus,.fbl_card .components-text-control__input[type=tel]:focus,.fbl_card .components-text-control__input[type=text]:focus,.fbl_card .components-text-control__input[type=time]:focus,.fbl_card .components-text-control__input[type=url]:focus,.fbl_card .components-text-control__input[type=week]:focus{border-color:var(--wp-admin-theme-color);box-shadow:0 0 0 1px var(--wp-admin-theme-color)}.fbl_card .components-card__header{color:#1e1e1e;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;font-size:13px}.fbl_card .components-combobox-control ul{margin-bottom:0;padding-left:0}.fbl_card .block-list-appender{position:relative!important;width:100%}.fbl_edit-overlay{z-index:100000!important}.components-popover__fallback-container{position:relative;z-index:100001!important}
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/editor.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+.fbl_editor-block {
+  border: 1px solid transparent;
+  position: relative;
+}
+.fbl_editor-block:hover {
+  border: 1px solid var(--wp-admin-theme-color);
+}
+
+.fbl_edit-btn-overlay {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  opacity: 0;
+}
+.fbl_edit-btn-overlay.is-selected {
+  opacity: 1;
+}
+
+*:hover > .fbl_edit-btn-overlay {
+  opacity: 1;
+}
+
+.fbl_card .fbl_card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 14px;
+}
+.fbl_card .components-button {
+  border-radius: 2px;
+}
+.fbl_card .components-circular-option-picker__option {
+  border-radius: 50%;
+}
+.fbl_card .components-range-control__wrapper {
+  margin-left: 0;
+}
+.fbl_card .components-base-control--error input,
+.fbl_card .components-base-control--error .fbl_rich-text,
+.fbl_card .components-base-control--error .mce-tinymce,
+.fbl_card .components-base-control--error textarea {
+  border-color: rgb(204, 24, 24) !important;
+  box-shadow: 0 0 0 1px rgb(204, 24, 24) !important;
+}
+.fbl_card .fbl_block-title {
+  padding: 16px;
+  font-size: 13px;
+  margin-bottom: 13px;
+  background-color: #f8f8f8;
+  font-weight: 500;
+  justify-content: start;
+  gap: 12px;
+}
+
+.fbl_card__content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+}
+.fbl_card__content-wrapper > * {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  min-width: 120px;
+}
+
+.fbl_card__inner-blocks-wrapper {
+  border: 1px dashed #ddd;
+  padding: 0;
+  border-radius: 2;
+  width: 100%;
+}
+
+.fbl_url-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* fix for input inside url input button */
+}
+.fbl_url-input__url {
+  display: inline-block;
+  padding-left: 16px;
+  color: gray;
+  width: calc(100% - 36px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+.fbl_url-input .block-editor-url-input__button {
+  display: inline-block;
+  vertical-align: middle;
+}
+.fbl_url-input .block-editor-url-input__button-modal {
+  position: absolute;
+  z-index: 1;
+}
+.fbl_url-input .block-editor-block-list__block .block-editor-url-input input[type=text],
+.fbl_url-input .block-editor-url-input input[type=text],
+.fbl_url-input .components-popover .block-editor-url-input input[type=text] {
+  width: unset;
+}
+
+.fbl_rich-text,
+.fbl_card .fbl_rich-text {
+  width: 100%;
+  min-height: 50px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  font-size: 13px;
+  padding: 6px 8px;
+  box-shadow: 0 0 0 transparent;
+  transition: box-shadow 0.1s linear;
+  border-radius: 2px;
+  border: 1px solid #757575;
+}
+.fbl_rich-text:focus,
+.fbl_card .fbl_rich-text:focus {
+  border-color: #007cba;
+  border-color: var(--wp-admin-theme-color);
+  box-shadow: 0 0 0 1px #007cba;
+  box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+  outline: 2px solid transparent;
+}
+
+.fbl_repeater-inputs {
+  width: 100% !important;
+}
+.fbl_repeater-inputs__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fbl_repeater-inputs .components-card__body > * {
+  padding: 0;
+}
+
+.fbl_repeater-card__header {
+  font-weight: 500;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.fbl_repeater-card__title {
+  min-width: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fbl_repeater-card__drag-handle {
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+.fbl_repeater-inputs__appender {
+  --wp-admin-theme-color: black;
+}
+
+.fbl_img-preview-box {
+  position: relative;
+  display: inline-block;
+}
+.fbl_img-preview-box__btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 5px !important;
+  background: #fff !important;
+}
+.fbl_img-preview-box__img {
+  display: block;
+  width: 150px;
+  height: 150px !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: white;
+  border: 1px solid rgb(226, 228, 231);
+  border-radius: 3px;
+}
+
+/* Flexbox for innerBlocks */
+.fbl_editor-block .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+.fbl_editor-block .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.fbl_editor-block .block-editor-inner-blocks > .block-editor-block-list__layout .block-list-appender {
+  position: relative;
+  width: 100%;
+}
+
+/* tinymce dropdown fix */
+.mce-menu {
+  z-index: 9999999 !important;
+}
+
+/* z-index fix (just testing) 
+.interface-interface-skeleton__content {
+  z-index: unset;
+} */
+/* Make 100% sure that inputs look like they should by scoping it in .fbl_card */
+.fbl_card .components-text-control__input,
+.fbl_card .components-text-control__input[type=color],
+.fbl_card .components-text-control__input[type=date],
+.fbl_card .components-text-control__input[type=datetime-local],
+.fbl_card .components-text-control__input[type=datetime],
+.fbl_card .components-text-control__input[type=email],
+.fbl_card .components-text-control__input[type=month],
+.fbl_card .components-text-control__input[type=number],
+.fbl_card .components-text-control__input[type=password],
+.fbl_card .components-text-control__input[type=tel],
+.fbl_card .components-text-control__input[type=text],
+.fbl_card .components-text-control__input[type=time],
+.fbl_card .components-text-control__input[type=url],
+.fbl_card .components-text-control__input[type=week] {
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  padding: 6px 8px;
+  box-shadow: 0 0 0 transparent;
+  transition: box-shadow 0.1s linear;
+  border-radius: 2px;
+  border: 1px solid #757575;
+  font-size: 13px;
+  line-height: normal;
+}
+.fbl_card .components-text-control__input:focus,
+.fbl_card .components-text-control__input[type=color]:focus,
+.fbl_card .components-text-control__input[type=date]:focus,
+.fbl_card .components-text-control__input[type=datetime-local]:focus,
+.fbl_card .components-text-control__input[type=datetime]:focus,
+.fbl_card .components-text-control__input[type=email]:focus,
+.fbl_card .components-text-control__input[type=month]:focus,
+.fbl_card .components-text-control__input[type=number]:focus,
+.fbl_card .components-text-control__input[type=password]:focus,
+.fbl_card .components-text-control__input[type=tel]:focus,
+.fbl_card .components-text-control__input[type=text]:focus,
+.fbl_card .components-text-control__input[type=time]:focus,
+.fbl_card .components-text-control__input[type=url]:focus,
+.fbl_card .components-text-control__input[type=week]:focus {
+  border-color: var(--wp-admin-theme-color);
+  box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+}
+
+.fbl_card .components-card__header {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  color: #1e1e1e;
+}
+.fbl_card .components-combobox-control ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.fbl_card .block-list-appender {
+  position: relative !important;
+  width: 100%;
+}
+
+/* z-index */
+.fbl_edit-overlay {
+  z-index: 100000 !important;
+}
+
+.components-popover__fallback-container {
+  position: relative;
+  z-index: 100001 !important;
+}
+
+/*# sourceMappingURL=index.css.map*/
