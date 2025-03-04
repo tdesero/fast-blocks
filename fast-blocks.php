@@ -5,7 +5,7 @@
  * Description:       Create Custom Gutenberg Blocks fast and easily in PHP.
  * Requires at least: 5.7
  * Requires PHP:      7.0
- * Version:           0.9.2
+ * Version:           0.9.3
  * Author:            Tom D
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -65,7 +65,7 @@ function fast_blocks_disable_auto_update($update, $item)
 		$current_version = $plugin_data['Version'];
 
 		// Specify the versions you want to disable auto-updates for
-		$versions_to_disable = ['0.9.1', '0.9.2', '0.9.3', '0.9.4', '0.9.5', '0.9.6', '0.9.7', '0.9.8', '0.9.9'];
+		$versions_to_disable = ['0.9.1', '0.9.3', '0.9.3', '0.9.4', '0.9.5', '0.9.6', '0.9.7', '0.9.8', '0.9.9'];
 
 		if (in_array($current_version, $versions_to_disable)) {
 			return false; // Disable automatic updates for these specific versions
