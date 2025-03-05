@@ -96,9 +96,12 @@ You can optionally provide a
         'id' => 22,
         'url' => 'http://...my-file.pdf',
         'alt' => 'alt text',
-        'title' => 'title'
-        'description' => 'desc'
-        'caption' => 'caption'
+        'title' => 'title',
+        'description' => 'desc',
+        'caption' => 'caption',
+        // Array of mime types, will be passed to this component: 
+        // https://github.com/WordPress/gutenberg/tree/trunk/packages/block-editor/src/components/media-upload
+        'allowedTypes' => [ 'text/plain' ], 
     ],
 ],
 ```

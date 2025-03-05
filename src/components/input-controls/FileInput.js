@@ -4,9 +4,10 @@ import { trash, file } from "@wordpress/icons";
 
 import { __ } from "@wordpress/i18n";
 
-const MediaUploadComponent = ({ label, onSelect, onRemove, value }) => (
+const MediaUploadComponent = ({ label, onSelect, onRemove, value, field }) => (
 	<MediaUploadCheck>
 		<MediaUpload
+			allowedTypes={field.allowedTypes}
 			onSelect={(media) => {
 				console.log(media);
 				onSelect({
@@ -52,6 +53,7 @@ const MediaUploadComponent = ({ label, onSelect, onRemove, value }) => (
 export function FileInput({
 	label,
 	value,
+	field,
 	setFieldAttributes,
 	removeFieldAttributes,
 }) {
@@ -61,6 +63,7 @@ export function FileInput({
 			onRemove={removeFieldAttributes}
 			value={value}
 			label={label}
+			field={field}
 		/>
 	);
 }
