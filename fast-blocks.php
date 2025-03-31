@@ -20,6 +20,7 @@
 require_once(__DIR__ . '/classes/SingleFastBlock.class.php');
 require_once(__DIR__ . '/classes/FastBlocksPlugin.class.php');
 require_once(__DIR__ . '/classes/FastBlockView.class.php');
+require_once(__DIR__ . '/classes/yoast/FastBlocksYoastContent.php');
 
 /**
  * Plugin Initialization
