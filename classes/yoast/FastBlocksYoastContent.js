@@ -29,7 +29,6 @@ class FastBlocksYoastContent {
     const data = await response;
     this.renderedContent = data.rendered;
   
-    console.log('fetched and now refreshes'); // Fully processed content
     YoastSEO.app.refresh();
   }
 
@@ -40,7 +39,6 @@ class FastBlocksYoastContent {
     }
     this.currentData = data;
     
-    console.log('returns rendered content')
     return this.renderedContent ? this.renderedContent : data;
   }
 }
