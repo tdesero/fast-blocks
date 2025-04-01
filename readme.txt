@@ -10,7 +10,7 @@ Create Custom Blocks fast and easy with PHP only.
 
 == Description ==
 
-Use the function `add_fast_block` to add a block to your theme in PHP. The Plugin automatically creates a interface for your block inside the editor.
+Use the function `add_fast_block` to add a block to your theme in PHP. The Plugin automatically creates an interface for your block inside the editor.
 Unlike the default block behaviour all blocks are rendered dynamically. This means changes inside the template are shown immediately without resaving the post or page.
 
 == Installation ==
@@ -21,7 +21,7 @@ Unlike the default block behaviour all blocks are rendered dynamically. This mea
 
 == Frequently Asked Questions ==
 
-= Do I have to know some PHP to use this plugin? =
+= Do I have to know PHP to use this plugin? =
 
 Yes! this plugin is meant to be used by developers and people that create their own themes.
 
@@ -31,9 +31,14 @@ No! The JavaScript part is handled completely by the plugin.
 
 = Does it work with SEO Plugins? =
 
-To avoid problems with dynamic blocks and SEO analyzing Plugins, most fields are stored inside the block content the traditional way additionally. But this doesn't mean it is 100% reliable.
+Yoast SEO is supported. To avoid problems with dynamic blocks and SEO analyzing Plugins, most fields are stored inside the block content the traditional way additionally. But this doesn't mean it is 100% reliable.
 
 == Changelog ==
+
+= 0.9.5 =
+* Release
+- add color field input
+- yoast content analysis
 
 = 0.9.4 =
 * Release
