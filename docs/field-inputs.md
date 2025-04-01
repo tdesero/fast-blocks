@@ -115,3 +115,13 @@ You can optionally provide a
     'postType' => 'post'
 ]
 ```
+
+## `color`
+
+```php
+'my_color' => [
+    'type' => 'string',
+    'input' => 'color', // will be returned in hex or hex8
+    'default' => '#000'
+]
+```
