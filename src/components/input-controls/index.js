@@ -15,6 +15,7 @@ import { ClassicEditorInput } from "./ClassicEditorInput";
 import { PostTypeEntryInput } from "./PostTypeEntryInput";
 import { ColorPaletteInput } from "./ColorPaletteInput";
 import { RadioInput } from "./RadioInput";
+import { ColorPickerInput } from "./ColorPickerInput";
 
 const inputControls = {
 	checkbox: CheckboxInput,
@@ -32,6 +33,7 @@ const inputControls = {
 	date: DateInput,
 	classicEditor: ClassicEditorInput,
 	postTypeEntry: PostTypeEntryInput,
+	color: ColorPickerInput,
 	colorPalette: ColorPaletteInput,
 	radio: RadioInput,
 };
