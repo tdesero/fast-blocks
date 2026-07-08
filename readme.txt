@@ -2,7 +2,7 @@
 Contributors:      tdesero
 Tags:              block
 Tested up to:      6.6
-Stable tag:        0.9.5
+Stable tag:        0.9.6
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,10 @@ No! The JavaScript part is handled completely by the plugin.
 Yoast SEO is supported. To avoid problems with dynamic blocks and SEO analyzing Plugins, most fields are stored inside the block content the traditional way additionally. But this doesn't mean it is 100% reliable.
 
 == Changelog ==
+
+= 0.9.6 =
+* Release
+- fix spacing between input fields
 
 = 0.9.5 =
 * Release
