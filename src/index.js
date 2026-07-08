@@ -49,7 +49,7 @@ function registerHelper(block) {
 	}
 
 	const blockObj = {
-		apiVersion: 2,
+		apiVersion: 3,
 		edit,
 		save,
 		title: name, // fallback (usually overwritten by options.title)

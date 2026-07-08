@@ -6,8 +6,6 @@ import { useState, useEffect } from "@wordpress/element";
 
 import countChars from "../../helpers/countChars";
 
-// make sure this tinymce is added in index.asset.php as dependency
-import "@wordpress/tinymce";
 
 const ClassicEdit = ({ value, colorMap, setFieldAttributes }) => (
 	<Editor
@@ -74,7 +72,7 @@ export const ClassicEditorInput = ({
 			label={label}
 			className={!isValid ? "components-base-control--error" : ""}
 		>
-			{(editView === "popover" || editView === "inspector" || deviceType === "Desktop")  ? (
+			{(editView === "popover" || editView === "inspector")  ? (
 				<ClassicEdit {...{ setFieldAttributes, value, colorMap }} />
 			) : (
 				<Button
@@ -93,6 +91,13 @@ export const ClassicEditorInput = ({
 					overlayClassName="fbl_edit-overlay"
 				>
 					<ClassicEdit {...{ setFieldAttributes, value, colorMap }} />
+					<div style={{ marginBottom: '1em' }}></div>
+					<Button
+						variant="primary"
+						onClick={() => setPopoverVisible(false)}
+					>
+						{__("Okay")}
+					</Button>
 				</Modal>
 			)}
 			{field.charLimit && (
