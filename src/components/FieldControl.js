@@ -32,13 +32,15 @@ export function FieldControl( { editProps, fieldName, field } ) {
 	const createFieldControl = () => {
 		const InputControl = inputControls[ field.input ];
 		const createInputControlComponent = () => (
-			<InputControl
-				setFieldAttributes={ setFieldAttributes }
-				removeFieldAttributes={ removeFieldAttributes }
-				field={ field }
-				label={ field.label }
-				value={ attributes[ fieldName ] }
-			/>
+			<div style={{ marginBottom: "1em" }}>
+				<InputControl
+					setFieldAttributes={setFieldAttributes}
+					removeFieldAttributes={removeFieldAttributes}
+					field={field}
+					label={field.label}
+					value={attributes[fieldName]}
+				/>
+			</div>
 		);
 
 		if ( InputControl === undefined ) {
