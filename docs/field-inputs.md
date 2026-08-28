@@ -22,6 +22,7 @@ You can optionally provide a
 - `date` (type: 'string')
 - `classicEditor` (type: 'string') This is actually a TinyMCE Component. Optionally set a `charLimit`
 - `repeater` a more complex field with subfields. you can optionally `limit` these.
+- `flexible` a repeater with different layouts. Each layout can define its own fields.
 - `postTypeEntry` (type: 'number') provide a `postType` to be able to search for entries.
 
 ## Options:

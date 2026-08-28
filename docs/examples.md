@@ -78,6 +78,93 @@ $options = [
 add_fast_block( $options );
 ```
 
+## Example for flexible content
+
+```php
+add_fast_block([
+  'name'     => 'theme/flexible-content',
+  'template' => '/blocks/flexible-content.php',
+  'settings' => [
+    'title' => 'Flexible Content',
+  ],
+  'fields' => [
+    'content' => [
+      'type'    => 'array',
+      'input'   => 'flexible',
+      'default' => [],
+      'layouts' => [
+        'headline' => [
+          'label'  => 'Headline',
+          'fields' => [
+            'text' => [
+              'type'    => 'string',
+              'input'   => 'text',
+              'default' => '',
+            ],
+          ],
+        ],
+        'text' => [
+          'label'  => 'Text',
+          'fields' => [
+            'content' => [
+              'type'    => 'string',
+              'input'   => 'richText',
+              'default' => '',
+            ],
+          ],
+        ],
+        'image' => [
+          'label'  => 'Image',
+          'fields' => [
+            'image' => [
+              'type'    => 'object',
+              'input'   => 'image',
+              'default' => [],
+            ],
+          ],
+        ],
+        'button' => [
+          'label'  => 'Button',
+          'fields' => [
+            'label' => [
+              'type'    => 'string',
+              'input'   => 'text',
+              'default' => '',
+            ],
+            'url' => [
+              'type'    => 'string',
+              'input'   => 'url',
+              'default' => '',
+            ],
+          ],
+        ],
+      ],
+    ],
+  ],
+]);
+```
+
+Example template at `/blocks/flexible-content.php`:
+
+```php
+<div class="flexible-content">
+  <?php foreach ($block->field_value('content') as $item) : ?>
+    <?php $data = $item['data']; ?>
+    <?php if ($item['type'] === 'headline') : ?>
+      <h2><?php echo esc_html($data['text']); ?></h2>
+    <?php elseif ($item['type'] === 'text') : ?>
+      <div><?php echo wp_kses_post($data['content']); ?></div>
+    <?php elseif ($item['type'] === 'image' && ! empty($data['image']['url'])) : ?>
+      <img src="<?php echo esc_url($data['image']['url']); ?>" alt="<?php echo esc_attr($data['image']['alt'] ?? ''); ?>">
+    <?php elseif ($item['type'] === 'button') : ?>
+      <a href="<?php echo esc_url($data['url']); ?>">
+        <?php echo esc_html($data['label']); ?>
+      </a>
+    <?php endif; ?>
+  <?php endforeach; ?>
+</div>
+```
+
 ## Example usage inside template:
 use `$block->field('yourFieldName')` to echo the field directly. The field will will be sanitized with wp_kses_post()
 use `$block->field_value('yourFieldName')` to get the value without echoing. Usefull for stored objects or arrays. You will have to sanitize on your own

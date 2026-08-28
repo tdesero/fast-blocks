@@ -4,6 +4,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import inputControls from './input-controls';
 import WidthWrapper from './WidthWrapper';
 import { RepeaterFieldControl } from './RepeaterFieldControl';
+import { FlexibleFieldControl } from './FlexibleFieldControl';
 
 /**
  * Create different Components to make all fields editable.
@@ -71,15 +72,18 @@ export function FieldControl( { editProps, fieldName, field } ) {
 		);
 	}
 
+	const props = {
+		field,
+		setAttributes,
+		fieldName,
+		attributes,
+		editProps,
+	};
+
 	if ( field.input === 'repeater' ) {
-		const props = {
-			field,
-			setAttributes,
-			fieldName,
-			attributes,
-			editProps,
-		}
 		return <RepeaterFieldControl { ...props }  />;
+	} else if ( field.input === 'flexible' ) {
+		return <FlexibleFieldControl { ...props } />;
 	} else {
 		return <>{ createFieldControl() }</>;
 	}
