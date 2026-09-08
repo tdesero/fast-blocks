@@ -291,6 +291,26 @@ function FlexibleCard( {
 				<CardBody>
 					{ Object.entries( layout.fields || {} ).map(
 						( [ subFieldName, subField ] ) => {
+							if ( subField.input === 'flexible' ) {
+								return (
+									<FlexibleFieldControl
+										key={ subFieldName }
+										field={ subField }
+										fieldName={ subFieldName }
+										attributes={ {
+											[ subFieldName ]:
+												item.data?.[ subFieldName ],
+										} }
+										setAttributes={ ( nextAttributes ) =>
+											setData(
+												subFieldName,
+												nextAttributes[ subFieldName ]
+											)
+										}
+									/>
+								);
+							}
+
 							const InputControl =
 								inputControls[ subField.input ];
 							if ( ! InputControl ) return null;
